@@ -1,10 +1,10 @@
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:ravenpay_mobile_pos/ravenpay_mobile_pos_method_channel.dart';
+import 'package:mobile_pos/mobile_pos_method_channel.dart';
 
 void main() {
-  MethodChannelRavenpayMobilePos platform = MethodChannelRavenpayMobilePos();
-  const MethodChannel channel = MethodChannel('ravenpay_mobile_pos');
+  MethodChannelMobilePos platform = MethodChannelMobilePos();
+  const MethodChannel channel = MethodChannel('mobile_pos');
 
   TestWidgetsFlutterBinding.ensureInitialized();
 

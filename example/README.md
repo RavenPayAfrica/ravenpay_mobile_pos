@@ -1,6 +1,6 @@
-# ravenpay_mobile_pos_example
+# mobile_pos_example
 
-Demonstrates how to use the ravenpay_mobile_pos plugin.
+Demonstrates how to use the mobile_pos plugin.
 
 ## Getting Started
 
