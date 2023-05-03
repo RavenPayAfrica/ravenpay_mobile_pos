@@ -25,6 +25,9 @@ class _PayCodeSuccessPageState extends State<PayCodeSuccessPage> {
           padding: EdgeInsets.symmetric(horizontal: kHoriontalScreenPadding),
           child: Column(mainAxisSize: MainAxisSize.min, children: [
             RavenPayButton(
+              onPressed: () {
+                toRavenPayHome(context);
+              },
               height: 54,
               textColor: AppColors.ravenDarkGreen,
               buttonText: "Close",

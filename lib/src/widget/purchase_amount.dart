@@ -75,7 +75,7 @@ class _PurchasAmountState extends State<PurchasAmount> {
                   child: RavenPayButton(
                     enabled: amount.isNotEmpty,
                     buttonText: "Proceed",
-                    onPressed: () => widget.callback(),
+                    onPressed: () => widget.callback(context),
                   ),
                 ),
                 const Gap(16),

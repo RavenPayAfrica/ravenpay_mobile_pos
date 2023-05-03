@@ -3,7 +3,6 @@ import 'package:gap/gap.dart';
 import 'package:mobile_pos/src/helpers/global_variables.dart';
 import 'package:mobile_pos/src/helpers/helper_functions.dart';
 import 'package:mobile_pos/src/styles/ravenpay_textstyles.dart';
-import 'package:mobile_pos/src/ui/pay_with_code/pay_code_success_page.dart';
 import 'package:mobile_pos/src/widget/powerby_by_raven_widget.dart';
 import 'package:mobile_pos/src/widget/ravenpay_button.dart';
 import 'package:mobile_pos/src/widget/ravenpay_close_button.dart';
@@ -28,7 +27,7 @@ class _GenerateQrCodeState extends State<GenerateQrCode> {
             RavenPayButton(
               buttonText: "Payment Complete",
               onPressed: () {
-                pushRoute(context, const PayCodeSuccessPage());
+                toRavenPayHome(context);
               },
             ),
             const Gap(24),

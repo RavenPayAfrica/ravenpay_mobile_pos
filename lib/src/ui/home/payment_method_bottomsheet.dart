@@ -4,8 +4,10 @@ import 'package:mobile_pos/src/helpers/global_variables.dart';
 import 'package:mobile_pos/src/helpers/helper_functions.dart';
 import 'package:mobile_pos/src/styles/ravenpay_app_colors.dart';
 import 'package:mobile_pos/src/styles/ravenpay_textstyles.dart';
-import 'package:mobile_pos/src/ui/card_payment/card_purchase_amount.dart';
+import 'package:mobile_pos/src/ui/card_payment/connect_device.dart';
+import 'package:mobile_pos/src/ui/pay_with_code/pay_with_code.dart';
 import 'package:mobile_pos/src/widget/powerby_by_raven_widget.dart';
+import 'package:mobile_pos/src/widget/purchase_amount.dart';
 import 'package:mobile_pos/src/widget/ravenpay_bottomsheet_capsule.dart';
 
 class PaymentMethod extends StatelessWidget {
@@ -35,7 +37,13 @@ class PaymentMethod extends StatelessWidget {
               asset: "card_payment.png",
               name: "Card Payment",
               onTap: () {
-                pushRoute(context, const CardPurchasAmount());
+                pushRoute(
+                    context,
+                    PurchasAmount(
+                        callback: (mcontext) {
+                          pushRoute(mcontext, const ConnectDevice());
+                        },
+                        title: "Requested Amount"));
               }),
           const Gap(8),
           Divider(color: AppColors.ravenPayGrey2.withOpacity(0.5)),
@@ -43,8 +51,10 @@ class PaymentMethod extends StatelessWidget {
           items(
               context: context,
               asset: "card_payment.png",
-              name: "Card Payment",
-              onTap: () {}),
+              name: "Pay-Code",
+              onTap: () {
+                pushRoute(context, const PayWithCode());
+              }),
           const Gap(34),
           const PoweredByRaven(fontSize: 9),
           const Gap(24),
