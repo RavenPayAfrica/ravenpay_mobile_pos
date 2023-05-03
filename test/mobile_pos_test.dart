@@ -1,3 +1,4 @@
+import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mobile_pos/mobile_pos.dart';
 import 'package:mobile_pos/mobile_pos_platform_interface.dart';
@@ -7,9 +8,14 @@ import 'package:plugin_platform_interface/plugin_platform_interface.dart';
 class MockMobilePosPlatform
     with MockPlatformInterfaceMixin
     implements MobilePosPlatform {
-
   @override
   Future<String?> getPlatformVersion() => Future.value('42');
+
+  @override
+  Future<void> startRavenPay(BuildContext context) {
+    // TODO: implement startRavenPay
+    throw UnimplementedError();
+  }
 }
 
 void main() {

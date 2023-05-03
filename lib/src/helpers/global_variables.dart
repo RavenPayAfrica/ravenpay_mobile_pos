@@ -1,0 +1,1 @@
+double kHoriontalScreenPadding = 24;
