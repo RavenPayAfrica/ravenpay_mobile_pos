@@ -4,7 +4,6 @@ import 'package:mobile_pos/src/helpers/global_variables.dart';
 import 'package:mobile_pos/src/helpers/helper_functions.dart';
 import 'package:mobile_pos/src/styles/ravenpay_app_colors.dart';
 import 'package:mobile_pos/src/styles/ravenpay_textstyles.dart';
-import 'package:mobile_pos/src/ui/home/raven_pay_app.dart';
 import 'package:mobile_pos/src/widget/powerby_by_raven_widget.dart';
 import 'package:mobile_pos/src/widget/ravenpay_button.dart';
 import 'package:mobile_pos/src/widget/ravenpay_scaffold.dart';
@@ -29,9 +28,7 @@ class _CardSuccessPageState extends State<CardSuccessPage> {
               children: [
                 Expanded(
                     child: RavenPayButton(
-                  onPressed: () {
-                    pushAndRemoveAll(context, const RavenPayApp());
-                  },
+                  onPressed: () {},
                   height: 54,
                   textColor: AppColors.ravenDarkGreen,
                   buttonText: "Share Receipt",
@@ -40,6 +37,9 @@ class _CardSuccessPageState extends State<CardSuccessPage> {
                 const Gap(24),
                 Expanded(
                   child: RavenPayButton(
+                    onPressed: () {
+                      toRavenPayHome(context);
+                    },
                     height: 54,
                     textColor: AppColors.ravenDarkGreen,
                     buttonText: "Close Payment",

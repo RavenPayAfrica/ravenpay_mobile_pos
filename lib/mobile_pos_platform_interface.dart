@@ -31,4 +31,8 @@ abstract class MobilePosPlatform extends PlatformInterface {
   Future<void> startRavenPay(BuildContext context) {
     throw UnimplementedError('platformVersion() has not been implemented.');
   }
+
+  Future<void> closeRavenPay(BuildContext context) {
+    throw UnimplementedError('platformVersion() has not been implemented.');
+  }
 }

@@ -14,12 +14,7 @@ Future<void> pushRoute(BuildContext context, Widget page) async {
   return;
 }
 
-Future<void> pushAndRemoveAll(BuildContext context, Widget page) async {
-  Navigator.pushAndRemoveUntil(
-      context,
-      MaterialPageRoute(
-        builder: (context) => page,
-      ),
-      (va) => true);
+Future<void> toRavenPayHome(BuildContext context) async {
+  Navigator.popUntil(context, ModalRoute.withName("raven_pay"));
   return;
 }

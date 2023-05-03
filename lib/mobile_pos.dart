@@ -10,4 +10,8 @@ class MobilePos {
   Future<void> startRavenPay(BuildContext context) async {
     return await MobilePosPlatform.instance.startRavenPay(context);
   }
+
+  Future<void> closeRavenPay(BuildContext context) async {
+    return await MobilePosPlatform.instance.closeRavenPay(context);
+  }
 }

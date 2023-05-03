@@ -22,6 +22,7 @@ class MethodChannelMobilePos extends MobilePosPlatform {
     await Navigator.push(
       context,
       PageRouteBuilder(
+        settings: const RouteSettings(name: "raven_pay"),
         transitionDuration: const Duration(milliseconds: 350),
         pageBuilder: (_, __, ___) => const RavenPayApp(),
         transitionsBuilder: (_, animation, __, child) {
@@ -36,5 +37,11 @@ class MethodChannelMobilePos extends MobilePosPlatform {
       ),
     );
     return;
+  }
+
+  @override
+  Future<void> closeRavenPay(BuildContext context) async {
+    Navigator.of(context, rootNavigator: true)
+        .popUntil((route) => route.isFirst);
   }
 }

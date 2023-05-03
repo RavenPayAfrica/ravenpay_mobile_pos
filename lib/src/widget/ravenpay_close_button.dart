@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:mobile_pos/mobile_pos.dart';
 import 'package:mobile_pos/src/helpers/helper_functions.dart';
 import 'package:mobile_pos/src/styles/ravenpay_textstyles.dart';
 
@@ -18,6 +19,10 @@ class RavenPayCloseButton extends StatelessWidget {
       children: [
         GestureDetector(
           onTap: () {
+            if (!isArrow) {
+              MobilePos().closeRavenPay(context);
+              return;
+            }
             Navigator.pop(context);
           },
           child: Container(
