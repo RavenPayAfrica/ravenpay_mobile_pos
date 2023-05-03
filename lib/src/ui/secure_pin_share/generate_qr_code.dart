@@ -7,9 +7,11 @@ import 'package:mobile_pos/src/widget/powerby_by_raven_widget.dart';
 import 'package:mobile_pos/src/widget/ravenpay_button.dart';
 import 'package:mobile_pos/src/widget/ravenpay_close_button.dart';
 import 'package:mobile_pos/src/widget/ravenpay_scaffold.dart';
+import 'package:qr_flutter/qr_flutter.dart';
 
 class GenerateQrCode extends StatefulWidget {
-  const GenerateQrCode({super.key});
+  final String pin;
+  const GenerateQrCode({super.key, required this.pin});
 
   @override
   State<GenerateQrCode> createState() => _GenerateQrCodeState();
@@ -60,7 +62,11 @@ class _GenerateQrCodeState extends State<GenerateQrCode> {
               style: subtitle2.copyWith(fontSize: 14),
             ),
             const Gap(34),
-            Image.asset(loadAsset("qr_code.png"), height: 240)
+            QrImage(
+              data: widget.pin,
+              version: QrVersions.auto,
+              size: 240.0,
+            ),
           ],
         ),
       ),

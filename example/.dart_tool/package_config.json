@@ -140,6 +140,18 @@
       "languageVersion": "2.12"
     },
     {
+      "name": "qr",
+      "rootUri": "file:///Users/confidencewangoho/.pub-cache/hosted/pub.dev/qr-2.1.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "qr_flutter",
+      "rootUri": "file:///Users/confidencewangoho/.pub-cache/hosted/pub.dev/qr_flutter-4.0.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "sky_engine",
       "rootUri": "file:///Users/confidencewangoho/tools/flutter/bin/cache/pkg/sky_engine",
       "packageUri": "lib/",
@@ -206,7 +218,7 @@
       "languageVersion": "2.19"
     }
   ],
-  "generated": "2023-05-03T01:13:26.392997Z",
+  "generated": "2023-05-03T21:41:02.348621Z",
   "generator": "pub",
   "generatorVersion": "2.19.6"
 }

@@ -1,0 +1,11 @@
+framework module mobile_pos {
+  umbrella header "mobile_pos-umbrella.h"
+
+  export *
+  module * { export * }
+}
+
+module mobile_pos.Swift {
+  header "mobile_pos-Swift.h"
+  requires objc
+}

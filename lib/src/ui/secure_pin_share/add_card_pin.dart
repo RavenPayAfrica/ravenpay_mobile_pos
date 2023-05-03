@@ -85,7 +85,11 @@ class _AddCardPinState extends State<AddCardPin> {
                     enabled: _pinController.text.length == 4,
                     buttonText: "Generate QR",
                     onPressed: () {
-                      pushRoute(context, const GenerateQrCode());
+                      pushRoute(
+                          context,
+                          GenerateQrCode(
+                            pin: _pinController.text,
+                          ));
                     },
                   ),
                 ),
