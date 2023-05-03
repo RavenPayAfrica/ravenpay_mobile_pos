@@ -16,6 +16,12 @@ class MockMobilePosPlatform
     // TODO: implement startRavenPay
     throw UnimplementedError();
   }
+
+  @override
+  Future<void> closeRavenPay(BuildContext context) {
+    // TODO: implement closeRavenPay
+    throw UnimplementedError();
+  }
 }
 
 void main() {
