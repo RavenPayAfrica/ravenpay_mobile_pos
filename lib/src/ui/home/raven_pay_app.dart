@@ -4,7 +4,7 @@ import 'package:mobile_pos/src/helpers/global_variables.dart';
 import 'package:mobile_pos/src/helpers/helper_functions.dart';
 import 'package:mobile_pos/src/styles/ravenpay_textstyles.dart';
 import 'package:mobile_pos/src/ui/generate_paycode/business_phone_number.dart';
-import 'package:mobile_pos/src/ui/home/payment_method_bottomsheet.dart';
+import 'package:mobile_pos/src/ui/home/widget/payment_method_bottomsheet.dart';
 import 'package:mobile_pos/src/ui/home/widget/home_item.dart';
 import 'package:mobile_pos/src/ui/secure_pin_share/add_card_pin.dart';
 import 'package:mobile_pos/src/widget/powerby_by_raven_widget.dart';

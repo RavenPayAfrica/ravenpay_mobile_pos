@@ -50,7 +50,7 @@ class PaymentMethod extends StatelessWidget {
           const Gap(8),
           items(
               context: context,
-              asset: "card_payment.png",
+              asset: "pay_with_code.png",
               name: "Pay-Code",
               onTap: () {
                 pushRoute(context, const PayWithCode());
