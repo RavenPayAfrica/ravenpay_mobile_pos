@@ -6,6 +6,7 @@ import 'package:mobile_pos/src/styles/ravenpay_textstyles.dart';
 import 'package:mobile_pos/src/ui/home/payment_method_bottomsheet.dart';
 import 'package:mobile_pos/src/ui/home/widget/home_item.dart';
 import 'package:mobile_pos/src/ui/pay_with_code/pay_with_code.dart';
+import 'package:mobile_pos/src/ui/secure_pin_share/add_card_pin.dart';
 import 'package:mobile_pos/src/widget/powerby_by_raven_widget.dart';
 import 'package:mobile_pos/src/widget/ravenpay_background.dart';
 import 'package:mobile_pos/src/widget/ravenpay_bottomsheet.dart';
@@ -56,7 +57,10 @@ class _RavenPayAppState extends State<RavenPayApp> {
               asset: "generate_pay_code.png",
               title: "Generate Pay-code",
               subTitile: "Receive payment from a third-party terminal"),
-          const HomeItem(
+          HomeItem(
+              onTap: () {
+                pushRoute(context, const AddCardPin());
+              },
               asset: "secure_pin.png",
               title: "Secure PIN Share",
               subTitile: "Accept payment from your customers"),

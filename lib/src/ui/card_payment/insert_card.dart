@@ -4,7 +4,6 @@ import 'package:mobile_pos/src/helpers/global_variables.dart';
 import 'package:mobile_pos/src/helpers/helper_functions.dart';
 import 'package:mobile_pos/src/styles/ravenpay_textstyles.dart';
 import 'package:mobile_pos/src/ui/card_payment/card_pin.dart';
-import 'package:mobile_pos/src/ui/card_payment/widget/scan_pin.dart';
 import 'package:mobile_pos/src/widget/ravenpay_close_button.dart';
 import 'package:mobile_pos/src/widget/ravenpay_scaffold.dart';
 
@@ -39,8 +38,6 @@ class _InsertCardState extends State<InsertCard> {
               Row(
                 children: const [
                   RavenPayCloseButton(isArrow: true, text: "Back"),
-                  Spacer(),
-                  ScanPin(),
                 ],
               ),
               const Gap(24),

@@ -54,8 +54,29 @@ class _PayCodeSuccessPageState extends State<PayCodeSuccessPage> {
               ),
               const Gap(12),
               Text("Code Generated Successfully",
-                  style: subtitle.copyWith(color: Colors.white, fontSize: 16)),
+                  style: subtitle.copyWith(color: Colors.white, fontSize: 14)),
               const Gap(12),
+              Container(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 28, vertical: 12),
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(40),
+                      color: AppColors.ravenGreyLight.withOpacity(0.2)),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Text(
+                        "563-145",
+                        style: headling2.copyWith(color: Colors.white),
+                      ),
+                      const Gap(8),
+                      Image.asset(
+                        loadAsset("copy_icon.png"),
+                        height: 16,
+                      )
+                    ],
+                  )),
+              const Gap(20),
               Container(
                   padding:
                       const EdgeInsets.symmetric(horizontal: 12, vertical: 16),
@@ -73,11 +94,13 @@ class _PayCodeSuccessPageState extends State<PayCodeSuccessPage> {
                         child: Text(
                           "Ensure to use this code within the next one hour unless, you would need to generate a new one",
                           textAlign: TextAlign.center,
-                          style: subtitle2.copyWith(color: Colors.white),
+                          style: subtitle2.copyWith(
+                              color: Colors.white, fontSize: 12),
                         ),
                       ),
                     ],
-                  ))
+                  )),
+              const Gap(24),
             ],
           ),
         ));
