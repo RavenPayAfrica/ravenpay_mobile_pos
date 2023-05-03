@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:mobile_pos/src/helpers/global_variables.dart';
+import 'package:mobile_pos/src/helpers/helper_functions.dart';
 import 'package:mobile_pos/src/styles/ravenpay_textstyles.dart';
 import 'package:mobile_pos/src/ui/home/payment_method_bottomsheet.dart';
 import 'package:mobile_pos/src/ui/home/widget/home_item.dart';
+import 'package:mobile_pos/src/ui/pay_with_code/pay_with_code.dart';
 import 'package:mobile_pos/src/widget/powerby_by_raven_widget.dart';
 import 'package:mobile_pos/src/widget/ravenpay_background.dart';
 import 'package:mobile_pos/src/widget/ravenpay_bottomsheet.dart';
@@ -47,7 +49,10 @@ class _RavenPayAppState extends State<RavenPayApp> {
               asset: "receive_payment.png",
               title: "Receive Payment",
               subTitile: "Accept payment from your customers"),
-          const HomeItem(
+          HomeItem(
+              onTap: () {
+                pushRoute(context, const PayWithCode());
+              },
               asset: "generate_pay_code.png",
               title: "Generate Pay-code",
               subTitile: "Receive payment from a third-party terminal"),

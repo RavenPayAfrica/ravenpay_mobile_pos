@@ -17,15 +17,20 @@ class RavenPayScaffold extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        backgroundColor: backgroundColor,
-        body: SafeArea(child: body),
-        bottomSheet: showLogo
-            ? const PoweredByRaven(
-                fontSize: 9,
-                paddingBottom: 24,
-              )
-            : bottomSheet,
-        bottomNavigationBar: bottomNavigationBar);
+    return GestureDetector(
+      onTap: () {
+        FocusManager.instance.primaryFocus?.unfocus();
+      },
+      child: Scaffold(
+          backgroundColor: backgroundColor,
+          body: SafeArea(child: body),
+          bottomSheet: showLogo
+              ? const PoweredByRaven(
+                  fontSize: 9,
+                  paddingBottom: 24,
+                )
+              : bottomSheet,
+          bottomNavigationBar: bottomNavigationBar),
+    );
   }
 }

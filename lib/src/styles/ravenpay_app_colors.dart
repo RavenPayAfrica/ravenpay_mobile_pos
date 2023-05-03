@@ -13,4 +13,6 @@ class AppColors {
   static Color ravenOrageColor = const Color(0xffEA872D);
   static Color lightOragen = const Color(0xffFFF6ED);
   static Color ravenPayGrey3 = const Color(0xff676767);
+  static Color ravenPayGrey4 = const Color(0xffB3B3B3);
+  static Color ravenLightGrey = const Color(0xffD9D9D9);
 }

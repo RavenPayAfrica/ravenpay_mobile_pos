@@ -26,13 +26,17 @@ class PoweredByRaven extends StatelessWidget {
                 padding:
                     const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                 decoration: BoxDecoration(
-                    color: Colors.white,
-                    boxShadow: const [
-                      BoxShadow(
-                          color: Color.fromARGB(255, 228, 228, 228),
-                          spreadRadius: 1,
-                          blurRadius: 0.5)
-                    ],
+                    color: transpirent ? null : Colors.white,
+                    border:
+                        transpirent ? Border.all(color: Colors.white) : null,
+                    boxShadow: transpirent
+                        ? null
+                        : const [
+                            BoxShadow(
+                                color: Color.fromARGB(255, 228, 228, 228),
+                                spreadRadius: 1,
+                                blurRadius: 0.5)
+                          ],
                     borderRadius: BorderRadius.circular(16)),
                 child: Row(
                   mainAxisSize: MainAxisSize.min,
@@ -40,12 +44,15 @@ class PoweredByRaven extends StatelessWidget {
                     Text(
                       "Powered By",
                       style: subtitle.copyWith(
-                          fontSize: fontSize, color: AppColors.darkGrey),
+                          fontSize: fontSize,
+                          color:
+                              transpirent ? Colors.white : AppColors.darkGrey),
                     ),
                     const Gap(4),
                     Padding(
                       padding: const EdgeInsets.only(bottom: 1),
                       child: Image.asset(loadAsset("raven_logo.png"),
+                          color: transpirent ? Colors.white : null,
                           height: fontSize),
                     )
                   ],

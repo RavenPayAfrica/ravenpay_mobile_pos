@@ -4,6 +4,7 @@ import 'package:mobile_pos/src/helpers/global_variables.dart';
 import 'package:mobile_pos/src/helpers/helper_functions.dart';
 import 'package:mobile_pos/src/styles/ravenpay_app_colors.dart';
 import 'package:mobile_pos/src/styles/ravenpay_textstyles.dart';
+import 'package:mobile_pos/src/ui/card_payment/card_success_page.dart';
 import 'package:mobile_pos/src/ui/card_payment/widget/scan_pin.dart';
 import 'package:mobile_pos/src/widget/powerby_by_raven_widget.dart';
 import 'package:mobile_pos/src/widget/ravenpay_amount_pad.dart';
@@ -11,7 +12,6 @@ import 'package:mobile_pos/src/widget/ravenpay_button.dart';
 import 'package:mobile_pos/src/widget/ravenpay_close_button.dart';
 import 'package:mobile_pos/src/widget/ravenpay_pin_widget.dart';
 import 'package:mobile_pos/src/widget/ravenpay_scaffold.dart';
-import 'package:mobile_pos/src/widget/ravenpay_success_page.dart';
 
 class CardPin extends StatefulWidget {
   const CardPin({super.key});
@@ -105,7 +105,7 @@ class _CardPinState extends State<CardPin> {
                     enabled: _pinController.text.length == 4,
                     buttonText: "Proceed",
                     onPressed: () {
-                      pushRoute(context, const RavenPaySuccessPage());
+                      pushRoute(context, const CardSuccessPage());
                     },
                   ),
                 ),

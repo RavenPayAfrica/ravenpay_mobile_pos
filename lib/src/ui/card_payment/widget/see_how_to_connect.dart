@@ -5,7 +5,11 @@ import 'package:mobile_pos/src/styles/ravenpay_app_colors.dart';
 import 'package:mobile_pos/src/styles/ravenpay_textstyles.dart';
 
 class SeeHowToConnect extends StatelessWidget {
-  const SeeHowToConnect({super.key});
+  final String? text;
+  final bool showIcon;
+  final FontWeight? fontWeight;
+  const SeeHowToConnect(
+      {super.key, this.fontWeight, this.text, this.showIcon = true});
 
   @override
   Widget build(BuildContext context) {
@@ -15,13 +19,16 @@ class SeeHowToConnect extends StatelessWidget {
           color: AppColors.lightOragen,
           borderRadius: BorderRadius.circular(16)),
       child: Row(children: [
-        Image.asset(
-          loadAsset("warning.png"),
-          height: 16,
-        ),
-        const Gap(4),
-        Text("See how to connect",
-            style: subtitle2.copyWith(color: AppColors.ravenOrageColor))
+        if (showIcon) ...[
+          Image.asset(
+            loadAsset("warning.png"),
+            height: 16,
+          ),
+          const Gap(4),
+        ],
+        Text(text ?? "See how to connect",
+            style: subtitle.copyWith(
+                color: AppColors.ravenOrageColor, fontWeight: fontWeight))
       ]),
     );
   }

@@ -13,3 +13,13 @@ Future<void> pushRoute(BuildContext context, Widget page) async {
   );
   return;
 }
+
+Future<void> pushAndRemoveAll(BuildContext context, Widget page) async {
+  Navigator.pushAndRemoveUntil(
+      context,
+      MaterialPageRoute(
+        builder: (context) => page,
+      ),
+      (va) => true);
+  return;
+}
