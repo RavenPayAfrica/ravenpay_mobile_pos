@@ -15,17 +15,17 @@ class RavenPayCloseButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: [
-        GestureDetector(
-          onTap: () {
-            if (!isArrow) {
-              MobilePos().closeRavenPay(context);
-              return;
-            }
-            Navigator.pop(context);
-          },
-          child: Container(
+    return InkWell(
+      onTap: () {
+        if (!isArrow) {
+          MobilePos().closeRavenPay(context);
+          return;
+        }
+        Navigator.pop(context);
+      },
+      child: Row(
+        children: [
+          Container(
               padding: const EdgeInsets.all(8),
               height: 32,
               width: 32,
@@ -39,10 +39,10 @@ class RavenPayCloseButton extends StatelessWidget {
               child: Image.asset(
                 loadAsset(isArrow ? "arrow_back.png" : "close_icon.png"),
               )),
-        ),
-        const Gap(12),
-        Text(text, style: subtitle)
-      ],
+          const Gap(12),
+          Text(text, style: subtitle)
+        ],
+      ),
     );
   }
 }

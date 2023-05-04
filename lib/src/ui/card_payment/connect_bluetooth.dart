@@ -54,6 +54,7 @@ class _ConnectBluetoothState extends State<ConnectBluetooth> {
               ),
               const Spacer(),
               RavenPayCard(
+                  padding: EdgeInsets.zero,
                   height: 180,
                   child: ListView.builder(itemBuilder: (context, index) {
                     return ItemView(
@@ -99,6 +100,7 @@ class ItemView extends StatelessWidget {
       highlightColor: Colors.transparent,
       onTap: () => onPressed(index),
       child: Container(
+        padding: const EdgeInsets.only(bottom: 8, top: 4),
         decoration: BoxDecoration(
             border: Border(
                 bottom: BorderSide(

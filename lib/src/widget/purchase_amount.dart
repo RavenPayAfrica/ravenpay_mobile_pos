@@ -9,16 +9,16 @@ import 'package:mobile_pos/src/widget/ravenpay_button.dart';
 import 'package:mobile_pos/src/widget/ravenpay_close_button.dart';
 import 'package:mobile_pos/src/widget/ravenpay_scaffold.dart';
 
-class PurchasAmount extends StatefulWidget {
+class PurchaseAmount extends StatefulWidget {
   final Function callback;
   final String? title;
-  const PurchasAmount({super.key, required this.callback, this.title});
+  const PurchaseAmount({super.key, required this.callback, this.title});
 
   @override
-  State<PurchasAmount> createState() => _PurchasAmountState();
+  State<PurchaseAmount> createState() => _PurchaseAmountState();
 }
 
-class _PurchasAmountState extends State<PurchasAmount> {
+class _PurchaseAmountState extends State<PurchaseAmount> {
   String amount = "";
   @override
   Widget build(BuildContext context) {
@@ -40,7 +40,6 @@ class _PurchasAmountState extends State<PurchasAmount> {
                   ),
                   const Gap(28),
                   Text(widget.title ?? "Enter Amount", style: headling1),
-                  Gap(size.height * 0.1),
                 ],
               ),
             ),
@@ -75,7 +74,17 @@ class _PurchasAmountState extends State<PurchasAmount> {
                   child: RavenPayButton(
                     enabled: amount.isNotEmpty,
                     buttonText: "Proceed",
-                    onPressed: () => widget.callback(context),
+                    onPressed: () {
+                      try {
+                        var val = double.tryParse(amount);
+                        if (val! <= 0) {
+                          return;
+                        }
+                        widget.callback(context);
+                      } catch (ex) {
+                        return;
+                      }
+                    },
                   ),
                 ),
                 const Gap(16),

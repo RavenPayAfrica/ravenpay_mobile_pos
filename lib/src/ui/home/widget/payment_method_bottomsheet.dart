@@ -39,7 +39,7 @@ class PaymentMethod extends StatelessWidget {
               onTap: () {
                 pushRoute(
                     context,
-                    PurchasAmount(
+                    PurchaseAmount(
                         callback: (mcontext) {
                           pushRoute(mcontext, const ConnectDevice());
                         },

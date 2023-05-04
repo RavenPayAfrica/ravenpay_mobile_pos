@@ -55,7 +55,7 @@ class _RavenPayAppState extends State<RavenPayApp> {
               onTap: () {
                 pushRoute(
                     context,
-                    PurchasAmount(
+                    PurchaseAmount(
                         callback: (mcontext) =>
                             pushRoute(mcontext, const BusinessPhoneNumber()),
                         title: "Requested Amount"));
@@ -74,7 +74,7 @@ class _RavenPayAppState extends State<RavenPayApp> {
               asset: "reward.png",
               title: "Rewards",
               subTitile: "Accept payment from your customers"),
-          const Gap(12),
+          const Gap(16),
           const PoweredByRaven(),
           const Gap(24),
         ]),
