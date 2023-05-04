@@ -75,6 +75,19 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  flutter_web_plugins:
+    dependency: transitive
+    description: flutter
+    source: sdk
+    version: "0.0.0"
+  gap:
+    dependency: transitive
+    description:
+      name: gap
+      sha256: "976fa1e405d7d8249b3d2ec0e18a1eac116f0a86430c29a7485dff6f5326f03a"
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.0.0"
   js:
     dependency: transitive
     description:
@@ -122,6 +135,14 @@ packages:
       relative: true
     source: path
     version: "0.0.1"
+  nested:
+    dependency: transitive
+    description:
+      name: nested
+      sha256: "03bac4c528c64c95c722ec99280375a6f2fc708eec17c7b3f07253b626cd2a20"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.0"
   path:
     dependency: transitive
     description:
@@ -130,6 +151,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.8.2"
+  pinput:
+    dependency: transitive
+    description:
+      name: pinput
+      sha256: "1773743c188cdd2f8d0398ea708ec72645bb41ac9311755c4f7bb03a4184bdcf"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.2.31"
   plugin_platform_interface:
     dependency: transitive
     description:
@@ -138,11 +167,43 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.1.4"
+  provider:
+    dependency: "direct main"
+    description:
+      name: provider
+      sha256: cdbe7530b12ecd9eb455bdaa2fcb8d4dad22e80b8afb4798b41479d5ce26847f
+      url: "https://pub.dev"
+    source: hosted
+    version: "6.0.5"
+  qr:
+    dependency: transitive
+    description:
+      name: qr
+      sha256: "5c4208b4dc0d55c3184d10d83ee0ded6212dc2b5e2ba17c5a0c0aab279128d21"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.1.0"
+  qr_flutter:
+    dependency: transitive
+    description:
+      name: qr_flutter
+      sha256: c5c121c54cb6dd837b9b9d57eb7bc7ec6df4aee741032060c8833a678c80b87e
+      url: "https://pub.dev"
+    source: hosted
+    version: "4.0.0"
   sky_engine:
     dependency: transitive
     description: flutter
     source: sdk
     version: "0.0.99"
+  smart_auth:
+    dependency: transitive
+    description:
+      name: smart_auth
+      sha256: "8cfaec55b77d5930ed1666bb7ae70db5bade099bb1422401386853b400962113"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.8"
   source_span:
     dependency: transitive
     description:
@@ -191,6 +252,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.4.16"
+  universal_platform:
+    dependency: transitive
+    description:
+      name: universal_platform
+      sha256: d315be0f6641898b280ffa34e2ddb14f3d12b1a37882557869646e0cc363d0cc
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.0+1"
   vector_math:
     dependency: transitive
     description:
@@ -201,4 +270,4 @@ packages:
     version: "2.1.4"
 sdks:
   dart: ">=2.19.6 <3.0.0"
-  flutter: ">=2.5.0"
+  flutter: ">=3.7.0"
