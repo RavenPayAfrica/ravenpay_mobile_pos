@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 String loadAsset(String asset) {
-  return "packages/mobile_pos/assets/$asset";
+  return "packages/mobile_pos/assets/images/$asset";
 }
 
 Future<void> pushRoute(BuildContext context, Widget page) async {

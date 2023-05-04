@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:mobile_pos/src/ui/home/raven_pay_app.dart';
+import 'package:mobile_pos/src/views/home/raven_pay_app.dart';
 
 import 'mobile_pos_platform_interface.dart';
 

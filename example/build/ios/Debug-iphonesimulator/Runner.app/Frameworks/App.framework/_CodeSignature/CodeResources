@@ -10,11 +10,11 @@
 		</data>
 		<key>flutter_assets/AssetManifest.json</key>
 		<data>
-		6Pm9Se+LVlJWeJJcmnsGjf5WNj8=
+		a/j/ONugXw6QAxOLzmD6s2wjlvE=
 		</data>
 		<key>flutter_assets/FontManifest.json</key>
 		<data>
-		3y/nRmNZJfKETc1ckQH0YFER7rw=
+		jc866lXuv46wU5kLoUcZ2N0onAc=
 		</data>
 		<key>flutter_assets/NOTICES.Z</key>
 		<data>
@@ -30,7 +30,7 @@
 		</data>
 		<key>flutter_assets/kernel_blob.bin</key>
 		<data>
-		W++nzlv+2O81dbgl7JwkdZLrGJQ=
+		CArBsnFUKBU078fcSDZcmW0wlm4=
 		</data>
 		<key>flutter_assets/packages/cupertino_icons/assets/CupertinoIcons.ttf</key>
 		<data>
@@ -68,9 +68,105 @@
 		<data>
 		DD0rXDwXndNlnLzHY02b4aN3aZY=
 		</data>
+		<key>flutter_assets/packages/mobile_pos/assets/fonts/br_bold.ttf</key>
+		<data>
+		OK0g9H5kkv0zaBCNa/bsQGTgC+E=
+		</data>
+		<key>flutter_assets/packages/mobile_pos/assets/fonts/br_light.ttf</key>
+		<data>
+		t1foVyxRLm0p+N4kNqBaPTbcOGo=
+		</data>
+		<key>flutter_assets/packages/mobile_pos/assets/fonts/br_regular.ttf</key>
+		<data>
+		avAf6sSFLL/499KDdV3I+TUyiyE=
+		</data>
 		<key>flutter_assets/packages/mobile_pos/assets/generate_pay_code.png</key>
 		<data>
 		4is+RI8MKrAiWneiEet5VSEcXRI=
+		</data>
+		<key>flutter_assets/packages/mobile_pos/assets/images/arrow_back.png</key>
+		<data>
+		fgJrbKd/WobIdOR0TVHnl286c3M=
+		</data>
+		<key>flutter_assets/packages/mobile_pos/assets/images/background_image.png</key>
+		<data>
+		xed/HQMAUcB9hqKBkapxcIPIQv4=
+		</data>
+		<key>flutter_assets/packages/mobile_pos/assets/images/bluetooth_search.png</key>
+		<data>
+		i6zSkch6bGEEYI69xatMMl2afz0=
+		</data>
+		<key>flutter_assets/packages/mobile_pos/assets/images/card_payment.png</key>
+		<data>
+		ma8m5Udcp/knu+dSU8kTaH3SqGE=
+		</data>
+		<key>flutter_assets/packages/mobile_pos/assets/images/check_icon.png</key>
+		<data>
+		dk/v6vKHVH7jebrKy33NLBD294g=
+		</data>
+		<key>flutter_assets/packages/mobile_pos/assets/images/close_icon.png</key>
+		<data>
+		wwwFRHw29VQfAHJpVCNj9kSnxiw=
+		</data>
+		<key>flutter_assets/packages/mobile_pos/assets/images/connect_otg.png</key>
+		<data>
+		1ZcA1QxLQvP5El+5rYvRvZ5CR6Y=
+		</data>
+		<key>flutter_assets/packages/mobile_pos/assets/images/copy_icon.png</key>
+		<data>
+		DD0rXDwXndNlnLzHY02b4aN3aZY=
+		</data>
+		<key>flutter_assets/packages/mobile_pos/assets/images/generate_pay_code.png</key>
+		<data>
+		4is+RI8MKrAiWneiEet5VSEcXRI=
+		</data>
+		<key>flutter_assets/packages/mobile_pos/assets/images/mobile_pos.png</key>
+		<data>
+		82G6OQNnOb6VvQ6spA/3qZw2OxI=
+		</data>
+		<key>flutter_assets/packages/mobile_pos/assets/images/ngn_icon.png</key>
+		<data>
+		dzS5ZPrFx7dDAU/t+rLdsA/2GdY=
+		</data>
+		<key>flutter_assets/packages/mobile_pos/assets/images/pay_code.png</key>
+		<data>
+		olUOZmbfHn5lCuscnhRqrz5SD9Q=
+		</data>
+		<key>flutter_assets/packages/mobile_pos/assets/images/pay_with_code.png</key>
+		<data>
+		olUOZmbfHn5lCuscnhRqrz5SD9Q=
+		</data>
+		<key>flutter_assets/packages/mobile_pos/assets/images/qr_code.png</key>
+		<data>
+		s4Xkp1DZSEBsEAdg4yP+vVfYMWI=
+		</data>
+		<key>flutter_assets/packages/mobile_pos/assets/images/raven_logo.png</key>
+		<data>
+		IdZfkoodSFX85oySsZFkQfJFh98=
+		</data>
+		<key>flutter_assets/packages/mobile_pos/assets/images/receive_payment.png</key>
+		<data>
+		zCIE1UsVJ+pOB1noadDg+TSMgp0=
+		</data>
+		<key>flutter_assets/packages/mobile_pos/assets/images/reward.png</key>
+		<data>
+		+i0Mnu+wmy2L0v6xVT+heRC22xY=
+		</data>
+		<key>flutter_assets/packages/mobile_pos/assets/images/scan_pin.png</key>
+		<data>
+		rSnxbxXkh+si/2Xzv1jxz03zRY8=
+		</data>
+		<key>flutter_assets/packages/mobile_pos/assets/images/secure_pin.png</key>
+		<data>
+		gm85VGiJXCNTj9QNPyhjG75N9p4=
+		</data>
+		<key>flutter_assets/packages/mobile_pos/assets/images/success_image.png</key>
+		<data>
+		rgkNl4os6bEJoiVu/QhCZZtSFzU=
+		</data>
+		<key>flutter_assets/packages/mobile_pos/assets/images/warning.png</key>
+		<data>
+		N5eEVm3V+KSHOseBRfadgbv1dGY=
 		</data>
 		<key>flutter_assets/packages/mobile_pos/assets/mobile_pos.png</key>
 		<data>
@@ -147,14 +243,14 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			JshzgUCgHGNvXymkdAmt9tK5b61jMfJvQb7FxdPAEg0=
+			CfJsA8gR6LCAb53qtSFcArIapnLzsHkBfxeu9ayPC0s=
 			</data>
 		</dict>
 		<key>flutter_assets/FontManifest.json</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			cGuN5z4JA0pDoMAlzRZtyrdXTdZWRh/bcBFLScHBLT0=
+			+1GD6/DW3tG10+OhANqjvR2cfOmqOHV4yDw6N+7Hi8g=
 			</data>
 		</dict>
 		<key>flutter_assets/NOTICES.Z</key>
@@ -182,7 +278,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			ftgHSSoqC1XUcwIyLX597ojKSLu7IicxO7CI+KMlpzY=
+			6rsfAUzNEVg2B7r35cQOT3wyrwNP2EpdmIrH7W/Y1Xg=
 			</data>
 		</dict>
 		<key>flutter_assets/packages/cupertino_icons/assets/CupertinoIcons.ttf</key>
@@ -248,11 +344,179 @@
 			81Qffs6wTNTq5JXkaQy9kjgKTgQdeejVaxN0SYStuao=
 			</data>
 		</dict>
+		<key>flutter_assets/packages/mobile_pos/assets/fonts/br_bold.ttf</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			0R7ZvZI/JlIQhQu12ApNhhCeNGmYeQvCl9bbsNJx398=
+			</data>
+		</dict>
+		<key>flutter_assets/packages/mobile_pos/assets/fonts/br_light.ttf</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			6nFgWxWXQJ9z1KxB8fveqrcSQqsXCSwy1VLaIEEOirY=
+			</data>
+		</dict>
+		<key>flutter_assets/packages/mobile_pos/assets/fonts/br_regular.ttf</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			H7eStzc0mPD+VKm0vKh+7fX+6mi6g+dtQeHfzDCUXFU=
+			</data>
+		</dict>
 		<key>flutter_assets/packages/mobile_pos/assets/generate_pay_code.png</key>
 		<dict>
 			<key>hash2</key>
 			<data>
 			341QytmTDK9SVMRHhBKmX0ScJPNArXUv0IlHfW53/V0=
+			</data>
+		</dict>
+		<key>flutter_assets/packages/mobile_pos/assets/images/arrow_back.png</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			+s+PXKMP5En5tOmQCr7fRkwTOMF9Oy6d2sLCXPINse0=
+			</data>
+		</dict>
+		<key>flutter_assets/packages/mobile_pos/assets/images/background_image.png</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			34f493qI6WU/jpYywjnS+SkiyzzbyNUnG3hp5ne7wL4=
+			</data>
+		</dict>
+		<key>flutter_assets/packages/mobile_pos/assets/images/bluetooth_search.png</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			2UNhItYuM4Uc+qdKG5jiVY8WCnWC1LHO5WsQH0c7O/Y=
+			</data>
+		</dict>
+		<key>flutter_assets/packages/mobile_pos/assets/images/card_payment.png</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			85ND2t3Uc5Tc+X2s2dwgB67GLtlFi0BXBQnSDr/i9dk=
+			</data>
+		</dict>
+		<key>flutter_assets/packages/mobile_pos/assets/images/check_icon.png</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			ycAxil5mffHmHN2Zmray95g4NZK4mAFa5nGnjpH+4dk=
+			</data>
+		</dict>
+		<key>flutter_assets/packages/mobile_pos/assets/images/close_icon.png</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			j+p08Rr58Rxt8A39QqdOMMsKoXadofYggNdl9sunQLI=
+			</data>
+		</dict>
+		<key>flutter_assets/packages/mobile_pos/assets/images/connect_otg.png</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			11JOVOILbrIlkVOH6ZdlpYsE8kg5Lh6ga7oqgxMBDd4=
+			</data>
+		</dict>
+		<key>flutter_assets/packages/mobile_pos/assets/images/copy_icon.png</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			81Qffs6wTNTq5JXkaQy9kjgKTgQdeejVaxN0SYStuao=
+			</data>
+		</dict>
+		<key>flutter_assets/packages/mobile_pos/assets/images/generate_pay_code.png</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			341QytmTDK9SVMRHhBKmX0ScJPNArXUv0IlHfW53/V0=
+			</data>
+		</dict>
+		<key>flutter_assets/packages/mobile_pos/assets/images/mobile_pos.png</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			xPjmUAAmtTz3QEJcKD56G/CSTd+M9FvGTahDKGSaviQ=
+			</data>
+		</dict>
+		<key>flutter_assets/packages/mobile_pos/assets/images/ngn_icon.png</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			YPf6rhE5tcd5o68lpnbV+nY3L8p9BCIx5GVhhpycUVM=
+			</data>
+		</dict>
+		<key>flutter_assets/packages/mobile_pos/assets/images/pay_code.png</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			TK7sy1o+PZ9t0bHx0YV+wtPRTi+gCX2Drb99Drge9Bk=
+			</data>
+		</dict>
+		<key>flutter_assets/packages/mobile_pos/assets/images/pay_with_code.png</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			TK7sy1o+PZ9t0bHx0YV+wtPRTi+gCX2Drb99Drge9Bk=
+			</data>
+		</dict>
+		<key>flutter_assets/packages/mobile_pos/assets/images/qr_code.png</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			xBchTOpPDAUx0AuGV/59YCqLjFLVM7n7owtABrkbrFU=
+			</data>
+		</dict>
+		<key>flutter_assets/packages/mobile_pos/assets/images/raven_logo.png</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			iE3NvePMPBKtrfgoNDhhxUZaVO3KPEFyb9sQmIiBOBg=
+			</data>
+		</dict>
+		<key>flutter_assets/packages/mobile_pos/assets/images/receive_payment.png</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			omMIKTk5xr/l7kVhzSRLvIRKTV7SRY9koJtXf9rcqm0=
+			</data>
+		</dict>
+		<key>flutter_assets/packages/mobile_pos/assets/images/reward.png</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			1Np0BElyCaCEK7crsnpZ5w4zhz1KddLrdp4WfeyhWso=
+			</data>
+		</dict>
+		<key>flutter_assets/packages/mobile_pos/assets/images/scan_pin.png</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			FzwUBccrhqvoOy+d4oklvs2XAz8BE4kWgJbUucY7qDs=
+			</data>
+		</dict>
+		<key>flutter_assets/packages/mobile_pos/assets/images/secure_pin.png</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			jQ4ze5pzhGQvNExnL1/sNnyOqRy6gR9zzLSi6WSuVzg=
+			</data>
+		</dict>
+		<key>flutter_assets/packages/mobile_pos/assets/images/success_image.png</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			1fXqdK+cIjhtWldClWyHRCrwcpPmuaXg1DhQY7Etkww=
+			</data>
+		</dict>
+		<key>flutter_assets/packages/mobile_pos/assets/images/warning.png</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			i/6HBa+ax02c/CEJB3gUXymaa08Bmke0zQlVCadZluI=
 			</data>
 		</dict>
 		<key>flutter_assets/packages/mobile_pos/assets/mobile_pos.png</key>
