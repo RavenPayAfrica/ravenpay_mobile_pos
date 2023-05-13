@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:mobile_pos/src/helpers/enums.dart';
 import 'package:mobile_pos/src/views/home/raven_pay_app.dart';
 
 import 'mobile_pos_platform_interface.dart';
@@ -37,6 +38,26 @@ class MethodChannelMobilePos extends MobilePosPlatform {
       ),
     );
     return;
+  }
+
+  @override
+  Future<bool?> checkConnectivity(ConnectivityType connectivityType) async {
+    final status =
+        await methodChannel.invokeMethod<bool>('getConnectivityStatus');
+    return status;
+  }
+
+  @override
+  Future<String?> startTransaction(
+      {required int amount, required String accountType}) async {
+    var sendMap = <String, dynamic>{
+      'amount': amount,
+      'account_type': accountType
+    };
+
+    final res =
+        await methodChannel.invokeMethod<String>('startTransaction', sendMap);
+    return res;
   }
 
   @override

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:plugin_platform_interface/plugin_platform_interface.dart';
 
 import 'mobile_pos_method_channel.dart';
+import 'src/helpers/enums.dart';
 
 abstract class MobilePosPlatform extends PlatformInterface {
   /// Constructs a MobilePosPlatform.
@@ -28,11 +29,20 @@ abstract class MobilePosPlatform extends PlatformInterface {
     throw UnimplementedError('platformVersion() has not been implemented.');
   }
 
+  Future<bool?> checkConnectivity(ConnectivityType connectivityType) {
+    throw UnimplementedError('Not implemented.');
+  }
+
+  Future<String?> startTransaction(
+      {required int amount, required String accountType}) {
+    throw UnimplementedError('Not implemented.');
+  }
+
   Future<void> startRavenPay(BuildContext context) {
-    throw UnimplementedError('platformVersion() has not been implemented.');
+    throw UnimplementedError('Not implemented.');
   }
 
   Future<void> closeRavenPay(BuildContext context) {
-    throw UnimplementedError('platformVersion() has not been implemented.');
+    throw UnimplementedError('Not implemented.');
   }
 }
