@@ -15,7 +15,7 @@ class _RavenPayExampleAppState extends State<RavenPayExampleApp> {
         body: Center(
             child: ElevatedButton(
                 onPressed: () {
-                  MobilePos().startRavenPay(context);
+                  MobilePos.startRavenPay(context);
                 },
                 child: const Text("Start Payment"))));
   }

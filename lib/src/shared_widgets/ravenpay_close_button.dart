@@ -18,7 +18,7 @@ class RavenPayCloseButton extends StatelessWidget {
     return InkWell(
       onTap: () {
         if (!isArrow) {
-          MobilePos().closeRavenPay(context);
+          MobilePos.closeRavenPay(context);
           return;
         }
         Navigator.pop(context);

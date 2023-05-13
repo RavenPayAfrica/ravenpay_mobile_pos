@@ -40,10 +40,8 @@ class MobilePosPlugin : FlutterActivity(), FlutterPlugin, MethodCallHandler {
       arguments = call.arguments as Map<String, Objects>
     }
 
-    if (call.method == "getPlatformVersion") {
-      result.success("Android ${android.os.Build.VERSION.RELEASE}")
-    } else if (call.method == "getPosSdkStatus") {
-      val sdkStatus: Boolean = RavenActivity.isUSBDetected();
+    if (call.method == "getConnectivityStatus") {
+      val sdkStatus: Boolean = RavenActivity.isUSBDetected()
       if (sdkStatus) {
         result.success(sdkStatus)
       } else {
