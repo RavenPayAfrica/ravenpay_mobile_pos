@@ -12,13 +12,13 @@ First you need to obtain your app credentials from [here.](https://getravenbank.
 
 ### Set minSdkVersion target
 
-This library targets android devices >= SDK 20. Make sure you're targeting at-least the same by modifying your `android/build.gradle` file
+This library targets android devices >= SDK 21. Make sure you're targeting at-least the same by modifying your `android/build.gradle` file
 
 
-> \
+> 
 > minSdkVersion = 21
 >
-> \
+> 
 
 
 ### Update  `AndroidManifest.xml` to add neccessary permissions and configs
@@ -83,6 +83,15 @@ This library targets android devices >= SDK 20. Make sure you're targeting at-le
 
 
 ## Usage
+
+### Import
+
+```dart
+import 'package:mobile_pos/mobile_pos_sdk.dart';
+
+```
+
+### Launch SDK
 
 ```dart
     await RavenMobilePOS.launch(context,

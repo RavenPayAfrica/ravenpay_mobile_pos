@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:mobile_pos/mobile_pos.dart';
 import 'package:mobile_pos/mobile_pos_sdk.dart';
 
 class RavenPayExampleApp extends StatefulWidget {
