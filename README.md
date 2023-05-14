@@ -16,7 +16,7 @@ This library targets android devices >= SDK 20. Make sure you're targeting at-le
 
 
 > \
-> minSdkVersion = 20
+> minSdkVersion = 21
 >
 > \
 
@@ -79,7 +79,7 @@ This library targets android devices >= SDK 20. Make sure you're targeting at-le
 ```
 
 
-## IOS SETUP (Coming Soon)
+## IOS Setup (Coming Soon)
 
 
 ## Usage
