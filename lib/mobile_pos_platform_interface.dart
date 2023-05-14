@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mobile_pos/mobile_pos_sdk.dart';
 import 'package:plugin_platform_interface/plugin_platform_interface.dart';
 
 import 'mobile_pos_method_channel.dart';
@@ -25,6 +26,8 @@ abstract class MobilePosPlatform extends PlatformInterface {
     _instance = instance;
   }
 
+  RavenMobilePOSConfig? config;
+
   Future<String?> getPlatformVersion() {
     throw UnimplementedError('platformVersion() has not been implemented.');
   }
@@ -43,6 +46,10 @@ abstract class MobilePosPlatform extends PlatformInterface {
   }
 
   Future<void> closeRavenPay(BuildContext context) {
+    throw UnimplementedError('Not implemented.');
+  }
+
+  void setConfig(RavenMobilePOSConfig config) {
     throw UnimplementedError('Not implemented.');
   }
 }

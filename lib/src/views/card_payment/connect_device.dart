@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:mobile_pos/mobile_pos.dart';
+import 'package:mobile_pos/mobile_pos_platform_interface.dart';
 import 'package:mobile_pos/mobile_pos_sdk.dart';
+import 'package:mobile_pos/src/helpers/failure.dart';
 import 'package:mobile_pos/src/helpers/global_variables.dart';
 import 'package:mobile_pos/src/styles/ravenpay_app_colors.dart';
 import 'package:mobile_pos/src/styles/ravenpay_textstyles.dart';
@@ -78,12 +80,20 @@ class _ConnectDeviceState extends State<ConnectDevice> {
                 buttonText: "Proceed",
                 onPressed: () async {
                   if (currentIndex == 1) {
-                    final res = await MobilePos.startTransaction(
+                    final res = await MobilePosPlatform.instance.chargeCard(
                         amount: widget.amount,
                         connectivityType: ConnectivityType.bluetooth);
-                    print(res);
+                    if (res != null) {
+                      //success
+                      MobilePosPlatform.instance.config?.onSuccess.call(res);
+                    } else {
+                      //failure
+                      MobilePosPlatform.instance.config?.onError.call(
+                          RavenMobilePOSException(
+                              code: 'failure', message: 'Payment failed'));
+                    }
                   } else if (currentIndex == 2) {
-                    MobilePos.startTransaction(
+                    await MobilePosPlatform.instance.chargeCard(
                         amount: widget.amount,
                         connectivityType: ConnectivityType.otg);
                   }

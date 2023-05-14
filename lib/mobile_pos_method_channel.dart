@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:mobile_pos/mobile_pos_sdk.dart';
 import 'package:mobile_pos/src/helpers/enums.dart';
 import 'package:mobile_pos/src/views/home/raven_pay_app.dart';
 
@@ -81,5 +82,10 @@ class MethodChannelMobilePos extends MobilePosPlatform {
       default:
         return 00;
     }
+  }
+
+  @override
+  void setConfig(RavenMobilePOSConfig config) {
+    this.config = config;
   }
 }

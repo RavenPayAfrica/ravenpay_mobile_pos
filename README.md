@@ -1,6 +1,6 @@
-# mobile_pos
+# Raven MPOS (Mobile POS)
 
-A new Flutter plugin project.
+A Flutter Plugin that enables you connect to [Raven Bank](https://getravenbank.com/) Mobile POS terminal 
 
 ## Getting Started
 
@@ -12,4 +12,3 @@ Android and/or iOS.
 For help getting started with Flutter development, view the
 [online documentation](https://flutter.dev/docs), which offers tutorials,
 samples, guidance on mobile development, and a full API reference.
-

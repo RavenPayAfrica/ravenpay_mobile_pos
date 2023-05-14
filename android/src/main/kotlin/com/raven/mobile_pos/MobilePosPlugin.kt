@@ -1,10 +1,5 @@
 package com.raven.mobile_pos
 
-//import android.content.Intent
-
-
-//import java.util.Objects
-
 import android.Manifest
 import android.app.Activity
 import android.app.Activity.RESULT_CANCELED
@@ -233,43 +228,6 @@ class MobilePosPlugin : FlutterPlugin, MethodCallHandler, ActivityAware, PluginR
         }
     }
 
-//    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-//        super.onActivityResult(requestCode, resultCode, data)
-//        Log.d("BBBBB", "Resulrrr")
-//        if (resultCode != RESULT_CANCELED) {
-//            if (requestCode == 1001) {
-//                if (data != null) {
-//                    if (data.hasExtra("data")) {
-//                        // val Tres = data.getSerializableExtra("data") as RavenEmv
-//                        val Tres = data.getStringExtra("data")
-//                        result?.success(Tres)
-//                        //  Log.d("BBBBB2", Tres.toString())
-//                        try {
-//                        } catch (e: Exception) {
-//                            AppLog.e("RAVENActivity", e.message)
-//                        }
-//                    }
-//                }
-//            }
-//        }
-//    }
-
-//    override fun onRequestPermissionsResult(
-//            requestCode: Int,
-//            permissions: Array<out String>,
-//            grantResults: IntArray,
-//    ) {
-//        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-//        if (requestCode == BLUETOOTH_CODE) {
-//            if (grantResults.isNotEmpty()
-//                    && grantResults[0] == PackageManager.PERMISSION_GRANTED
-//            ) {
-//                this.resultStatus?.success(true)
-//            } else {
-//                this.resultStatus?.error("UNAVAILABLE", "posSDK  not available.", null)
-//            }
-//        }
-//    }
 
     override fun onAttachedToActivity(binding: ActivityPluginBinding) {
         try {

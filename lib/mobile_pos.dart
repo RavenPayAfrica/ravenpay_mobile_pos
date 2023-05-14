@@ -1,27 +1,15 @@
 import 'package:flutter/material.dart';
-
+import 'package:mobile_pos/src/helpers/config.dart';
 import 'mobile_pos_platform_interface.dart';
-import 'src/helpers/enums.dart';
 
-class MobilePos {
-  static Future<void> startRavenPay(BuildContext context) async {
+class RavenMobilePOS {
+  static Future<void> launch(BuildContext context,
+      {required RavenMobilePOSConfig config}) async {
+    MobilePosPlatform.instance.setConfig(config);
     return await MobilePosPlatform.instance.startRavenPay(context);
   }
 
-  static Future<void> closeRavenPay(BuildContext context) async {
+  static Future<void> close(BuildContext context) async {
     return await MobilePosPlatform.instance.closeRavenPay(context);
-  }
-
-  static Future<bool?> checkConnectivityStatus(
-      ConnectivityType connectivityType) async {
-    return await MobilePosPlatform.instance
-        .checkConnectivityStatus(connectivityType);
-  }
-
-  static Future<String?> startTransaction(
-      {required double amount,
-      required ConnectivityType connectivityType}) async {
-    return await MobilePosPlatform.instance
-        .chargeCard(amount: amount, connectivityType: connectivityType);
   }
 }
