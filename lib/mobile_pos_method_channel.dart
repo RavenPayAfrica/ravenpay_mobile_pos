@@ -41,22 +41,28 @@ class MethodChannelMobilePos extends MobilePosPlatform {
   }
 
   @override
-  Future<bool?> checkConnectivity(ConnectivityType connectivityType) async {
+  Future<bool?> checkConnectivityStatus(
+      ConnectivityType connectivityType) async {
+    var args = <String, dynamic>{
+      "deviceType": _getConnectivityCode(connectivityType)
+    };
     final status =
-        await methodChannel.invokeMethod<bool>('getConnectivityStatus');
+        await methodChannel.invokeMethod<bool>('getPosSdkStatus', args);
     return status;
   }
 
   @override
-  Future<String?> startTransaction(
-      {required int amount, required String accountType}) async {
-    var sendMap = <String, dynamic>{
-      'amount': amount,
-      'account_type': accountType
+  Future<String?> chargeCard(
+      {required double amount,
+      required ConnectivityType connectivityType}) async {
+    var args = <String, dynamic>{
+      "amount": amount,
+      'account_type': '10',
+      'device_type': _getConnectivityCode(connectivityType),
     };
 
     final res =
-        await methodChannel.invokeMethod<String>('startTransaction', sendMap);
+        await methodChannel.invokeMethod<String>('startTransaction', args);
     return res;
   }
 
@@ -64,5 +70,16 @@ class MethodChannelMobilePos extends MobilePosPlatform {
   Future<void> closeRavenPay(BuildContext context) async {
     Navigator.of(context, rootNavigator: true)
         .popUntil((route) => route.isFirst);
+  }
+
+  int _getConnectivityCode(ConnectivityType connectivityType) {
+    switch (connectivityType) {
+      case ConnectivityType.bluetooth:
+        return 0;
+      case ConnectivityType.otg:
+        return 0;
+      default:
+        return 00;
+    }
   }
 }

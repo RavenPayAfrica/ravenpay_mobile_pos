@@ -29,12 +29,12 @@ abstract class MobilePosPlatform extends PlatformInterface {
     throw UnimplementedError('platformVersion() has not been implemented.');
   }
 
-  Future<bool?> checkConnectivity(ConnectivityType connectivityType) {
+  Future<bool?> checkConnectivityStatus(ConnectivityType connectivityType) {
     throw UnimplementedError('Not implemented.');
   }
 
-  Future<String?> startTransaction(
-      {required int amount, required String accountType}) {
+  Future<String?> chargeCard(
+      {required double amount, required ConnectivityType connectivityType}) {
     throw UnimplementedError('Not implemented.');
   }
 

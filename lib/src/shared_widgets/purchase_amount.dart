@@ -10,9 +10,9 @@ import 'package:mobile_pos/src/shared_widgets/ravenpay_close_button.dart';
 import 'package:mobile_pos/src/shared_widgets/ravenpay_scaffold.dart';
 
 class PurchaseAmount extends StatefulWidget {
-  final Function callback;
+  final Function(BuildContext conext, double amount) onProceed;
   final String? title;
-  const PurchaseAmount({super.key, required this.callback, this.title});
+  const PurchaseAmount({super.key, required this.onProceed, this.title});
 
   @override
   State<PurchaseAmount> createState() => _PurchaseAmountState();
@@ -80,7 +80,7 @@ class _PurchaseAmountState extends State<PurchaseAmount> {
                         if (val! <= 0) {
                           return;
                         }
-                        widget.callback(context);
+                        widget.onProceed(context, val);
                       } catch (ex) {
                         return;
                       }

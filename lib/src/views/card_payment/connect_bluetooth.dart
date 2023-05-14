@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:mobile_pos/mobile_pos_sdk.dart';
 import 'package:mobile_pos/src/helpers/global_variables.dart';
 import 'package:mobile_pos/src/helpers/helper_functions.dart';
 import 'package:mobile_pos/src/styles/ravenpay_app_colors.dart';
@@ -19,6 +20,19 @@ class ConnectBluetooth extends StatefulWidget {
 }
 
 class _ConnectBluetoothState extends State<ConnectBluetooth> {
+  bool? status;
+  @override
+  void initState() {
+    super.initState();
+    init();
+  }
+
+  void init() async {
+    final res =
+        await MobilePos.checkConnectivityStatus(ConnectivityType.bluetooth);
+    print(res);
+  }
+
   int currentIndex = 0;
   @override
   Widget build(BuildContext context) {
@@ -70,7 +84,7 @@ class _ConnectBluetoothState extends State<ConnectBluetooth> {
               RavenPayButton(
                 buttonText: "Proceed",
                 onPressed: () {
-                  pushRoute(context, const InsertCard());
+                  // pushRoute(context, const InsertCard());
                 },
               ),
               const Gap(74),

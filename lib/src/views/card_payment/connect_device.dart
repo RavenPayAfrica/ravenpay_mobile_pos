@@ -3,11 +3,8 @@ import 'package:gap/gap.dart';
 import 'package:mobile_pos/mobile_pos.dart';
 import 'package:mobile_pos/mobile_pos_sdk.dart';
 import 'package:mobile_pos/src/helpers/global_variables.dart';
-import 'package:mobile_pos/src/helpers/helper_functions.dart';
 import 'package:mobile_pos/src/styles/ravenpay_app_colors.dart';
 import 'package:mobile_pos/src/styles/ravenpay_textstyles.dart';
-import 'package:mobile_pos/src/views/card_payment/connect_bluetooth.dart';
-import 'package:mobile_pos/src/views/card_payment/connect_otg.dart';
 import 'package:mobile_pos/src/views/card_payment/widget/see_how_to_connect.dart';
 import 'package:mobile_pos/src/shared_widgets/ravenpay_button.dart';
 import 'package:mobile_pos/src/shared_widgets/ravenpay_card.dart';
@@ -15,7 +12,9 @@ import 'package:mobile_pos/src/shared_widgets/ravenpay_close_button.dart';
 import 'package:mobile_pos/src/shared_widgets/ravenpay_scaffold.dart';
 
 class ConnectDevice extends StatefulWidget {
-  const ConnectDevice({super.key});
+  const ConnectDevice({super.key, required this.amount});
+
+  final double amount;
 
   @override
   State<ConnectDevice> createState() => _ConnectDeviceState();
@@ -23,14 +22,6 @@ class ConnectDevice extends StatefulWidget {
 
 class _ConnectDeviceState extends State<ConnectDevice> {
   int currentIndex = 0;
-
-  @override
-  void initState() {
-    MobilePos.checkConnectivity(ConnectivityType.bluetooth);
-    super.initState();
-
-  }
-
 
   @override
   Widget build(BuildContext context) {
@@ -85,12 +76,17 @@ class _ConnectDeviceState extends State<ConnectDevice> {
               RavenPayButton(
                 enabled: currentIndex != 0,
                 buttonText: "Proceed",
-                onPressed: () {
-                  pushRoute(
-                      context,
-                      currentIndex == 1
-                          ? const ConnectBluetooth()
-                          : const ConnectOtg());
+                onPressed: () async {
+                  if (currentIndex == 1) {
+                    final res = await MobilePos.startTransaction(
+                        amount: widget.amount,
+                        connectivityType: ConnectivityType.bluetooth);
+                    print(res);
+                  } else if (currentIndex == 2) {
+                    MobilePos.startTransaction(
+                        amount: widget.amount,
+                        connectivityType: ConnectivityType.otg);
+                  }
                 },
               )
             ],

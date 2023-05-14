@@ -56,8 +56,8 @@ class _RavenPayAppState extends State<RavenPayApp> {
                 pushRoute(
                     context,
                     PurchaseAmount(
-                        callback: (mcontext) =>
-                            pushRoute(mcontext, const BusinessPhoneNumber()),
+                        onProceed: (mContext, amount) =>
+                            pushRoute(mContext, const BusinessPhoneNumber()),
                         title: "Requested Amount"));
               },
               asset: "generate_pay_code.png",
