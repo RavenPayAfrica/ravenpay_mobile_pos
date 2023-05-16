@@ -146,6 +146,12 @@
       "languageVersion": "2.17"
     },
     {
+      "name": "pretty_qr_code",
+      "rootUri": "file:///Users/confidencewangoho/.pub-cache/hosted/pub.dev/pretty_qr_code-2.0.3",
+      "packageUri": "lib/",
+      "languageVersion": "2.13"
+    },
+    {
       "name": "provider",
       "rootUri": "file:///Users/confidencewangoho/.pub-cache/hosted/pub.dev/provider-6.0.5",
       "packageUri": "lib/",
@@ -153,15 +159,9 @@
     },
     {
       "name": "qr",
-      "rootUri": "file:///Users/confidencewangoho/.pub-cache/hosted/pub.dev/qr-2.1.0",
+      "rootUri": "file:///Users/confidencewangoho/.pub-cache/hosted/pub.dev/qr-3.0.1",
       "packageUri": "lib/",
-      "languageVersion": "2.12"
-    },
-    {
-      "name": "qr_flutter",
-      "rootUri": "file:///Users/confidencewangoho/.pub-cache/hosted/pub.dev/qr_flutter-4.0.0",
-      "packageUri": "lib/",
-      "languageVersion": "2.12"
+      "languageVersion": "2.16"
     },
     {
       "name": "sky_engine",
@@ -236,7 +236,7 @@
       "languageVersion": "2.19"
     }
   ],
-  "generated": "2023-05-16T12:40:10.389823Z",
+  "generated": "2023-05-16T19:44:09.564073Z",
   "generator": "pub",
   "generatorVersion": "2.19.6"
 }

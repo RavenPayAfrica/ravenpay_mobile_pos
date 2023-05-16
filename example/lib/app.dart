@@ -17,7 +17,7 @@ class _RavenPayExampleAppState extends State<RavenPayExampleApp> {
                 onPressed: () async {
                   await RavenMobilePOS.launch(context,
                       config: RavenMobilePOSConfig(
-                          enviroment: RavenMobilePOSEnviroment.staging,
+                          enviroment: RavenMobilePOSEnviroment.production,
                           businessInfo:
                               BusinessInfo(businessName: 'Raven Bank'),
                           onSuccess: (data) {

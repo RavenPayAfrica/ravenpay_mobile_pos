@@ -40,9 +40,7 @@ class ProgressDialog extends StatelessWidget {
               ),
               Text(
                 status!,
-                style: subtitle.copyWith(
-                    color: MobilePosPlatform
-                        .instance.config!.theme!.bodyTextColor),
+                style: subtitle,
               ),
             ],
           ),

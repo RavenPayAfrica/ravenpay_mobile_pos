@@ -1,3 +1,3 @@
 enum ConnectivityType { otg, bluetooth }
 
-enum RavenMobilePOSEnviroment { staging, prod }
+enum RavenMobilePOSEnviroment { staging, production }

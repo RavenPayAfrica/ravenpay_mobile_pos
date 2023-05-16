@@ -2,10 +2,11 @@ import 'dart:convert';
 
 import 'package:http/http.dart' as http;
 
-const String kBseURL = '';
+const String kBseURL = 'http://postest.getravenpos.com';
 
 class HttpBase {
-  static Future<dynamic> postRequest(Map map, String route) async {
+  static Future<dynamic> postRequest(
+      Map<String, dynamic> map, String route) async {
     var url = Uri.parse('$kBseURL/$route');
     try {
       http.Response response = await http.post(url, body: map);
