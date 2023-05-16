@@ -1,5 +1,4 @@
 import 'package:mobile_pos/mobile_pos_sdk.dart';
-import 'package:mobile_pos/src/models/business_info.dart';
 
 class RavenMobilePOSConfig {
   ///Called when a transaction completes successfully
