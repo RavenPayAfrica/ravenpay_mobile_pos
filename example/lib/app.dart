@@ -16,11 +16,16 @@ class _RavenPayExampleAppState extends State<RavenPayExampleApp> {
             child: ElevatedButton(
                 onPressed: () async {
                   await RavenMobilePOS.launch(context,
-                      config: RavenMobilePOSConfig(onSuccess: (data) {
-                        print(data);
-                      }, onError: (error) {
-                        print(error.message);
-                      }));
+                      config: RavenMobilePOSConfig(
+                          enviroment: RavenMobilePOSEnviroment.staging,
+                          businessInfo:
+                              BusinessInfo(businessName: 'Raven Bank'),
+                          onSuccess: (data) {
+                            print(data);
+                          },
+                          onError: (error) {
+                            print(error.message);
+                          }));
                 },
                 child: const Text("Start Payment"))));
   }

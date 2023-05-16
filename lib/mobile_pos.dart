@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mobile_pos/src/helpers/config.dart';
+import 'package:mobile_pos/src/models/config.dart';
 import 'mobile_pos_platform_interface.dart';
 
 class RavenMobilePOS {

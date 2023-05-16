@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
-import 'package:mobile_pos/mobile_pos.dart';
 import 'package:mobile_pos/mobile_pos_platform_interface.dart';
 import 'package:mobile_pos/mobile_pos_sdk.dart';
-import 'package:mobile_pos/src/helpers/failure.dart';
 import 'package:mobile_pos/src/helpers/global_variables.dart';
+import 'package:mobile_pos/src/helpers/helper_functions.dart';
+import 'package:mobile_pos/src/network/api_requests.dart';
 import 'package:mobile_pos/src/styles/ravenpay_app_colors.dart';
 import 'package:mobile_pos/src/styles/ravenpay_textstyles.dart';
+import 'package:mobile_pos/src/views/card_payment/card_success_page.dart';
 import 'package:mobile_pos/src/views/card_payment/widget/see_how_to_connect.dart';
 import 'package:mobile_pos/src/shared_widgets/ravenpay_button.dart';
 import 'package:mobile_pos/src/shared_widgets/ravenpay_card.dart';
@@ -80,17 +81,29 @@ class _ConnectDeviceState extends State<ConnectDevice> {
                 buttonText: "Proceed",
                 onPressed: () async {
                   if (currentIndex == 1) {
-                    final res = await MobilePosPlatform.instance.chargeCard(
-                        amount: widget.amount,
-                        connectivityType: ConnectivityType.bluetooth);
-                    if (res != null) {
-                      //success
-                      MobilePosPlatform.instance.config?.onSuccess.call(res);
+                    final cardData = await MobilePosPlatform.instance
+                        .chargeCard(
+                            amount: widget.amount,
+                            connectivityType: ConnectivityType.bluetooth);
+                    if (cardData != null) {
+                      if (MobilePosPlatform.instance.config!.isStaging) {
+                        //Mock Successful
+                        pushRoute(context, CardSuccessPage());
+                      } else {
+                        //charge card
+                        try {
+                          final res =
+                              await ApiRequest.processCard(context, cardData);
+                          MobilePosPlatform.instance.config?.onSuccess
+                              .call(res);
+                        } on RavenMobilePOSException catch (e) {
+                          MobilePosPlatform.instance.config?.onError.call(e);
+                        }
+                      }
                     } else {
-                      //failure
                       MobilePosPlatform.instance.config?.onError.call(
                           RavenMobilePOSException(
-                              code: 'failure', message: 'Payment failed'));
+                              code: kNibbsError, message: 'Payment failed'));
                     }
                   } else if (currentIndex == 2) {
                     await MobilePosPlatform.instance.chargeCard(

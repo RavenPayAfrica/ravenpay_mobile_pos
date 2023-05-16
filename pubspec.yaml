@@ -1,7 +1,7 @@
 name: mobile_pos
 description: A new Flutter plugin project.
 version: 0.0.1
-homepage:
+homepage: null
 
 environment:
   sdk: '>=2.19.6 <3.0.0'
@@ -10,20 +10,19 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  plugin_platform_interface: ^2.0.2
   gap: ^3.0.0
+  http: ^0.13.6
   pinput: ^2.2.31
+  plugin_platform_interface: ^2.0.2
   qr_flutter: ^4.0.0
 
 dev_dependencies:
+  flutter_lints: ^2.0.0
   flutter_test:
     sdk: flutter
-  flutter_lints: ^2.0.0
- 
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
-
 # The following section is specific to Flutter packages.
 flutter:
   # This section identifies this Flutter project as a plugin project.
@@ -54,7 +53,6 @@ flutter:
   #
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
-
   # To add custom fonts to your plugin package, add a fonts section here,
   # in this "flutter" section. Each entry in this list should have a
   # "family" key with the font family name, and a "fonts" key with a
