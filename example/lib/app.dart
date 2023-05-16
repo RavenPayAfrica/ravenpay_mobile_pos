@@ -17,14 +17,17 @@ class _RavenPayExampleAppState extends State<RavenPayExampleApp> {
                 onPressed: () async {
                   await RavenMobilePOS.launch(context,
                       config: RavenMobilePOSConfig(
-                          theme: const MobilePOSTheme(
-                              primaryColor: Color(0xff41186C),
+                          theme: MobilePOSTheme(
+                              primaryColor: Color(0xFF755AE2),
                               onPrimary: Colors.white,
-                              logo: "assets/company_logo.png",
-                              secondaryColor: Colors.grey),
-                          enviroment: RavenMobilePOSEnviroment.production,
-                          businessInfo:
-                              BusinessInfo(businessName: 'Raven Bank'),
+                              secondaryColor: Color(0xFFEA872D)),
+                          enviroment: RavenMobilePOSEnviroment.staging,
+                          businessInfo: BusinessInfo(
+                              businessName: 'Raven Bank',
+                              logo: Image.asset(
+                                'assets/logo.png',
+                                fit: BoxFit.cover,
+                              )),
                           onSuccess: (data) {
                             print(data);
                           },

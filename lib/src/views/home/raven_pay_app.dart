@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:mobile_pos/mobile_pos_platform_interface.dart';
 import 'package:mobile_pos/src/helpers/global_variables.dart';
 import 'package:mobile_pos/src/helpers/helper_functions.dart';
 import 'package:mobile_pos/src/styles/ravenpay_textstyles.dart';
@@ -37,11 +38,15 @@ class _RavenPayAppState extends State<RavenPayApp> {
             const Spacer(),
             Align(
                 alignment: Alignment.topLeft,
-                child: Image.asset(pluginTheme.logo!, height: 48)),
-            const Gap(20),
-            Text("Accept Payment  faster with your terminal.",
+                child: SizedBox(
+                    height: 48,
+                    width: 48,
+                    child: pluginConfig.businessInfo.logo)),
+            const Gap(16),
+            Text(
+                "Accept payment much easier with ${pluginConfig.businessInfo.businessName}",
                 style: headling1.copyWith(color: pluginTheme.onPrimary)),
-            const Gap(40),
+            const Gap(24),
             Container(
               padding: const EdgeInsets.symmetric(vertical: 12),
               decoration: BoxDecoration(

@@ -87,7 +87,7 @@ class _ConnectDeviceState extends State<ConnectDevice> {
                             amount: widget.amount,
                             connectivityType: ConnectivityType.bluetooth);
                     if (cardData != null) {
-                      if (MobilePosPlatform.instance.config!.isStaging) {
+                      if (pluginConfig.isStaging) {
                         //Mock Successful
                         pushRoute(
                             context,
@@ -100,16 +100,14 @@ class _ConnectDeviceState extends State<ConnectDevice> {
                         try {
                           final res = await ApiRequest.processCard(
                               context, widget.amount, cardData);
-                          MobilePosPlatform.instance.config?.onSuccess
-                              .call(res);
+                          pluginConfig.onSuccess.call(res);
                         } on RavenMobilePOSException catch (e) {
-                          MobilePosPlatform.instance.config?.onError.call(e);
+                          pluginConfig.onError.call(e);
                         }
                       }
                     } else {
-                      MobilePosPlatform.instance.config?.onError.call(
-                          RavenMobilePOSException(
-                              code: kNibbsError, message: 'Payment failed'));
+                      pluginConfig.onError.call(RavenMobilePOSException(
+                          code: kNibbsError, message: 'Payment failed'));
                     }
                   } else if (currentIndex == 2) {
                     await MobilePosPlatform.instance.chargeCard(

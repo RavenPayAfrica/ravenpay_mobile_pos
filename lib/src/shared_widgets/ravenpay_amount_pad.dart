@@ -19,64 +19,116 @@ class RavenPayAmountPad extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Expanded(
-        child: Column(
+        child: Row(
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [item("1"), item("2"), item("3")],
-        ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [item("4"), item("5"), item("6")],
-        ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [item("7"), item("8"), item("9")],
-        ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Expanded(
-              child: InkWell(
-                  highlightColor: Colors.transparent,
-                  focusColor: Colors.transparent,
-                  splashColor: Colors.transparent,
-                  onTap: () => valueChanged("$amount."),
-                  child: SizedBox(
+        Expanded(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              item("1"),
+              item("4"),
+              item("7"),
+              Expanded(
+                child: InkWell(
+                    highlightColor: Colors.transparent,
+                    focusColor: Colors.transparent,
+                    splashColor: Colors.transparent,
+                    onTap: () => valueChanged("$amount."),
                     child: Container(
                         height: 8,
                         width: 8,
-                        margin: const EdgeInsets.all(24),
+                        // margin: const EdgeInsets.all(24),
                         decoration: BoxDecoration(
                             color: AppColors.ravenPayDark,
-                            shape: BoxShape.circle)),
-                  )),
-            ),
-            item("0"),
-            Expanded(
-              child: InkWell(
-                  highlightColor: Colors.transparent,
-                  focusColor: Colors.transparent,
-                  splashColor: Colors.transparent,
-                  onTap: () async {
-                    delete();
-                  },
-                  child: Center(
-                    child: Padding(
-                      padding: const EdgeInsets.only(left: 12.0),
-                      child: Image.asset(
-                        loadAsset("arrow_back.png"),
-                        color: AppColors.ravenPayDark,
-                        height: 18,
-                        width: 18,
+                            shape: BoxShape.circle))),
+              ),
+            ],
+          ),
+        ),
+        Expanded(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [item("2"), item("5"), item("8"), item('0')],
+          ),
+        ),
+        Expanded(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              item("3"),
+              item("6"),
+              item("9"),
+              Expanded(
+                child: InkWell(
+                    highlightColor: Colors.transparent,
+                    focusColor: Colors.transparent,
+                    splashColor: Colors.transparent,
+                    onTap: () async {
+                      delete();
+                    },
+                    child: Center(
+                      child: Padding(
+                        padding: const EdgeInsets.only(right: 8),
+                        child: Image.asset(
+                          loadAsset("arrow_back.png"),
+                          color: AppColors.ravenPayDark,
+                          height: 18,
+                          width: 18,
+                        ),
                       ),
-                    ),
-                  )),
-            ),
-            const Gap(12),
-          ],
-        )
+                    )),
+              ),
+            ],
+          ),
+        ),
+        // Row(
+        //   mainAxisAlignment: MainAxisAlignment.center,
+        //   children: [
+        //     Expanded(
+        //       child: InkWell(
+        //           highlightColor: Colors.transparent,
+        //           focusColor: Colors.transparent,
+        //           splashColor: Colors.transparent,
+        //           onTap: () => valueChanged("$amount."),
+        //           child: SizedBox(
+        //             width: 32,
+        //             child: Container(
+        //                 height: 8,
+        //                 width: 8,
+        //                 margin: const EdgeInsets.all(24),
+        //                 decoration: BoxDecoration(
+        //                     color: AppColors.ravenPayDark,
+        //                     shape: BoxShape.circle)),
+        //           )),
+        //     ),
+        //     item("0"),
+        //     Expanded(
+        //       child: InkWell(
+        //           highlightColor: Colors.transparent,
+        //           focusColor: Colors.transparent,
+        //           splashColor: Colors.transparent,
+        //           onTap: () async {
+        //             delete();
+        //           },
+        //           child: Center(
+        //             child: Padding(
+        //               padding: const EdgeInsets.only(left: 12.0),
+        //               child: Image.asset(
+        //                 loadAsset("arrow_back.png"),
+        //                 color: AppColors.ravenPayDark,
+        //                 height: 18,
+        //                 width: 18,
+        //               ),
+        //             ),
+        //           )),
+        //     ),
+        //     // const Gap(12),
+        //   ],
+        // )
       ],
     ));
   }

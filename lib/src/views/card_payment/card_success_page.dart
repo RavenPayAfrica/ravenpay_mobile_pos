@@ -78,11 +78,12 @@ class _CardSuccessPageState extends State<CardSuccessPage> {
                   style: headling2.copyWith(
                       color: pluginTheme.onPrimary, fontSize: 18)),
               const Gap(8),
-              Text("You have successfully received",
-                  style: subtitle2.copyWith(color: AppColors.ravenPayGrey2)),
+              Text("You have successfully received,",
+                  style: subtitle2.copyWith(color: pluginTheme.onPrimary)),
               const Gap(4),
-              Text("N${widget.amount.toString()}",
-                  style: subtitle.copyWith(color: pluginTheme.onPrimary)),
+              Text("NGN ${formatAmount(widget.amount)}",
+                  style: subtitle.copyWith(
+                      color: pluginTheme.onPrimary, fontSize: 18)),
               const Gap(74),
             ],
           ),
