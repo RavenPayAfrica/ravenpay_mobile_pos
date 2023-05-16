@@ -12,7 +12,7 @@ import '../models/card_tx_response.dart';
 
 class ApiRequest {
   static Future<RavenMPOSResponse> processCard(
-      BuildContext context, String cardData) async {
+      BuildContext context, double amount, String cardData) async {
     final body = json.decode(cardData);
     final cardModel = CardTransactionResponseModel.fromJson(body);
 
@@ -26,20 +26,34 @@ class ApiRequest {
     Map<String, dynamic> nibssMap = cardModel.nibbsEMV!.toJson();
     nibssMap.update('ssl', (value) => 'true');
 
+    final serializedMap = nibssMap.map((key, value) {
+      if (nibssMap[key] == null) {
+        return MapEntry(key, '');
+      } else {
+        return MapEntry(key, value);
+      }
+    });
+
     logData(jsonEncode(nibssMap));
 
-    var response = await HttpBase.postRequest(nibssMap, 'card/processing');
+    var response = await HttpBase.postRequest(serializedMap, 'card/processing');
     Navigator.pop(context);
-    logData(response);
+
     //failed
     if (response == 'failed' || response == null) {
       throw RavenMobilePOSException(
           code: kNibbsError, message: 'Transaction failed to complete');
     } else {
+      logData(response);
       //Completes with a response
       if (response['data']['data']['resp'].toString() == '00') {
         //success
-        pushRoute(context, CardSuccessPage());
+        pushRoute(
+            context,
+            CardSuccessPage(
+              amount: amount,
+              response: response,
+            ));
         return RavenMPOSResponse(data: response);
       } else {
         //Unsuccessful

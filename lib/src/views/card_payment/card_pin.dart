@@ -105,7 +105,7 @@ class _CardPinState extends State<CardPin> {
                     enabled: _pinController.text.length == 4,
                     buttonText: "Proceed",
                     onPressed: () {
-                      pushRoute(context, const CardSuccessPage());
+                      // pushRoute(context, const CardSuccessPage());
                     },
                   ),
                 ),

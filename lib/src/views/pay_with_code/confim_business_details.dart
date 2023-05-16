@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:mobile_pos/src/helpers/global_variables.dart';
 import 'package:mobile_pos/src/helpers/helper_functions.dart';
+import 'package:mobile_pos/src/models/success_response.dart';
 import 'package:mobile_pos/src/styles/ravenpay_app_colors.dart';
 import 'package:mobile_pos/src/styles/ravenpay_textstyles.dart';
 import 'package:mobile_pos/src/views/card_payment/card_success_page.dart';
@@ -36,7 +37,12 @@ class _ConfirmBusinessDetailsState extends State<ConfirmBusinessDetails> {
                 RavenPayButton(
                   buttonText: "Proceed",
                   onPressed: () {
-                    pushRoute(context, const CardSuccessPage());
+                    pushRoute(
+                        context,
+                        CardSuccessPage(
+                          amount: 1000,
+                          response: RavenMPOSResponse(),
+                        ));
                   },
                 ),
                 const Gap(24),

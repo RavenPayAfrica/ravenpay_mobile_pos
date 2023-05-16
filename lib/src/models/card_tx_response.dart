@@ -86,7 +86,7 @@ class RavenEMV {
     data['CardNo'] = cardNo;
     data['CardSequenceNumber'] = cardSequenceNumber;
     data['IccData'] = iccData;
-    data['PinBlock'] = pinBlock;
+    data['PinBlock'] = pinBlock ?? '';
     data['TLV'] = tLV;
     data['TerminaID'] = terminaID;
     data['Track2'] = track2;

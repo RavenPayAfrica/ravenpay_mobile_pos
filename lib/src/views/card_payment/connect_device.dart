@@ -4,6 +4,7 @@ import 'package:mobile_pos/mobile_pos_platform_interface.dart';
 import 'package:mobile_pos/mobile_pos_sdk.dart';
 import 'package:mobile_pos/src/helpers/global_variables.dart';
 import 'package:mobile_pos/src/helpers/helper_functions.dart';
+import 'package:mobile_pos/src/models/success_response.dart';
 import 'package:mobile_pos/src/network/api_requests.dart';
 import 'package:mobile_pos/src/styles/ravenpay_app_colors.dart';
 import 'package:mobile_pos/src/styles/ravenpay_textstyles.dart';
@@ -88,12 +89,17 @@ class _ConnectDeviceState extends State<ConnectDevice> {
                     if (cardData != null) {
                       if (MobilePosPlatform.instance.config!.isStaging) {
                         //Mock Successful
-                        pushRoute(context, CardSuccessPage());
+                        pushRoute(
+                            context,
+                            CardSuccessPage(
+                              amount: widget.amount,
+                              response: RavenMPOSResponse(),
+                            ));
                       } else {
                         //charge card
                         try {
-                          final res =
-                              await ApiRequest.processCard(context, cardData);
+                          final res = await ApiRequest.processCard(
+                              context, widget.amount, cardData);
                           MobilePosPlatform.instance.config?.onSuccess
                               .call(res);
                         } on RavenMobilePOSException catch (e) {
