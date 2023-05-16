@@ -8,6 +8,7 @@ class MobilePOSTheme {
   final Color? foreGroundColor;
   final Color? backgroundColor;
   final Color? onPrimary;
+  final Widget? logo;
 
   const MobilePOSTheme(
       {this.primaryColor,
@@ -15,6 +16,7 @@ class MobilePOSTheme {
       this.foreGroundColor,
       this.bodyTextColor,
       this.onPrimary,
+      this.logo,
       this.backgroundColor});
 
   factory MobilePOSTheme.defaults() {
@@ -24,6 +26,7 @@ class MobilePOSTheme {
         headerTextColor: AppColors.ravenPayGreen,
         bodyTextColor: AppColors.ravenPayGrey,
         onPrimary: Colors.white,
+        logo: SizedBox(),
         primaryColor: AppColors.ravenPayGreen);
   }
 }
