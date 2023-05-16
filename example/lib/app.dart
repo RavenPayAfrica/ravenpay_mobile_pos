@@ -17,6 +17,11 @@ class _RavenPayExampleAppState extends State<RavenPayExampleApp> {
                 onPressed: () async {
                   await RavenMobilePOS.launch(context,
                       config: RavenMobilePOSConfig(
+                          // theme: const MobilePOSTheme(
+                          //     primaryColor: Color(0xff41186C),
+                          //     onPrimary: Colors.white,
+                          //     logo: "assets/company_logo.png",
+                          //     secondaryColor: Colors.grey),
                           enviroment: RavenMobilePOSEnviroment.production,
                           businessInfo:
                               BusinessInfo(businessName: 'Raven Bank'),

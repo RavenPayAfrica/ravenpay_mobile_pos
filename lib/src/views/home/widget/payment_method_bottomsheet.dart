@@ -29,7 +29,8 @@ class PaymentMethod extends StatelessWidget {
           Align(
             alignment: Alignment.centerLeft,
             child: Text("Select Payment Method",
-                style: headling2.copyWith(fontSize: 20)),
+                style: headling2.copyWith(
+                    fontSize: 20, color: pluginTheme.primaryColor)),
           ),
           const Gap(24),
           items(
@@ -50,7 +51,7 @@ class PaymentMethod extends StatelessWidget {
           const Gap(8),
           items(
               context: context,
-              asset: "pay_with_code.png",
+              asset: "generate_pay_code.png",
               name: "Pay-Code",
               onTap: () {
                 pushRoute(context, const PayWithCode());
@@ -75,9 +76,18 @@ class PaymentMethod extends StatelessWidget {
       },
       child: Row(
         children: [
-          Image.asset(loadAsset(asset), height: 32),
+          Container(
+              height: 40,
+              width: 40,
+              padding: const EdgeInsets.all(8),
+              decoration: BoxDecoration(
+                  shape: BoxShape.circle, color: AppColors.ravenLightGrey4),
+              child: Image.asset(loadAsset(asset), height: 32)),
           const Gap(16),
-          Expanded(child: Text(name, style: headling2.copyWith(fontSize: 15))),
+          Expanded(
+              child: Text(name,
+                  style: headling2.copyWith(
+                      fontSize: 15, color: AppColors.ravenPayDark))),
           const Icon(Icons.arrow_forward_ios, size: 16)
         ],
       ),

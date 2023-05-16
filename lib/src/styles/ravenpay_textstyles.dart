@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mobile_pos/src/helpers/global_variables.dart';
 import 'package:mobile_pos/src/styles/ravenpay_app_colors.dart';
 
 class RavenPayText extends StatelessWidget {
@@ -44,7 +45,7 @@ class RavenPayText extends StatelessWidget {
 TextStyle headling1 = TextStyle(
     fontSize: 24,
     fontFamily: "br_bold",
-    color: AppColors.ravenPayGreen,
+    color: pluginTheme.primaryColor,
     package: "mobile_pos");
 TextStyle headling2 = TextStyle(
     fontSize: 16,

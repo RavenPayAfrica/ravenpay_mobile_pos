@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:mobile_pos/src/helpers/global_variables.dart';
 import 'package:mobile_pos/src/helpers/helper_functions.dart';
-import 'package:mobile_pos/src/styles/ravenpay_app_colors.dart';
 import 'package:mobile_pos/src/styles/ravenpay_textstyles.dart';
 import 'package:mobile_pos/src/views/card_payment/insert_card.dart';
 import 'package:mobile_pos/src/views/card_payment/widget/see_how_to_connect.dart';
@@ -50,7 +49,7 @@ class _ConnectOtgState extends State<ConnectOtg> {
               const Gap(12),
               Text(
                 "Connecting to device, wait a minute",
-                style: subtitle.copyWith(color: AppColors.ravenDarkGreen),
+                style: subtitle.copyWith(color: pluginTheme.primaryColor),
               ),
               const Spacer(),
               const Gap(34),

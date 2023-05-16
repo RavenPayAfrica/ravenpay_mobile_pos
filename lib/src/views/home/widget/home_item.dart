@@ -22,26 +22,28 @@ class HomeItem extends StatelessWidget {
     return GestureDetector(
       onTap: () => onTap!(),
       child: Container(
-          margin: const EdgeInsets.symmetric(vertical: 8),
+          margin: const EdgeInsets.symmetric(vertical: 4),
           padding: const EdgeInsets.symmetric(horizontal: 12),
           constraints:
               const BoxConstraints(minHeight: 74, maxWidth: double.infinity),
-          decoration: BoxDecoration(boxShadow: [
-            BoxShadow(
-                color: AppColors.ravenPayGrey2.withOpacity(0.8),
-                spreadRadius: 0.2,
-                blurRadius: 0.1)
-          ], color: Colors.white, borderRadius: BorderRadius.circular(8)),
           child: Row(
             children: [
-              Image.asset(loadAsset(asset), height: 40, width: 40),
+              Container(
+                  height: 40,
+                  width: 40,
+                  padding: const EdgeInsets.all(9),
+                  decoration: BoxDecoration(
+                      shape: BoxShape.circle, color: AppColors.ravenLightGrey4),
+                  child: Image.asset(loadAsset(asset), height: 40, width: 40)),
               const Gap(8),
               Expanded(
                   child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(title, style: headling2),
-                  Text(subTitile, style: subtitle2)
+                  Text(title,
+                      style: headling2.copyWith(color: AppColors.ravenPayDark)),
+                  Text(subTitile,
+                      style: subtitle2.copyWith(color: AppColors.ravenPayDark))
                 ],
               ))
             ],

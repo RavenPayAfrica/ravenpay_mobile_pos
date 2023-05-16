@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:gap/gap.dart';
+import 'package:mobile_pos/src/helpers/global_variables.dart';
 import 'package:mobile_pos/src/helpers/helper_functions.dart';
 import 'package:mobile_pos/src/styles/ravenpay_app_colors.dart';
 import 'package:mobile_pos/src/styles/ravenpay_textstyles.dart';
@@ -107,7 +108,7 @@ class _RavenPayTextFieldState extends State<RavenPayTextField> {
           style: subtitle2.copyWith(
             fontWeight: FontWeight.w500,
             fontSize: 16,
-            color: AppColors.ravenDarkGreen,
+            color: pluginTheme.primaryColor,
           ),
           obscureText: obscure,
           keyboardType: widget.inputType,
@@ -146,7 +147,7 @@ class _RavenPayTextFieldState extends State<RavenPayTextField> {
             focusedBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(12),
               borderSide:
-                  BorderSide(color: AppColors.ravenDarkGreen, width: .8),
+                  BorderSide(color: pluginTheme.primaryColor!, width: .8),
             ),
             enabledBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(12),

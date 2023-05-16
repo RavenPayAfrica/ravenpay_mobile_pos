@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:mobile_pos/src/helpers/global_variables.dart';
-import 'package:mobile_pos/src/helpers/helper_functions.dart';
-import 'package:mobile_pos/src/styles/ravenpay_app_colors.dart';
 import 'package:mobile_pos/src/styles/ravenpay_textstyles.dart';
-import 'package:mobile_pos/src/views/card_payment/card_success_page.dart';
 import 'package:mobile_pos/src/views/card_payment/widget/scan_pin.dart';
 import 'package:mobile_pos/src/shared_widgets/powerby_by_raven_widget.dart';
 import 'package:mobile_pos/src/shared_widgets/ravenpay_amount_pad.dart';
@@ -62,7 +59,7 @@ class _CardPinState extends State<CardPin> {
                           style: subtitle2.copyWith(
                               fontWeight: FontWeight.bold,
                               fontSize: 14,
-                              color: AppColors.ravenOrageColor),
+                              color: pluginTheme.secondaryColor),
                           children: [
                             TextSpan(
                               text: " method above.",

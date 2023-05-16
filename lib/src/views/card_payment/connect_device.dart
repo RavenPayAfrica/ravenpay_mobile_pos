@@ -163,13 +163,14 @@ class Items extends StatelessWidget {
           Row(
             children: [
               Radio(
-                  activeColor: AppColors.ravenDarkGreen,
+                  activeColor: pluginTheme.primaryColor,
                   value: currentIndex,
                   groupValue: index,
                   onChanged: (val) {}),
               RavenPayText.bodyText(
                 name,
                 fontSize: 14,
+                color: pluginTheme.primaryColor,
               )
             ],
           ),

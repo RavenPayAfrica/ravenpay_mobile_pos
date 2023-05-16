@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:mobile_pos/src/helpers/global_variables.dart';
 import 'package:mobile_pos/src/helpers/helper_functions.dart';
-import 'package:mobile_pos/src/styles/ravenpay_app_colors.dart';
 import 'package:mobile_pos/src/styles/ravenpay_textstyles.dart';
 import 'package:mobile_pos/src/views/card_payment/widget/see_how_to_connect.dart';
 import 'package:mobile_pos/src/shared_widgets/powerby_by_raven_widget.dart';
@@ -77,7 +76,7 @@ class _ShareReceiptState extends State<ShareReceipt> {
                     style: subtitle2.copyWith(
                         fontWeight: FontWeight.bold,
                         fontSize: 14,
-                        color: AppColors.ravenOrageColor),
+                        color: pluginTheme.secondaryColor),
                   )
                 ])),
             const Gap(24),

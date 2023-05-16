@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mobile_pos/src/styles/ravenpay_app_colors.dart';
+import 'package:mobile_pos/src/helpers/global_variables.dart';
 import 'package:mobile_pos/src/styles/ravenpay_textstyles.dart';
 import 'package:mobile_pos/src/shared_widgets/ravenpay_button_loader.dart';
 
@@ -43,8 +43,8 @@ class RavenPayButton extends StatelessWidget {
     return Material(
       borderRadius: BorderRadius.circular(borderRadius),
       color: enabled
-          ? (buttonColor ?? AppColors.ravenDarkGreen)
-          : AppColors.ravenDarkGreen.withOpacity(.4),
+          ? (buttonColor ?? pluginTheme.primaryColor)
+          : pluginTheme.primaryColor!.withOpacity(.4),
       child: InkWell(
         borderRadius: BorderRadius.circular(borderRadius),
         onTap: enabled ? onPressed : null,

@@ -29,9 +29,9 @@ class _PayCodeSuccessPageState extends State<PayCodeSuccessPage> {
                 toRavenPayHome(context);
               },
               height: 54,
-              textColor: AppColors.ravenDarkGreen,
+              textColor: pluginTheme.primaryColor!,
               buttonText: "Close",
-              buttonColor: Colors.white,
+              buttonColor: pluginTheme.onPrimary,
             ),
             const Gap(24),
             const PoweredByRaven(
@@ -41,7 +41,7 @@ class _PayCodeSuccessPageState extends State<PayCodeSuccessPage> {
             const Gap(34),
           ]),
         ),
-        backgroundColor: AppColors.ravenDarkGreen,
+        backgroundColor: pluginTheme.primaryColor,
         showLogo: false,
         body: Padding(
           padding: EdgeInsets.symmetric(horizontal: kHoriontalScreenPadding),
@@ -49,15 +49,20 @@ class _PayCodeSuccessPageState extends State<PayCodeSuccessPage> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Gap(size.height * 0.2),
-              Center(
-                child: Image.asset(
-                  loadAsset("check_icon.png"),
+              Container(
                   height: 84,
-                ),
-              ),
+                  width: 84,
+                  padding: const EdgeInsets.all(20),
+                  decoration: BoxDecoration(
+                      color: pluginTheme.onPrimary, shape: BoxShape.circle),
+                  child: Image.asset(
+                    loadAsset("check.png"),
+                    color: pluginTheme.primaryColor,
+                  )),
               const Gap(12),
               Text("Code Generated Successfully",
-                  style: subtitle.copyWith(color: Colors.white, fontSize: 14)),
+                  style: subtitle.copyWith(
+                      color: pluginTheme.onPrimary, fontSize: 14)),
               const Gap(12),
               Container(
                   padding:
@@ -70,7 +75,7 @@ class _PayCodeSuccessPageState extends State<PayCodeSuccessPage> {
                     children: [
                       Text(
                         "563-145",
-                        style: headling2.copyWith(color: Colors.white),
+                        style: headling2.copyWith(color: pluginTheme.onPrimary),
                       ),
                       const Gap(8),
                       Image.asset(
@@ -91,14 +96,14 @@ class _PayCodeSuccessPageState extends State<PayCodeSuccessPage> {
                       Image.asset(
                         loadAsset("warning.png"),
                         height: 16,
-                        color: Colors.white,
+                        color: pluginTheme.onPrimary,
                       ),
                       Expanded(
                         child: Text(
                           "Ensure to use this code within the next one hour unless, you would need to generate a new one",
                           textAlign: TextAlign.center,
                           style: subtitle2.copyWith(
-                              color: Colors.white, fontSize: 12),
+                              color: pluginTheme.onPrimary, fontSize: 12),
                         ),
                       ),
                     ],

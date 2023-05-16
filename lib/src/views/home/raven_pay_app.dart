@@ -9,7 +9,6 @@ import 'package:mobile_pos/src/views/home/widget/home_item.dart';
 import 'package:mobile_pos/src/views/secure_pin_share/add_card_pin.dart';
 import 'package:mobile_pos/src/shared_widgets/powerby_by_raven_widget.dart';
 import 'package:mobile_pos/src/shared_widgets/purchase_amount.dart';
-import 'package:mobile_pos/src/shared_widgets/ravenpay_background.dart';
 import 'package:mobile_pos/src/shared_widgets/ravenpay_bottomsheet.dart';
 import 'package:mobile_pos/src/shared_widgets/ravenpay_close_button.dart';
 import 'package:mobile_pos/src/shared_widgets/ravenpay_scaffold.dart';
@@ -25,59 +24,67 @@ class _RavenPayAppState extends State<RavenPayApp> {
   @override
   Widget build(BuildContext context) {
     return RavenPayScaffold(
-      body: Column(
-        children: [
-          RavenPayBackground(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const Gap(24),
-                const RavenPayCloseButton(),
-                const Gap(28),
-                Text("Accept Payment  faster with your terminal.",
-                    style: headling1)
-              ],
-            ),
-          )
-        ],
-      ),
-      bottomSheet: Padding(
+      backgroundColor: pluginTheme.primaryColor,
+      body: Padding(
         padding: EdgeInsets.symmetric(horizontal: kHoriontalScreenPadding),
-        child: Column(mainAxisSize: MainAxisSize.min, children: [
-          HomeItem(
-              onTap: () {
-                showRavenPayBottomSheet(context, child: const PaymentMethod());
-              },
-              asset: "receive_payment.png",
-              title: "Receive Payment",
-              subTitile: "Accept payment from your customers"),
-          HomeItem(
-              onTap: () {
-                pushRoute(
-                    context,
-                    PurchaseAmount(
-                        onProceed: (mContext, amount) =>
-                            pushRoute(mContext, const BusinessPhoneNumber()),
-                        title: "Requested Amount"));
-              },
-              asset: "generate_pay_code.png",
-              title: "Generate Pay-code",
-              subTitile: "Receive payment from a third-party terminal"),
-          HomeItem(
-              onTap: () {
-                pushRoute(context, const AddCardPin());
-              },
-              asset: "secure_pin.png",
-              title: "Secure PIN Share",
-              subTitile: "Accept payment from your customers"),
-          const HomeItem(
-              asset: "reward.png",
-              title: "Rewards",
-              subTitile: "Accept payment from your customers"),
-          const Gap(16),
-          const PoweredByRaven(),
-          const Gap(24),
-        ]),
+        child: Column(
+          children: [
+            const Gap(12),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: const [RavenPayCloseButton()],
+            ),
+            const Spacer(),
+            Align(
+                alignment: Alignment.topLeft,
+                child: Image.asset(pluginTheme.logo!, height: 48)),
+            const Gap(20),
+            Text("Accept Payment  faster with your terminal.",
+                style: headling1.copyWith(color: pluginTheme.onPrimary)),
+            const Gap(40),
+            Container(
+              padding: const EdgeInsets.symmetric(vertical: 12),
+              decoration: BoxDecoration(
+                  color: Colors.white, borderRadius: BorderRadius.circular(14)),
+              child: Column(children: [
+                HomeItem(
+                    onTap: () {
+                      showRavenPayBottomSheet(context,
+                          child: const PaymentMethod());
+                    },
+                    asset: "receive_payment.png",
+                    title: "Receive Payment",
+                    subTitile: "Accept payment from your customers"),
+                HomeItem(
+                    onTap: () {
+                      pushRoute(
+                          context,
+                          PurchaseAmount(
+                              onProceed: (mContext, amount) => pushRoute(
+                                  mContext, const BusinessPhoneNumber()),
+                              title: "Requested Amount"));
+                    },
+                    asset: "generate_pay_code.png",
+                    title: "Generate Pay-code",
+                    subTitile: "Receive payment from a third-party terminal"),
+                HomeItem(
+                    onTap: () {
+                      pushRoute(context, const AddCardPin());
+                    },
+                    asset: "secure_pin.png",
+                    title: "Secure PIN Share",
+                    subTitile: "Accept payment from your customers"),
+                const HomeItem(
+                    asset: "reward.png",
+                    title: "Rewards",
+                    subTitile: "Accept payment from your customers"),
+              ]),
+            ),
+            const Gap(16),
+            const PoweredByRaven(),
+            const Gap(24),
+          ],
+        ),
       ),
     );
   }
