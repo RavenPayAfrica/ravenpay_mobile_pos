@@ -47,14 +47,15 @@ class ApiRequest {
       logData(response);
       //Completes with a response
       if (response['data']['data']['resp'].toString() == '00') {
+        final res = RavenMPOSResponse(data: Map.from(response));
         //success
         pushRoute(
             context,
             CardSuccessPage(
               amount: amount,
-              response: response,
+              response: res,
             ));
-        return RavenMPOSResponse(data: response);
+        return res;
       } else {
         //Unsuccessful
         throw RavenMobilePOSException(

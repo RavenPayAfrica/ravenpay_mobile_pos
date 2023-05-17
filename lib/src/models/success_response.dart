@@ -1,5 +1,5 @@
 class RavenMPOSResponse {
-  final String? data;
+  final Map<String, dynamic>? data;
 
   RavenMPOSResponse({this.data});
 }
