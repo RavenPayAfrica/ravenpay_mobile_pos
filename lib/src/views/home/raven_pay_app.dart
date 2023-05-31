@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:mobile_pos/mobile_pos_platform_interface.dart';
+import 'package:mobile_pos/src/helpers/enums.dart';
 import 'package:mobile_pos/src/helpers/global_variables.dart';
 import 'package:mobile_pos/src/helpers/helper_functions.dart';
 import 'package:mobile_pos/src/styles/ravenpay_textstyles.dart';
@@ -22,6 +23,17 @@ class RavenPayApp extends StatefulWidget {
 }
 
 class _RavenPayAppState extends State<RavenPayApp> {
+  @override
+  void initState() {
+    super.initState();
+    setupPermissions();
+  }
+
+  setupPermissions() async {
+    await MobilePosPlatform.instance
+        .checkConnectivityStatus(ConnectivityType.bluetooth);
+  }
+
   @override
   Widget build(BuildContext context) {
     return RavenPayScaffold(
