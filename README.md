@@ -12,7 +12,7 @@ First you need to obtain your app credentials from [here.](https://getravenbank.
 
 ### Set minSdkVersion target
 
-This library targets android devices >= SDK 21. Make sure you're targeting at-least the same by modifying your `android/build.gradle` file
+This library targets android devices >= SDK 21. Make sure you're targeting at-least the same by modifying your `android/app/build.gradle` file
 
 
 > minSdkVersion = 21
