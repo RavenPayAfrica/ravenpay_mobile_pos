@@ -52,6 +52,14 @@ This library targets android devices >= SDK 21. Make sure you're targeting at-le
 ```
 
 
+Update styles.xml
+
+Switch your theme parent to use
+
+> ```
+>     <style name="LaunchTheme" parent="Theme.AppCompat.Light.NoActionBar">
+> ```
+
 ## IOS Setup (Coming Soon)
 
 
