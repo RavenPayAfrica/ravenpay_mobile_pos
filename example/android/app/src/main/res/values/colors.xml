@@ -1,1 +1,4 @@
-<color name="primary_color">#FF000000</color>
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="primary_color">#003c3b</color>
+</resources>
