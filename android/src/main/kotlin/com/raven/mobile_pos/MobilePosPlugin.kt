@@ -16,6 +16,7 @@ import android.widget.Toast
 import androidx.annotation.NonNull
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import com.ravenpos.ravendspreadpos.BaseApplication
 import com.ravenpos.ravendspreadpos.device.RavenActivity
 import com.ravenpos.ravendspreadpos.utils.AppLog
 import com.ravenpos.ravendspreadpos.utils.Constants
@@ -55,7 +56,7 @@ class MobilePosPlugin : FlutterPlugin, MethodCallHandler, ActivityAware, PluginR
         context = flutterPluginBinding.applicationContext
         channel = MethodChannel(flutterPluginBinding.binaryMessenger, "mobile_pos")
         channel.setMethodCallHandler(this)
-
+        BaseApplication.setContext(context)
 
     }
 
