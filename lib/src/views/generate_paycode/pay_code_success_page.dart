@@ -35,7 +35,7 @@ class _PayCodeSuccessPageState extends State<PayCodeSuccessPage> {
             ),
             const Gap(24),
             const PoweredByRaven(
-              transpirent: true,
+              transparent: true,
               fontSize: 10,
             ),
             const Gap(34),

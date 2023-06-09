@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:mobile_pos/src/helpers/global_variables.dart';
+import 'package:mobile_pos/src/helpers/helper_functions.dart';
 import 'package:mobile_pos/src/styles/ravenpay_textstyles.dart';
 import 'package:mobile_pos/src/shared_widgets/powerby_by_raven_widget.dart';
 import 'package:mobile_pos/src/shared_widgets/ravenpay_amount_pad.dart';
@@ -51,8 +52,11 @@ class _PurchaseAmountState extends State<PurchaseAmount> {
               child: Column(mainAxisSize: MainAxisSize.min, children: [
                 Align(
                     alignment: Alignment.center,
-                    child: Text(amount.isEmpty ? "0.00" : amount,
-                        style: headling1.copyWith(fontSize: 34))),
+                    child: Text(
+                        amount.isEmpty
+                            ? "NGN0.00"
+                            : "NGN${formatAmount(double.tryParse(amount) ?? 0)}",
+                        style: headling1.copyWith(fontSize: 38))),
                 SizedBox(
                   height: 340,
                   width: size.width,

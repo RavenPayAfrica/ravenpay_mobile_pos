@@ -6,11 +6,11 @@ import 'package:mobile_pos/src/styles/ravenpay_textstyles.dart';
 
 class PoweredByRaven extends StatelessWidget {
   final double fontSize;
-  final bool transpirent;
+  final bool transparent;
   final double paddingBottom;
   const PoweredByRaven(
       {super.key,
-      this.transpirent = false,
+      this.transparent = false,
       this.fontSize = 12,
       this.paddingBottom = 0});
 
@@ -26,10 +26,10 @@ class PoweredByRaven extends StatelessWidget {
                 padding:
                     const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                 decoration: BoxDecoration(
-                    color: transpirent ? null : Colors.white,
+                    color: transparent ? null : Colors.white,
                     border:
-                        transpirent ? Border.all(color: Colors.white) : null,
-                    boxShadow: transpirent
+                        transparent ? Border.all(color: Colors.white) : null,
+                    boxShadow: transparent
                         ? null
                         : const [
                             BoxShadow(
@@ -46,13 +46,13 @@ class PoweredByRaven extends StatelessWidget {
                       style: subtitle.copyWith(
                           fontSize: fontSize,
                           color:
-                              transpirent ? Colors.white : AppColors.darkGrey),
+                              transparent ? Colors.white : AppColors.darkGrey),
                     ),
                     const Gap(4),
                     Padding(
                       padding: const EdgeInsets.only(bottom: 1),
                       child: Image.asset(loadAsset("raven_logo.png"),
-                          color: transpirent ? Colors.white : null,
+                          color: transparent ? Colors.white : null,
                           height: fontSize),
                     )
                   ],

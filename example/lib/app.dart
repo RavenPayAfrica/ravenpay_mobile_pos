@@ -23,11 +23,12 @@ class _RavenPayExampleAppState extends State<RavenPayExampleApp> {
                               secondaryColor: Color(0xFFEA872D)),
                           enviroment: RavenMobilePOSEnviroment.production,
                           businessInfo: BusinessInfo(
-                              businessName: 'Raven Bank',
-                              logo: Image.asset(
-                                'assets/logo.png',
-                                fit: BoxFit.cover,
-                              )),
+                            businessName: 'Raven Bank',
+                            // logo: Image.asset(
+                            //   'assets/logo.png',
+                            //   fit: BoxFit.cover,
+                            // ),
+                          ),
                           onSuccess: (data) {
                             print(data);
                           },

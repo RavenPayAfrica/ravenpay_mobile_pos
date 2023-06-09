@@ -53,7 +53,17 @@ class _RavenPayAppState extends State<RavenPayApp> {
                 child: SizedBox(
                     height: 48,
                     width: 48,
-                    child: pluginConfig.businessInfo.logo)),
+                    child: pluginConfig.businessInfo.logo == null
+                        ? Container(
+                            decoration: BoxDecoration(
+                                border: Border.all(color: Colors.red)),
+                            child: Icon(
+                              Icons.close,
+                              color: Colors.red,
+                              size: 48,
+                            ),
+                          )
+                        : pluginConfig.businessInfo.logo)),
             const Gap(16),
             Text(
                 "Accept payment much easier with ${pluginConfig.businessInfo.businessName}",
@@ -79,7 +89,7 @@ class _RavenPayAppState extends State<RavenPayApp> {
                           PurchaseAmount(
                               onProceed: (mContext, amount) => pushRoute(
                                   mContext, const BusinessPhoneNumber()),
-                              title: "Requested Amount"));
+                              title: "Enter Amount"));
                     },
                     asset: "generate_pay_code.png",
                     title: "Generate Pay-code",
@@ -98,7 +108,9 @@ class _RavenPayAppState extends State<RavenPayApp> {
               ]),
             ),
             const Gap(16),
-            const PoweredByRaven(),
+            const PoweredByRaven(
+              transparent: true,
+            ),
             const Gap(24),
           ],
         ),

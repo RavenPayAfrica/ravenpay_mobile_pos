@@ -44,7 +44,7 @@ class PaymentMethod extends StatelessWidget {
                         onProceed: (mContext, amount) {
                           pushRoute(mContext, ConnectDevice(amount: amount));
                         },
-                        title: "Requested Amount"));
+                        title: "Enter Amount"));
               }),
           const Gap(8),
           Divider(color: AppColors.ravenPayGrey2.withOpacity(0.5)),
