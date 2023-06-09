@@ -1,6 +1,6 @@
 name: mobile_pos
 description: A new Flutter plugin project.
-version: 0.0.5
+version: 0.0.6
 homepage: null
 
 environment:
@@ -10,9 +10,10 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  # flutter_local_notifications: ^14.1.1
+  flutter_local_notifications: ^14.1.1
   gap: ^3.0.0
   http: ^0.13.6
+  intercom_flutter: 
   intl: ^0.18.1
   pinput: ^2.2.31
   plugin_platform_interface: ^2.0.2
