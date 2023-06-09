@@ -18,6 +18,7 @@ class _RavenPayExampleAppState extends State<RavenPayExampleApp> {
                   await RavenMobilePOS.launch(context,
                       config: RavenMobilePOSConfig(
                           theme: MobilePOSTheme(
+                              headerTextColor: Color(0xFF755AE2),
                               primaryColor: Color(0xFF755AE2),
                               onPrimary: Colors.white,
                               secondaryColor: Color(0xFFEA872D)),

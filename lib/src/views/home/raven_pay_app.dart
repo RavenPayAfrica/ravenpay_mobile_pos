@@ -54,13 +54,17 @@ class _RavenPayAppState extends State<RavenPayApp> {
                     height: 48,
                     width: 48,
                     child: pluginConfig.businessInfo.logo == null
-                        ? Container(
-                            decoration: BoxDecoration(
-                                border: Border.all(color: Colors.red)),
-                            child: Icon(
-                              Icons.close,
-                              color: Colors.red,
-                              size: 48,
+                        ? ClipOval(
+                            child: Container(
+                              decoration: BoxDecoration(
+                                  color: pluginConfig.theme!.secondaryColor),
+                              child: Center(
+                                child: Text(
+                                  pluginConfig.businessInfo.businessName[0],
+                                  style: headling1.copyWith(
+                                      color: pluginConfig.theme!.onPrimary),
+                                ),
+                              ),
                             ),
                           )
                         : pluginConfig.businessInfo.logo)),
