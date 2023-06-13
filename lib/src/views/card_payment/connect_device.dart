@@ -89,8 +89,9 @@ class _ConnectDeviceState extends State<ConnectDevice> {
                           code: kNibbsError, message: 'Payment failed'));
                       return;
                     } else {
-                      final cardData = await MobilePosPlatform.instance
-                          .chargeCard(
+                      final cardData =
+                          await MobilePosPlatform.instance.chargeCard(
+                              // pin: '0133',
                               amount: widget.amount,
                               connectivityType: ConnectivityType.bluetooth);
                       if (cardData != null) {

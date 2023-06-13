@@ -24,9 +24,8 @@ class _AddCardPinState extends State<AddCardPin> {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return RavenPayScaffold(
-      body: Stack(
+      body: Column(
         children: [
-          SizedBox(height: size.height),
           Padding(
             padding: EdgeInsets.symmetric(horizontal: kHoriontalScreenPadding),
             child: Column(
@@ -57,50 +56,37 @@ class _AddCardPinState extends State<AddCardPin> {
               ],
             ),
           ),
-          Positioned(
-            bottom: 0,
-            child: SizedBox(
-              width: size.width,
-              child: Column(mainAxisSize: MainAxisSize.min, children: [
-                SizedBox(
-                  height: 340,
-                  width: size.width,
-                  child: Column(
-                    children: [
-                      RavenPayAmountPad(
-                          length: 4,
-                          onChange: (val) {
-                            _pinController.text = val;
-                            setState(() {});
-                          },
-                          amount: _pinController.text),
-                    ],
-                  ),
-                ),
-                const Gap(24),
-                Padding(
-                  padding:
-                      EdgeInsets.symmetric(horizontal: kHoriontalScreenPadding),
-                  child: RavenPayButton(
-                    enabled: _pinController.text.length == 4,
-                    buttonText: "Generate QR",
-                    onPressed: () {
-                      pushRoute(
-                          context,
-                          GenerateQrCode(
-                            pin: _pinController.text,
-                          ));
-                    },
-                  ),
-                ),
-                const Gap(16),
-                const PoweredByRaven(
-                  fontSize: 9,
-                ),
-                const Gap(16),
-              ]),
+          Gap(32),
+          RavenPayAmountPad(
+              length: 4,
+              onChange: (val) {
+                _pinController.text = val;
+                setState(() {});
+              },
+              amount: _pinController.text),
+          const Gap(24),
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: kHoriontalScreenPadding),
+            child: RavenPayButton(
+              enabled: _pinController.text.length == 4,
+              buttonText: "Generate QR",
+              onPressed: () async {
+                final encData = await encryptString(_pinController.text);
+                if (encData != null) {
+                  pushRoute(
+                      context,
+                      GenerateQrCode(
+                        pin: encData,
+                      ));
+                }
+              },
             ),
           ),
+          const Gap(24),
+          const PoweredByRaven(
+            fontSize: 9,
+          ),
+          // const Gap(16),
         ],
       ),
     );

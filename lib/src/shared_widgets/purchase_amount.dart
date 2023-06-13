@@ -23,82 +23,74 @@ class _PurchaseAmountState extends State<PurchaseAmount> {
   String amount = "";
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
     return RavenPayScaffold(
-      body: Stack(
+      body: Column(
         children: [
-          SizedBox(height: size.height),
-          SizedBox(
-            child: RavenPayBackground(
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const Gap(24),
-                  const RavenPayCloseButton(
-                    isArrow: true,
-                    text: "Back",
-                  ),
-                  const Gap(28),
-                  Text(widget.title ?? "Enter Amount", style: headling1),
-                ],
-              ),
-            ),
-          ),
-          Positioned(
-            bottom: 0,
-            child: SizedBox(
-              width: size.width,
-              child: Column(mainAxisSize: MainAxisSize.min, children: [
-                Align(
-                    alignment: Alignment.center,
-                    child: Text(
-                        amount.isEmpty
-                            ? "NGN0.00"
-                            : "NGN${formatAmount(double.tryParse(amount) ?? 0)}",
-                        style: headling1.copyWith(fontSize: 38))),
-                SizedBox(
-                  height: 340,
-                  width: size.width,
-                  child: Column(
-                    children: [
-                      RavenPayAmountPad(
-                          onChange: (val) {
-                            amount = val;
-                            setState(() {});
-                          },
-                          amount: amount),
-                    ],
-                  ),
+          const Gap(24),
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: kHoriontalScreenPadding),
+            child: Column(
+              children: [
+                const RavenPayCloseButton(
+                  isArrow: true,
+                  text: "Back",
                 ),
                 const Gap(24),
-                Padding(
-                  padding:
-                      EdgeInsets.symmetric(horizontal: kHoriontalScreenPadding),
-                  child: RavenPayButton(
-                    enabled: amount.isNotEmpty,
-                    buttonText: "Proceed",
-                    onPressed: () {
-                      try {
-                        var val = double.tryParse(amount);
-                        if (val! <= 0) {
-                          return;
-                        }
-                        widget.onProceed(context, val);
-                      } catch (ex) {
-                        return;
-                      }
-                    },
-                  ),
-                ),
-                const Gap(16),
-                const PoweredByRaven(
-                  fontSize: 9,
-                ),
-                const Gap(16),
-              ]),
+                Align(
+                    alignment: Alignment.centerLeft,
+                    child:
+                        Text(widget.title ?? "Enter Amount", style: headling1)),
+                Gap(32),
+                Align(
+                    alignment: Alignment.center,
+                    child: RichText(
+                        text: TextSpan(
+                            text: '₦',
+                            style: headling1.copyWith(
+                                fontFamily: 'Roboto',
+                                fontSize: 38,
+                                fontWeight: FontWeight.bold),
+                            children: [
+                          TextSpan(
+                              text: amount.isEmpty
+                                  ? "0.00"
+                                  : "${formatAmount(double.tryParse(amount) ?? 0)}",
+                              style: headling1.copyWith(fontSize: 38))
+                        ]))),
+                Gap(24),
+              ],
             ),
           ),
+          RavenPayAmountPad(
+              onChange: (val) {
+                amount = val;
+                setState(() {});
+              },
+              amount: amount),
+          const Gap(24),
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: kHoriontalScreenPadding),
+            child: RavenPayButton(
+              enabled: amount.isNotEmpty,
+              buttonText: "Proceed",
+              onPressed: () {
+                try {
+                  var val = double.tryParse(amount);
+                  if (val! <= 0) {
+                    return;
+                  }
+                  widget.onProceed(context, val);
+                } catch (ex) {
+                  return;
+                }
+              },
+            ),
+          ),
+          const Gap(24),
+          const PoweredByRaven(
+            fontSize: 9,
+          ),
+          // const Gap(16),
         ],
       ),
     );

@@ -96,7 +96,7 @@ class _RavenPayAppState extends State<RavenPayApp> {
                               title: "Enter Amount"));
                     },
                     asset: "generate_pay_code.png",
-                    title: "Generate Pay-code",
+                    title: "Generate Paycode",
                     subTitile: "Receive payment from a third-party terminal"),
                 HomeItem(
                     onTap: () {
@@ -104,18 +104,19 @@ class _RavenPayAppState extends State<RavenPayApp> {
                     },
                     asset: "secure_pin.png",
                     title: "Secure PIN Share",
-                    subTitile: "Accept payment from your customers"),
+                    subTitile: "Securely share card PIN for payment"),
                 const HomeItem(
+                    comingSoon: true,
                     asset: "reward.png",
                     title: "Rewards",
                     subTitile: "Accept payment from your customers"),
               ]),
             ),
-            const Gap(16),
+            const Gap(32),
             const PoweredByRaven(
               transparent: true,
             ),
-            const Gap(24),
+            // const Gap(24),
           ],
         ),
       ),

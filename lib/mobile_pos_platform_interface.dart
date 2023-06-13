@@ -37,7 +37,9 @@ abstract class MobilePosPlatform extends PlatformInterface {
   }
 
   Future<String?> chargeCard(
-      {required double amount, required ConnectivityType connectivityType}) {
+      {required double amount,
+      required ConnectivityType connectivityType,
+      String? pin}) {
     throw UnimplementedError('Not implemented.');
   }
 

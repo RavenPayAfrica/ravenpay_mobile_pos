@@ -50,6 +50,12 @@
       "languageVersion": "2.17"
     },
     {
+      "name": "flutter_aes_ecb_pkcs5",
+      "rootUri": "file:///Users/prince/.pub-cache/hosted/pub.dev/flutter_aes_ecb_pkcs5-0.1.2",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "flutter_lints",
       "rootUri": "file:///Users/prince/.pub-cache/hosted/pub.dev/flutter_lints-2.0.1",
       "packageUri": "lib/",
@@ -242,7 +248,7 @@
       "languageVersion": "2.19"
     }
   ],
-  "generated": "2023-06-09T17:14:21.534587Z",
+  "generated": "2023-06-12T12:37:07.446865Z",
   "generator": "pub",
   "generatorVersion": "2.19.6"
 }

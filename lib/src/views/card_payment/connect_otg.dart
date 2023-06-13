@@ -56,7 +56,7 @@ class _ConnectOtgState extends State<ConnectOtg> {
               RavenPayButton(
                 buttonText: "Proceed",
                 onPressed: () {
-                  pushRoute(context, const InsertCard());
+                  // pushRoute(context, const InsertCard());
                 },
               ),
               const Gap(74),

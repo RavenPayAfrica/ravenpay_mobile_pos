@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:mobile_pos/src/helpers/global_variables.dart';
 import 'package:mobile_pos/src/helpers/helper_functions.dart';
 import 'package:mobile_pos/src/styles/ravenpay_app_colors.dart';
 import 'package:mobile_pos/src/styles/ravenpay_textstyles.dart';
@@ -9,9 +10,11 @@ class HomeItem extends StatelessWidget {
   final String subTitile;
   final String asset;
   final Function? onTap;
+  final bool comingSoon;
   const HomeItem({
     required this.asset,
     required this.subTitile,
+    this.comingSoon = false,
     this.onTap,
     required this.title,
     super.key,
@@ -40,8 +43,31 @@ class HomeItem extends StatelessWidget {
                   child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(title,
-                      style: headling2.copyWith(color: AppColors.ravenPayDark)),
+                  Row(
+                    children: [
+                      Text(title,
+                          style: headling2.copyWith(
+                              color: AppColors.ravenPayDark)),
+                      if (comingSoon) ...[
+                        Gap(8),
+                        Container(
+                          margin: EdgeInsets.only(bottom: 4),
+                          padding:
+                              EdgeInsets.symmetric(vertical: 2, horizontal: 6),
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(16),
+                              color: pluginConfig.theme!.secondaryColor
+                                  .withOpacity(.8)),
+                          child: Text(
+                            'Coming soon',
+                            style: headling2.copyWith(
+                                color: pluginConfig.theme!.onPrimary,
+                                fontSize: 12),
+                          ),
+                        )
+                      ]
+                    ],
+                  ),
                   Text(subTitile,
                       style: subtitle2.copyWith(color: AppColors.ravenPayDark))
                 ],
