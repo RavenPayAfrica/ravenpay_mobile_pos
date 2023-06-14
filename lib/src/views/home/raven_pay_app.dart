@@ -116,7 +116,7 @@ class _RavenPayAppState extends State<RavenPayApp> {
             const PoweredByRaven(
               transparent: true,
             ),
-            // const Gap(24),
+            const Gap(24),
           ],
         ),
       ),

@@ -52,7 +52,7 @@ class PaymentMethod extends StatelessWidget {
           items(
               context: context,
               asset: "generate_pay_code.png",
-              name: "Pay-Code",
+              name: "Paycode",
               onTap: () {
                 pushRoute(context, const PayWithCode());
               }),

@@ -144,14 +144,14 @@ class Items extends StatelessWidget {
     required this.name,
   });
 
-  List<String> bluetoothItems = [
+  final List<String> bluetoothItems = [
     "Ensure your bluetooth is active ",
     "Ensure the Terminal is on",
     "Find the device and connect ",
     "Once connected proceed to add a PIN"
   ];
 
-  List<String> otgItems = [
+  final List<String> otgItems = [
     "Ensure you have your OTG Cable available",
     "Ensure the terminal is on",
     "Insert your OTG to your phone and the terminal",

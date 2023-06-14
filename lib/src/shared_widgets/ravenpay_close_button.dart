@@ -39,7 +39,7 @@ class RavenPayCloseButton extends StatelessWidget {
                         blurRadius: 2)
                   ],
                   shape: BoxShape.circle,
-                  color: pluginTheme.onPrimary!.withOpacity(0.2)),
+                  color: pluginTheme.onPrimary.withOpacity(0.2)),
               child: Image.asset(
                   loadAsset(isArrow ? "arrow_back.png" : "close_icon.png"),
                   color: isArrow ? null : pluginTheme.onPrimary)),

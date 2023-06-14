@@ -5,7 +5,6 @@ import 'package:mobile_pos/src/helpers/helper_functions.dart';
 import 'package:mobile_pos/src/styles/ravenpay_textstyles.dart';
 import 'package:mobile_pos/src/shared_widgets/powerby_by_raven_widget.dart';
 import 'package:mobile_pos/src/shared_widgets/ravenpay_amount_pad.dart';
-import 'package:mobile_pos/src/shared_widgets/ravenpay_background.dart';
 import 'package:mobile_pos/src/shared_widgets/ravenpay_button.dart';
 import 'package:mobile_pos/src/shared_widgets/ravenpay_close_button.dart';
 import 'package:mobile_pos/src/shared_widgets/ravenpay_scaffold.dart';
@@ -90,7 +89,7 @@ class _PurchaseAmountState extends State<PurchaseAmount> {
           const PoweredByRaven(
             fontSize: 9,
           ),
-          // const Gap(16),
+          const Gap(24),
         ],
       ),
     );

@@ -29,7 +29,7 @@ class _PayCodeSuccessPageState extends State<PayCodeSuccessPage> {
                 toRavenPayHome(context);
               },
               height: 54,
-              textColor: pluginTheme.primaryColor!,
+              textColor: pluginTheme.primaryColor,
               buttonText: "Close",
               buttonColor: pluginTheme.onPrimary,
             ),

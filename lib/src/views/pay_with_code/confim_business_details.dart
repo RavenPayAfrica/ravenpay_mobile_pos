@@ -22,7 +22,6 @@ class ConfirmBusinessDetails extends StatefulWidget {
 class _ConfirmBusinessDetailsState extends State<ConfirmBusinessDetails> {
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
     return GestureDetector(
       onTap: () {
         FocusManager.instance.primaryFocus?.unfocus();

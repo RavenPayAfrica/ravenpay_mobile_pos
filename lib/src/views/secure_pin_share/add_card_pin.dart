@@ -22,7 +22,6 @@ class _AddCardPinState extends State<AddCardPin> {
   final _pinController = TextEditingController();
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
     return RavenPayScaffold(
       body: Column(
         children: [

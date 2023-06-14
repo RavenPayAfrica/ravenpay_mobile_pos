@@ -147,7 +147,7 @@ class _RavenPayTextFieldState extends State<RavenPayTextField> {
             focusedBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(12),
               borderSide:
-                  BorderSide(color: pluginTheme.primaryColor!, width: .8),
+                  BorderSide(color: pluginTheme.primaryColor, width: .8),
             ),
             enabledBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(12),

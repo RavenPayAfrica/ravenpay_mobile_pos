@@ -3,7 +3,6 @@ import 'package:gap/gap.dart';
 import 'package:mobile_pos/src/helpers/global_variables.dart';
 import 'package:mobile_pos/src/helpers/helper_functions.dart';
 import 'package:mobile_pos/src/models/success_response.dart';
-import 'package:mobile_pos/src/styles/ravenpay_app_colors.dart';
 import 'package:mobile_pos/src/styles/ravenpay_textstyles.dart';
 import 'package:mobile_pos/src/views/card_payment/share_receipt.dart';
 import 'package:mobile_pos/src/shared_widgets/powerby_by_raven_widget.dart';
@@ -37,7 +36,7 @@ class _CardSuccessPageState extends State<CardSuccessPage> {
                     pushRoute(context, const ShareReceipt());
                   },
                   height: 48,
-                  textColor: pluginTheme.primaryColor!,
+                  textColor: pluginTheme.primaryColor,
                   buttonText: "Share Receipt",
                   buttonColor: pluginTheme.onPrimary,
                 )),
@@ -48,7 +47,7 @@ class _CardSuccessPageState extends State<CardSuccessPage> {
                       toRavenPayHome(context);
                     },
                     height: 48,
-                    textColor: pluginTheme.primaryColor!,
+                    textColor: pluginTheme.primaryColor,
                     buttonText: "Close Payment",
                     buttonColor: pluginTheme.onPrimary,
                   ),

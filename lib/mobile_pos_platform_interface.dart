@@ -3,7 +3,6 @@ import 'package:mobile_pos/mobile_pos_sdk.dart';
 import 'package:plugin_platform_interface/plugin_platform_interface.dart';
 
 import 'mobile_pos_method_channel.dart';
-import 'src/helpers/enums.dart';
 
 abstract class MobilePosPlatform extends PlatformInterface {
   /// Constructs a MobilePosPlatform.

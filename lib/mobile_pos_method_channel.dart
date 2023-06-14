@@ -51,6 +51,7 @@ class MethodChannelMobilePos extends MobilePosPlatform {
           await methodChannel.invokeMethod<bool>('getPosSdkStatus', args);
       return status;
     } catch (e) {}
+    return null;
   }
 
   @override
