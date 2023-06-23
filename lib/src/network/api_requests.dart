@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:mobile_pos/mobile_pos_sdk.dart';
+import 'package:mobile_pos/src/helpers/global_variables.dart';
 import 'package:mobile_pos/src/helpers/helper_functions.dart';
 import 'package:mobile_pos/src/helpers/logger.dart';
 import 'package:mobile_pos/src/models/success_response.dart';
@@ -62,5 +63,12 @@ class ApiRequest {
             code: kNibbsError, message: 'Transaction failed to complete');
       }
     }
+  }
+
+  static Future<void> registerUser() async {
+    final payload = pluginConfig.customerInfo.toJson();
+    payload["affiliate_app_id"] = pluginConfig.appInfo.appId;
+    var response = await HttpBase.postRequest(payload, 'pdon/register');
+    logData(response);
   }
 }

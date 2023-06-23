@@ -4,6 +4,7 @@ import 'package:mobile_pos/mobile_pos_platform_interface.dart';
 import 'package:mobile_pos/src/helpers/enums.dart';
 import 'package:mobile_pos/src/helpers/global_variables.dart';
 import 'package:mobile_pos/src/helpers/helper_functions.dart';
+import 'package:mobile_pos/src/network/api_requests.dart';
 import 'package:mobile_pos/src/styles/ravenpay_textstyles.dart';
 import 'package:mobile_pos/src/views/generate_paycode/business_phone_number.dart';
 import 'package:mobile_pos/src/views/home/widget/payment_method_bottomsheet.dart';
@@ -26,7 +27,12 @@ class _RavenPayAppState extends State<RavenPayApp> {
   @override
   void initState() {
     super.initState();
+    registerUser();
     setupPermissions();
+  }
+
+  void registerUser() async {
+    await ApiRequest.registerUser();
   }
 
   setupPermissions() async {
@@ -53,24 +59,24 @@ class _RavenPayAppState extends State<RavenPayApp> {
                 child: SizedBox(
                     height: 48,
                     width: 48,
-                    child: pluginConfig.businessInfo.logo == null
+                    child: pluginConfig.appInfo.appLogo == null
                         ? ClipOval(
                             child: Container(
                               decoration: BoxDecoration(
                                   color: pluginConfig.theme!.secondaryColor),
                               child: Center(
                                 child: Text(
-                                  pluginConfig.businessInfo.businessName[0],
+                                  pluginConfig.appInfo.appName[0],
                                   style: headling1.copyWith(
                                       color: pluginConfig.theme!.onPrimary),
                                 ),
                               ),
                             ),
                           )
-                        : pluginConfig.businessInfo.logo)),
+                        : pluginConfig.appInfo.appLogo)),
             const Gap(16),
             Text(
-                "Accept payment much easier with ${pluginConfig.businessInfo.businessName}",
+                "Accept payment much easier with ${pluginConfig.appInfo.appName}",
                 style: headling1.copyWith(color: pluginTheme.onPrimary)),
             const Gap(24),
             Container(
