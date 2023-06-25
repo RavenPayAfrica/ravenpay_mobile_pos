@@ -3,12 +3,11 @@ import 'package:gap/gap.dart';
 import 'package:mobile_pos/src/helpers/global_variables.dart';
 import 'package:mobile_pos/src/helpers/helper_functions.dart';
 import 'package:mobile_pos/src/shared_widgets/powerby_by_raven_widget.dart';
+import 'package:mobile_pos/src/shared_widgets/raven_pay_appbar.dart';
 import 'package:mobile_pos/src/shared_widgets/ravenpay_button.dart';
-import 'package:mobile_pos/src/shared_widgets/ravenpay_close_button.dart';
 import 'package:mobile_pos/src/shared_widgets/ravenpay_scaffold.dart';
 import 'package:mobile_pos/src/styles/ravenpay_app_colors.dart';
 import 'package:mobile_pos/src/styles/ravenpay_textstyles.dart';
-import 'package:mobile_pos/src/views/card_payment/widget/see_how_to_connect.dart';
 import 'package:mobile_pos/src/views/request_pos/request_terminal_2.dart';
 
 class RequestTerminal1 extends StatefulWidget {
@@ -23,28 +22,8 @@ class _RequestTerminal1State extends State<RequestTerminal1> {
   Widget build(BuildContext context) {
     return RavenPayScaffold(
         backgroundColor: Colors.white,
-        appBar: AppBar(
-          leadingWidth: double.infinity,
-          leading: Padding(
-            padding: const EdgeInsets.only(right: 20, left: 20, top: 12),
-            child: Row(
-              children: const [
-                RavenPayCloseButton(
-                  text: "Back",
-                  isArrow: true,
-                ),
-                Spacer(),
-                SeeHowToConnect(
-                  fontSize: 12,
-                  text: "Track your Terminal",
-                  showIcon: false,
-                  fontWeight: FontWeight.w600,
-                ),
-              ],
-            ),
-          ),
-          backgroundColor: Colors.white,
-          elevation: 0,
+        appBar: ravenPayAppBar(
+          howToText: "Track your Terminal",
         ),
         bottomNavigationBar: Padding(
           padding: EdgeInsets.symmetric(horizontal: kHoriontalScreenPadding),

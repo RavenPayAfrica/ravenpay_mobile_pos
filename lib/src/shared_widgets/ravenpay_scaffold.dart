@@ -7,7 +7,7 @@ class RavenPayScaffold extends StatelessWidget {
   final bool showLogo;
   final Widget? bottomSheet;
   final Color? backgroundColor;
-  final PreferredSizeWidget? appBar;
+  final AppBar? appBar;
   final Widget? fab;
   const RavenPayScaffold(
       {super.key,
