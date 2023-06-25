@@ -167,6 +167,15 @@ packages:
       relative: true
     source: path
     version: "0.0.12"
+  modal_bottom_sheet:
+    dependency: transitive
+    description:
+      path: modal_bottom_sheet
+      ref: main
+      resolved-ref: "3e8c3682be91a4a86ee73f39606901d5eb033f0b"
+      url: "https://github.com/followthemoney1/modal_bottom_sheet.git"
+    source: git
+    version: "2.1.2+1"
   nested:
     dependency: transitive
     description:

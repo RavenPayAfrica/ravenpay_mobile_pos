@@ -134,6 +134,12 @@
       "languageVersion": "2.19"
     },
     {
+      "name": "modal_bottom_sheet",
+      "rootUri": "file:///Users/confidencewangoho/.pub-cache/git/modal_bottom_sheet-3e8c3682be91a4a86ee73f39606901d5eb033f0b/modal_bottom_sheet",
+      "packageUri": "lib/",
+      "languageVersion": "2.17"
+    },
+    {
       "name": "nested",
       "rootUri": "file:///Users/confidencewangoho/.pub-cache/hosted/pub.dev/nested-1.0.0",
       "packageUri": "lib/",
@@ -248,7 +254,7 @@
       "languageVersion": "2.19"
     }
   ],
-  "generated": "2023-06-25T12:43:21.711364Z",
+  "generated": "2023-06-25T20:21:10.552691Z",
   "generator": "pub",
   "generatorVersion": "2.19.6"
 }

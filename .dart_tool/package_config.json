@@ -122,6 +122,12 @@
       "languageVersion": "2.12"
     },
     {
+      "name": "modal_bottom_sheet",
+      "rootUri": "file:///Users/confidencewangoho/.pub-cache/git/modal_bottom_sheet-3e8c3682be91a4a86ee73f39606901d5eb033f0b/modal_bottom_sheet",
+      "packageUri": "lib/",
+      "languageVersion": "2.17"
+    },
+    {
       "name": "path",
       "rootUri": "file:///Users/confidencewangoho/.pub-cache/hosted/pub.dev/path-1.8.2",
       "packageUri": "lib/",
@@ -224,7 +230,7 @@
       "languageVersion": "2.19"
     }
   ],
-  "generated": "2023-06-25T12:39:02.889264Z",
+  "generated": "2023-06-25T20:21:10.479548Z",
   "generator": "pub",
   "generatorVersion": "2.19.6"
 }

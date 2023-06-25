@@ -2,15 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:mobile_pos/src/helpers/global_variables.dart';
 import 'package:mobile_pos/src/helpers/helper_functions.dart';
+import 'package:mobile_pos/src/shared_widgets/lga_bottom_sheet.dart';
 import 'package:mobile_pos/src/shared_widgets/powerby_by_raven_widget.dart';
 import 'package:mobile_pos/src/shared_widgets/ravenpay_button.dart';
 import 'package:mobile_pos/src/shared_widgets/ravenpay_close_button.dart';
 import 'package:mobile_pos/src/shared_widgets/ravenpay_custom_success_page.dart';
 import 'package:mobile_pos/src/shared_widgets/ravenpay_scaffold.dart';
 import 'package:mobile_pos/src/shared_widgets/ravenpay_textfeild.dart';
+import 'package:mobile_pos/src/shared_widgets/state_of_origin_sheet.dart';
 import 'package:mobile_pos/src/styles/ravenpay_app_colors.dart';
 import 'package:mobile_pos/src/styles/ravenpay_textstyles.dart';
 import 'package:mobile_pos/src/views/card_payment/widget/see_how_to_connect.dart';
+import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
 class RequestTerminal2 extends StatefulWidget {
   const RequestTerminal2({super.key});
@@ -20,6 +23,8 @@ class RequestTerminal2 extends StatefulWidget {
 }
 
 class _RequestTerminal2State extends State<RequestTerminal2> {
+  final stateController = TextEditingController();
+  final lgaController = TextEditingController();
   int currentIndex = 1;
   int purchaseNo = 1;
   @override
@@ -184,25 +189,61 @@ class _RequestTerminal2State extends State<RequestTerminal2> {
             if (currentIndex == 1) ...[
               const Pickup(),
             ] else ...[
-              const RavenPayTextField(
+              RavenPayTextField(
+                controller: stateController,
                 readOnly: true,
                 isDropdown: true,
                 labelText: "Select State",
                 hintText: "Choose a State",
+                onTap: () async {
+                  var choice = await showCupertinoModalBottomSheet(
+                      expand: false,
+                      duration: const Duration(milliseconds: 200),
+                      context: context,
+                      builder: (BuildContext context) =>
+                          const Material(child: StateOfOriginSheet()));
+
+                  if (choice != null) {
+                    setState(() {
+                      stateController.text = choice;
+                    });
+                  }
+                },
               ),
-              const Gap(12),
-              const RavenPayTextField(
+              const Gap(16),
+              RavenPayTextField(
+                controller: lgaController,
                 readOnly: true,
                 isDropdown: true,
                 labelText: "Select City",
                 hintText: "Choose a City",
+                onTap: () async {
+                  if (stateController.text.length < 3) {
+                    showSnack(
+                        context, 'Please select state of residence first');
+
+                    return;
+                  }
+                  var choice = await showCupertinoModalBottomSheet(
+                      expand: false,
+                      duration: const Duration(milliseconds: 200),
+                      context: context,
+                      builder: (BuildContext context) => Material(
+                              child: LGASheet(
+                            state: stateController.text,
+                          )));
+
+                  if (choice != null) {
+                    lgaController.text = choice;
+                  }
+                },
               ),
-              const Gap(12),
+              const Gap(16),
               const RavenPayTextField(
                 labelText: "Your Address",
                 hintText: "Your Address Location",
               ),
-              const Gap(12),
+              const Gap(16),
             ],
             const Gap(34),
           ]),
