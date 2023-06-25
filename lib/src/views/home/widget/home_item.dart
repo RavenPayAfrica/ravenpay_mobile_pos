@@ -49,11 +49,11 @@ class HomeItem extends StatelessWidget {
                           style: headling2.copyWith(
                               color: AppColors.ravenPayDark)),
                       if (comingSoon) ...[
-                        Gap(8),
+                        const Gap(8),
                         Container(
-                          margin: EdgeInsets.only(bottom: 4),
-                          padding:
-                              EdgeInsets.symmetric(vertical: 2, horizontal: 6),
+                          margin: const EdgeInsets.only(bottom: 4),
+                          padding: const EdgeInsets.symmetric(
+                              vertical: 2, horizontal: 6),
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(16),
                               color: pluginConfig.theme!.secondaryColor

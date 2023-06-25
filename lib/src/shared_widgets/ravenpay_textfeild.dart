@@ -30,6 +30,7 @@ class RavenPayTextField extends StatefulWidget {
     this.inputFormatters,
     this.onChanged,
     this.hintStyle,
+    this.isDropdown = false,
     this.readOnly = false,
     this.isRequiredField = false,
     this.onSaved,
@@ -47,6 +48,7 @@ class RavenPayTextField extends StatefulWidget {
   final int? maxLength;
   final int? maxLines;
   final int? minLines;
+  final bool isDropdown;
   final bool isPhone;
   final bool enabled;
   final bool autoFocus;
@@ -121,7 +123,15 @@ class _RavenPayTextFieldState extends State<RavenPayTextField> {
           decoration: InputDecoration(
             counterText: widget.counterText,
             prefixIcon: widget.isPhone ? phonePreffix() : widget.preffixIcon,
-            suffixIcon: widget.suffixIcon,
+            suffixIcon: widget.isDropdown
+                ? Padding(
+                    padding: const EdgeInsets.only(right: 8),
+                    child: Image.asset(
+                      loadAsset("is_drop_down.png"),
+                      height: 20,
+                    ),
+                  )
+                : widget.suffixIcon,
             suffixIconConstraints: const BoxConstraints(
               maxHeight: 50,
               maxWidth: 70,

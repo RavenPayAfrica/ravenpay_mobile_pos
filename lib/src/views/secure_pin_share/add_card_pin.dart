@@ -55,7 +55,7 @@ class _AddCardPinState extends State<AddCardPin> {
               ],
             ),
           ),
-          Gap(32),
+          const Gap(32),
           RavenPayAmountPad(
               length: 4,
               onChange: (val) {

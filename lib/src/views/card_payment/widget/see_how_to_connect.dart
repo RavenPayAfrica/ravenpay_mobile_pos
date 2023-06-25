@@ -7,9 +7,14 @@ import 'package:mobile_pos/src/styles/ravenpay_textstyles.dart';
 class SeeHowToConnect extends StatelessWidget {
   final String? text;
   final bool showIcon;
+  final double? fontSize;
   final FontWeight? fontWeight;
   const SeeHowToConnect(
-      {super.key, this.fontWeight, this.text, this.showIcon = true});
+      {super.key,
+      this.fontWeight,
+      this.text,
+      this.showIcon = true,
+      this.fontSize});
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +31,9 @@ class SeeHowToConnect extends StatelessWidget {
         ],
         Text(text ?? "See how to connect",
             style: subtitle.copyWith(
-                color: pluginTheme.secondaryColor, fontWeight: fontWeight))
+                fontSize: fontSize,
+                color: pluginTheme.secondaryColor,
+                fontWeight: fontWeight))
       ]),
     );
   }

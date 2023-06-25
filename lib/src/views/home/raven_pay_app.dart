@@ -8,6 +8,7 @@ import 'package:mobile_pos/src/styles/ravenpay_textstyles.dart';
 import 'package:mobile_pos/src/views/generate_paycode/business_phone_number.dart';
 import 'package:mobile_pos/src/views/home/widget/payment_method_bottomsheet.dart';
 import 'package:mobile_pos/src/views/home/widget/home_item.dart';
+import 'package:mobile_pos/src/views/request_pos/request_terminal_index.dart';
 import 'package:mobile_pos/src/views/secure_pin_share/add_card_pin.dart';
 import 'package:mobile_pos/src/shared_widgets/powerby_by_raven_widget.dart';
 import 'package:mobile_pos/src/shared_widgets/purchase_amount.dart';
@@ -53,21 +54,20 @@ class _RavenPayAppState extends State<RavenPayApp> {
                 child: SizedBox(
                     height: 48,
                     width: 48,
-                    child: pluginConfig.businessInfo.logo == null
-                        ? ClipOval(
-                            child: Container(
-                              decoration: BoxDecoration(
-                                  color: pluginConfig.theme!.secondaryColor),
-                              child: Center(
-                                child: Text(
-                                  pluginConfig.businessInfo.businessName[0],
-                                  style: headling1.copyWith(
-                                      color: pluginConfig.theme!.onPrimary),
-                                ),
+                    child: pluginConfig.businessInfo.logo ??
+                        ClipOval(
+                          child: Container(
+                            decoration: BoxDecoration(
+                                color: pluginConfig.theme!.secondaryColor),
+                            child: Center(
+                              child: Text(
+                                pluginConfig.businessInfo.businessName[0],
+                                style: headling1.copyWith(
+                                    color: pluginConfig.theme!.onPrimary),
                               ),
                             ),
-                          )
-                        : pluginConfig.businessInfo.logo)),
+                          ),
+                        ))),
             const Gap(16),
             Text(
                 "Accept payment much easier with ${pluginConfig.businessInfo.businessName}",
@@ -105,7 +105,10 @@ class _RavenPayAppState extends State<RavenPayApp> {
                     asset: "secure_pin.png",
                     title: "Secure PIN Share",
                     subTitile: "Securely share card PIN for payment"),
-                const HomeItem(
+                HomeItem(
+                    onTap: () {
+                      pushRoute(context, const RequestTerminalIndex());
+                    },
                     comingSoon: true,
                     asset: "reward.png",
                     title: "Rewards",

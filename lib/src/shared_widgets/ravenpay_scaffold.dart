@@ -7,10 +7,14 @@ class RavenPayScaffold extends StatelessWidget {
   final bool showLogo;
   final Widget? bottomSheet;
   final Color? backgroundColor;
+  final PreferredSizeWidget? appBar;
+  final Widget? fab;
   const RavenPayScaffold(
       {super.key,
       required this.body,
       this.showLogo = false,
+      this.appBar,
+      this.fab,
       this.backgroundColor,
       this.bottomSheet,
       this.bottomNavigationBar});
@@ -22,6 +26,8 @@ class RavenPayScaffold extends StatelessWidget {
         FocusManager.instance.primaryFocus?.unfocus();
       },
       child: Scaffold(
+          appBar: appBar,
+          floatingActionButton: fab,
           backgroundColor: backgroundColor,
           body: SafeArea(child: body),
           bottomSheet: showLogo
