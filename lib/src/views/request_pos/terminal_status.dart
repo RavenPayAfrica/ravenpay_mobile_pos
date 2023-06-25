@@ -155,7 +155,8 @@ class Item extends StatelessWidget {
           child:
               Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
             Text(title,
-                style: headling2.copyWith(
+                style: bodyText.copyWith(
+                  fontSize: 14,
                   color:
                       pluginTheme.primaryColor.withOpacity(completed ? 1 : 0.4),
                 )),
