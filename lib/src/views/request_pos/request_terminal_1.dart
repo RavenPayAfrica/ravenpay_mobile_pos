@@ -9,6 +9,7 @@ import 'package:mobile_pos/src/shared_widgets/ravenpay_scaffold.dart';
 import 'package:mobile_pos/src/styles/ravenpay_app_colors.dart';
 import 'package:mobile_pos/src/styles/ravenpay_textstyles.dart';
 import 'package:mobile_pos/src/views/request_pos/request_terminal_2.dart';
+import 'package:mobile_pos/src/views/request_pos/terminal_status.dart';
 
 class RequestTerminal1 extends StatefulWidget {
   const RequestTerminal1({super.key});
@@ -23,8 +24,10 @@ class _RequestTerminal1State extends State<RequestTerminal1> {
     return RavenPayScaffold(
         backgroundColor: Colors.white,
         appBar: ravenPayAppBar(
-          howToText: "Track your Terminal",
-        ),
+            howToText: "Track your Terminal",
+            howToTap: () {
+              pushRoute(context, const TerminalStatus());
+            }),
         bottomNavigationBar: Padding(
           padding: EdgeInsets.symmetric(horizontal: kHoriontalScreenPadding),
           child: Column(

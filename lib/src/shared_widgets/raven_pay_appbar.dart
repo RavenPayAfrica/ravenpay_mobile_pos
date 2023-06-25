@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:mobile_pos/src/shared_widgets/ravenpay_close_button.dart';
 import 'package:mobile_pos/src/views/card_payment/widget/see_how_to_connect.dart';
 
-AppBar ravenPayAppBar({String? howToText}) {
+AppBar ravenPayAppBar({String? howToText, Function()? howToTap}) {
   return AppBar(
     leadingWidth: double.infinity,
     leading: Padding(
@@ -15,11 +15,14 @@ AppBar ravenPayAppBar({String? howToText}) {
           ),
           if (howToText != null) ...[
             const Spacer(),
-            SeeHowToConnect(
-              fontSize: 12,
-              text: howToText,
-              showIcon: false,
-              fontWeight: FontWeight.w600,
+            GestureDetector(
+              onTap: howToTap,
+              child: SeeHowToConnect(
+                fontSize: 12,
+                text: howToText,
+                showIcon: false,
+                fontWeight: FontWeight.w600,
+              ),
             ),
           ]
         ],

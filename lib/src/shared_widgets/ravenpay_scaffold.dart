@@ -31,7 +31,8 @@ class RavenPayScaffold extends StatelessWidget {
           backgroundColor: backgroundColor,
           body: SafeArea(child: body),
           bottomSheet: showLogo
-              ? const PoweredByRaven(
+              ? PoweredByRaven(
+                  backgroundColor: backgroundColor,
                   fontSize: 9,
                   paddingBottom: 24,
                 )
