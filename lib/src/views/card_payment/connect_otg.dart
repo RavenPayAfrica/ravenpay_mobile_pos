@@ -3,7 +3,6 @@ import 'package:gap/gap.dart';
 import 'package:mobile_pos/src/helpers/global_variables.dart';
 import 'package:mobile_pos/src/helpers/helper_functions.dart';
 import 'package:mobile_pos/src/styles/ravenpay_textstyles.dart';
-import 'package:mobile_pos/src/views/card_payment/insert_card.dart';
 import 'package:mobile_pos/src/views/card_payment/widget/see_how_to_connect.dart';
 import 'package:mobile_pos/src/shared_widgets/ravenpay_button.dart';
 import 'package:mobile_pos/src/shared_widgets/ravenpay_close_button.dart';
@@ -56,7 +55,7 @@ class _ConnectOtgState extends State<ConnectOtg> {
               RavenPayButton(
                 buttonText: "Proceed",
                 onPressed: () {
-                  pushRoute(context, const InsertCard());
+                  // pushRoute(context, const InsertCard());
                 },
               ),
               const Gap(74),

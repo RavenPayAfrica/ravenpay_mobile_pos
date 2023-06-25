@@ -22,6 +22,10 @@ rootProject.allprojects {
             rootProject
             dirs("${rootProject.buildDir}/../../android/libs/")
         }
+        maven {
+            url "https://maven.google.com" // Google's Maven repository
+        }
+        maven { url "https://jitpack.io" }
     }
 }
 
@@ -47,9 +51,14 @@ android {
     defaultConfig {
         minSdkVersion 21
     }
+
+    buildFeatures {
+        viewBinding true
+    }
 }
 
 dependencies {
+<<<<<<< HEAD
 
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation(name:'ravendspreadpos-release', ext:'aar')
@@ -63,6 +72,23 @@ dependencies {
     implementation 'io.github.chaosleung:pinview:1.4.4'
     implementation 'com.iqiyi.xcrash:xcrash-android-lib:3.0.0'
     
+=======
+    // implementation(name:'ravendspreadpos-debug', ext:'aar')
+    // implementation fileTree(include: ['*.jar'], dir: 'libs')
+    // implementation 'com.github.ybq:Android-SpinKit:1.4.0'
+    // implementation 'androidx.appcompat:appcompat:1.3.1'
+    implementation "com.google.android.material:material:1.8.0"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation 'pl.droidsonroids.gif:android-gif-drawable:1.2.24'
+    implementation 'androidx.appcompat:appcompat:1.6.1'
+    implementation 'com.github.ostilo:RavenDspread:2.0.2'
+    // implementation('com.github.ostilo:RavenDspread:1.1.4')
+    // implementation 'com.google.code.gson:gson:2.8.9'
+    // implementation 'com.google.android.material:material:1.8.0'
+    // implementation 'androidx.databinding:viewbinding:7.1.2'
+    // implementation 'io.github.chaosleung:pinview:1.4.4'
+    // implementation 'com.iqiyi.xcrash:xcrash-android-lib:3.0.0'
+>>>>>>> f9474098ea2f4833afc5fae196fb119b149cf69d
 
 }
 

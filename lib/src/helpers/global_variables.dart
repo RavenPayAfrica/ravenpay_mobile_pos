@@ -6,3 +6,5 @@ MobilePOSTheme get pluginTheme =>
     MobilePosPlatform.instance.config?.theme ?? MobilePOSTheme.defaults();
 
 RavenMobilePOSConfig get pluginConfig => MobilePosPlatform.instance.config!;
+
+final String eKey = "1704C7E7C2AE708BA7DBFA51B062CEA9";

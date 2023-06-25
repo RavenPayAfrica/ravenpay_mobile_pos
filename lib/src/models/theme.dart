@@ -2,18 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:mobile_pos/src/styles/ravenpay_app_colors.dart';
 
 class MobilePOSTheme {
-  final Color? primaryColor;
-  final Color? headerTextColor;
-  final Color? secondaryColor;
-  final Color? onPrimary;
+  final Color primaryColor;
+  final Color headerTextColor;
+  final Color secondaryColor;
+  final Color onPrimary;
   // final String? logo;
 
   const MobilePOSTheme(
-      {this.primaryColor,
-      this.headerTextColor,
-      this.onPrimary,
+      {required this.primaryColor,
+      required this.headerTextColor,
+      required this.onPrimary,
       // this.logo,
-      this.secondaryColor});
+      required this.secondaryColor});
 
   factory MobilePOSTheme.defaults() {
     return MobilePOSTheme(

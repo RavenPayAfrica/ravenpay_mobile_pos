@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:mobile_pos/mobile_pos_platform_interface.dart';
 import 'package:mobile_pos/src/helpers/global_variables.dart';
 import 'package:mobile_pos/src/styles/ravenpay_textstyles.dart';
 
@@ -37,7 +36,7 @@ class ProgressDialog extends StatelessWidget {
                 child: CircularProgressIndicator(
                   semanticsLabel: 'Please wait',
                   valueColor: AlwaysStoppedAnimation<Color>(
-                      pluginConfig.theme!.primaryColor!),
+                      pluginConfig.theme!.primaryColor),
                 ),
               ),
               const SizedBox(

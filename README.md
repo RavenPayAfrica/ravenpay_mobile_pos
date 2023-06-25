@@ -12,24 +12,20 @@ First you need to obtain your app credentials from [here.](https://getravenbank.
 
 ### Set minSdkVersion target
 
-This library targets android devices >= SDK 21. Make sure you're targeting at-least the same by modifying your `android/build.gradle` file
+This library targets android devices >= SDK 21. Make sure you're targeting at-least the same by modifying your `android/app/build.gradle` file
 
 
-> 
 > minSdkVersion = 21
->
-> 
 
 
 ### Update  `AndroidManifest.xml` to add neccessary permissions and configs
 
 
 ```
- <uses-feature
+     <uses-feature
         android:name="android.hardware.bluetooth_le"
         android:required="true" />
     <uses-feature android:name="android.hardware.usb.host" />
-
     <uses-permission android:name="android.permission.BLUETOOTH_CONNECT" />
     <uses-permission android:name="android.permission.BLUETOOTH_SCAN" />
     <uses-permission android:name="android.permission.BLUETOOTH_ADVERTISE" />
@@ -40,30 +36,7 @@ This library targets android devices >= SDK 21. Make sure you're targeting at-le
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission
-        android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"
-        tools:ignore="ProtectedPermissions" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.RECORD_AUDIO" />
-    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
-    <uses-permission
-        android:name="android.permission.INTERACT_ACROSS_USERS_FULL"
-        tools:ignore="ProtectedPermissions" />
-    <uses-permission
-        android:name="android.permission.INTERACT_ACROSS_USERS"
-        tools:ignore="ProtectedPermissions" />
-
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
-    <uses-permission android:name="android.permission.WRITE_CONTACTS" />
-
-    <uses-permission
-        android:name="android.permission.HARDWARE_TEST"
-        tools:ignore="ProtectedPermissions" />
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission
-        android:name="android.permission.INSTALL_PACKAGES"
-        tools:ignore="ProtectedPermissions" />
-    <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
 ```
 
 
@@ -79,6 +52,14 @@ This library targets android devices >= SDK 21. Make sure you're targeting at-le
 ```
 
 
+Update styles.xml
+
+Switch your theme parent to use
+
+> ```
+>     <style name="LaunchTheme" parent="Theme.AppCompat.Light.NoActionBar">
+> ```
+
 ## IOS Setup (Coming Soon)
 
 
@@ -88,7 +69,6 @@ This library targets android devices >= SDK 21. Make sure you're targeting at-le
 
 ```dart
 import 'package:mobile_pos/mobile_pos_sdk.dart';
-
 ```
 
 ### Launch SDK

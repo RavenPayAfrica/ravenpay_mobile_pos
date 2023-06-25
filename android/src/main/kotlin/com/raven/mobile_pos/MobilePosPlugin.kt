@@ -16,6 +16,7 @@ import android.widget.Toast
 import androidx.annotation.NonNull
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import com.ravenpos.ravendspreadpos.BaseApplication
 import com.ravenpos.ravendspreadpos.device.RavenActivity
 import com.ravenpos.ravendspreadpos.utils.AppLog
 import com.ravenpos.ravendspreadpos.utils.Constants
@@ -55,7 +56,7 @@ class MobilePosPlugin : FlutterPlugin, MethodCallHandler, ActivityAware, PluginR
         context = flutterPluginBinding.applicationContext
         channel = MethodChannel(flutterPluginBinding.binaryMessenger, "mobile_pos")
         channel.setMethodCallHandler(this)
-
+        BaseApplication.setContext(context)
 
     }
 
@@ -94,7 +95,7 @@ class MobilePosPlugin : FlutterPlugin, MethodCallHandler, ActivityAware, PluginR
                     val amount: Double = arguments.getValue("amount") as Double
                     val deviceType: Int = arguments.getValue("device_type") as Int
                     this.result = result
-                    val intent = Intent(getActivity(), RavenActivity::class.java)
+                    val intent = Intent(getContext(), RavenActivity::class.java)
                     intent.putExtra(Constants.INTENT_EXTRA_ACCOUNT_TYPE, "10")
                     intent.putExtra(Constants.INTENT_EXTRA_AMOUNT_KEY, amount)
                     intent.putExtra(Constants.TERMINAL_ID, "2030LQ01")
@@ -121,6 +122,10 @@ class MobilePosPlugin : FlutterPlugin, MethodCallHandler, ActivityAware, PluginR
                             Constants.INTENT_CLEAR_SESSION_KEY,
                             "97BCC4618F323BF119103E9E161C589E"
                     )
+
+                    if (arguments.containsKey("pin")) {
+                        intent.putExtra(Constants.KEY_ID, arguments.getValue("pin") as String)
+                    }
                     getActivity().startActivityForResult(intent, 1001)
                 } catch (e: Exception) {
                     AppLog.d("startTransaction", e.message)
@@ -139,93 +144,98 @@ class MobilePosPlugin : FlutterPlugin, MethodCallHandler, ActivityAware, PluginR
     }
 
     private fun bluetoothRelaPer() {
-        val adapter = BluetoothAdapter.getDefaultAdapter()
-        if (adapter != null && !adapter.isEnabled) {
-            //if bluetooth is disabled, add one fix
-            val enabler = Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE)
-            getActivity().startActivity(enabler)
-        }
-        lm =
-                getActivity().getSystemService(LOCATION_SERVICE) as LocationManager
-        val ok = lm!!.isProviderEnabled(LocationManager.GPS_PROVIDER)
-        if (ok) { //Location service is on
-            if (ContextCompat.checkSelfPermission(
-                            getActivity(),
-                            Manifest.permission.ACCESS_FINE_LOCATION
-                    )
-                    != PackageManager.PERMISSION_GRANTED
-            ) {
-                Log.e("POS_SDK", "Permission Denied")
-                // Permission denied
-                // Request authorization
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-                    if (ContextCompat.checkSelfPermission(
-                                    getContext(),
-                                    Manifest.permission.BLUETOOTH_SCAN
-                            ) != PackageManager.PERMISSION_GRANTED || ContextCompat.checkSelfPermission(
-                                    getContext(),
-                                    Manifest.permission.BLUETOOTH_CONNECT
-                            ) != PackageManager.PERMISSION_GRANTED || ContextCompat.checkSelfPermission(
-                                    getContext(),
-                                    Manifest.permission.BLUETOOTH_ADVERTISE
-                            ) != PackageManager.PERMISSION_GRANTED
-                    ) {
-                        val list = arrayOf(
-                                Manifest.permission.ACCESS_FINE_LOCATION,
-                                Manifest.permission.BLUETOOTH_SCAN,
-                                Manifest.permission.BLUETOOTH_CONNECT,
-                                Manifest.permission.BLUETOOTH_ADVERTISE
-                        )
-                        ActivityCompat.requestPermissions(getActivity(), list, bluetoothCode)
-                    }
-                } else {
-                    ActivityCompat.requestPermissions(
-                            getActivity(),
-                            arrayOf(
-                                    Manifest.permission.ACCESS_COARSE_LOCATION,
-                                    Manifest.permission.ACCESS_FINE_LOCATION
-                            ),
-                            locationCode
-                    )
-                }
-                //                        Toast.makeText(getActivity(), "Permission Denied", Toast.LENGTH_SHORT).show();
-            } else {
-                // have permission
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-                    if (ContextCompat.checkSelfPermission(
-                                    getActivity(),
-                                    Manifest.permission.BLUETOOTH_SCAN
-                            ) != PackageManager.PERMISSION_GRANTED || ContextCompat.checkSelfPermission(
-                                    getActivity(),
-                                    Manifest.permission.BLUETOOTH_CONNECT
-                            ) != PackageManager.PERMISSION_GRANTED || ContextCompat.checkSelfPermission(
-                                    getActivity(),
-                                    Manifest.permission.BLUETOOTH_ADVERTISE
-                            ) != PackageManager.PERMISSION_GRANTED
-                    ) {
-                        val list = arrayOf(
-                                Manifest.permission.ACCESS_FINE_LOCATION,
-                                Manifest.permission.BLUETOOTH_SCAN,
-                                Manifest.permission.BLUETOOTH_CONNECT,
-                                Manifest.permission.BLUETOOTH_ADVERTISE
-                        )
-                        ActivityCompat.requestPermissions(getActivity(), list, bluetoothCode)
-                    }
-                }
-                this.resultStatus?.success(true)
-                Toast.makeText(this.activity, "Permission Granted", Toast.LENGTH_SHORT).show()
+        try {
+            val adapter = BluetoothAdapter.getDefaultAdapter()
+            if (adapter != null && !adapter.isEnabled) {
+                //if bluetooth is disabled, add one fix
+                val enabler = Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE)
+                getActivity().startActivity(enabler)
             }
-        } else {
-            Log.e("BRG", "System detects that the GPS location service is not turned on")
-            Toast.makeText(
-                    getActivity(),
-                    "System detects that the GPS location service is not turned on",
-                    Toast.LENGTH_SHORT
-            ).show()
-            val intent = Intent()
-            intent.action = Settings.ACTION_LOCATION_SOURCE_SETTINGS
-            getActivity().startActivityForResult(intent, 1315)
+            lm =
+                    getActivity().getSystemService(LOCATION_SERVICE) as LocationManager
+            val ok = lm!!.isProviderEnabled(LocationManager.GPS_PROVIDER)
+            if (ok) { //Location service is on
+                if (ContextCompat.checkSelfPermission(
+                                getActivity(),
+                                Manifest.permission.ACCESS_FINE_LOCATION
+                        )
+                        != PackageManager.PERMISSION_GRANTED
+                ) {
+                    Log.e("POS_SDK", "Permission Denied")
+                    // Permission denied
+                    // Request authorization
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+                        if (ContextCompat.checkSelfPermission(
+                                        getActivity(),
+                                        Manifest.permission.BLUETOOTH_SCAN
+                                ) != PackageManager.PERMISSION_GRANTED || ContextCompat.checkSelfPermission(
+                                        getActivity(),
+                                        Manifest.permission.BLUETOOTH_CONNECT
+                                ) != PackageManager.PERMISSION_GRANTED || ContextCompat.checkSelfPermission(
+                                        getActivity(),
+                                        Manifest.permission.BLUETOOTH_ADVERTISE
+                                ) != PackageManager.PERMISSION_GRANTED
+                        ) {
+                            val list = arrayOf(
+                                    Manifest.permission.ACCESS_FINE_LOCATION,
+                                    Manifest.permission.BLUETOOTH_SCAN,
+                                    Manifest.permission.BLUETOOTH_CONNECT,
+                                    Manifest.permission.BLUETOOTH_ADVERTISE
+                            )
+                            ActivityCompat.requestPermissions(getActivity(), list, bluetoothCode)
+                        }
+                    } else {
+                        ActivityCompat.requestPermissions(
+                                getActivity(),
+                                arrayOf(
+                                        Manifest.permission.ACCESS_COARSE_LOCATION,
+                                        Manifest.permission.ACCESS_FINE_LOCATION
+                                ),
+                                locationCode
+                        )
+                    }
+                    //                        Toast.makeText(getActivity(), "Permission Denied", Toast.LENGTH_SHORT).show();
+                } else {
+                    // have permission
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+                        if (ContextCompat.checkSelfPermission(
+                                        getActivity(),
+                                        Manifest.permission.BLUETOOTH_SCAN
+                                ) != PackageManager.PERMISSION_GRANTED || ContextCompat.checkSelfPermission(
+                                        getActivity(),
+                                        Manifest.permission.BLUETOOTH_CONNECT
+                                ) != PackageManager.PERMISSION_GRANTED || ContextCompat.checkSelfPermission(
+                                        getActivity(),
+                                        Manifest.permission.BLUETOOTH_ADVERTISE
+                                ) != PackageManager.PERMISSION_GRANTED
+                        ) {
+                            val list = arrayOf(
+                                    Manifest.permission.ACCESS_FINE_LOCATION,
+                                    Manifest.permission.BLUETOOTH_SCAN,
+                                    Manifest.permission.BLUETOOTH_CONNECT,
+                                    Manifest.permission.BLUETOOTH_ADVERTISE
+                            )
+                            ActivityCompat.requestPermissions(getActivity(), list, bluetoothCode)
+                        }
+                    }
+                    this.resultStatus?.success(true)
+                    Toast.makeText(this.activity, "Permission Granted", Toast.LENGTH_SHORT).show()
+                }
+            } else {
+                Log.e("BRG", "System detects that the GPS location service is not turned on")
+                Toast.makeText(
+                        getActivity(),
+                        "System detects that the GPS location service is not turned on",
+                        Toast.LENGTH_SHORT
+                ).show()
+                val intent = Intent()
+                intent.action = Settings.ACTION_LOCATION_SOURCE_SETTINGS
+                getActivity().startActivityForResult(intent, 1315)
+            }
+        } catch (e: Exception) {
+            AppLog.d("Bluetooth", e.message)
         }
+
     }
 
 
@@ -239,7 +249,7 @@ class MobilePosPlugin : FlutterPlugin, MethodCallHandler, ActivityAware, PluginR
     }
 
     override fun onDetachedFromActivityForConfigChanges() {
-        activity = null
+//        activity = null
     }
 
     override fun onReattachedToActivityForConfigChanges(binding: ActivityPluginBinding) {
@@ -248,7 +258,7 @@ class MobilePosPlugin : FlutterPlugin, MethodCallHandler, ActivityAware, PluginR
     }
 
     override fun onDetachedFromActivity() {
-        activity = null
+//        activity = null
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?): Boolean {

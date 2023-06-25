@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:mobile_pos/mobile_pos_platform_interface.dart';
+import 'package:mobile_pos/src/helpers/enums.dart';
 import 'package:mobile_pos/src/helpers/global_variables.dart';
 import 'package:mobile_pos/src/helpers/helper_functions.dart';
 import 'package:mobile_pos/src/styles/ravenpay_textstyles.dart';
@@ -23,6 +24,17 @@ class RavenPayApp extends StatefulWidget {
 
 class _RavenPayAppState extends State<RavenPayApp> {
   @override
+  void initState() {
+    super.initState();
+    setupPermissions();
+  }
+
+  setupPermissions() async {
+    await MobilePosPlatform.instance
+        .checkConnectivityStatus(ConnectivityType.bluetooth);
+  }
+
+  @override
   Widget build(BuildContext context) {
     return RavenPayScaffold(
       backgroundColor: pluginTheme.primaryColor,
@@ -41,7 +53,21 @@ class _RavenPayAppState extends State<RavenPayApp> {
                 child: SizedBox(
                     height: 48,
                     width: 48,
-                    child: pluginConfig.businessInfo.logo)),
+                    child: pluginConfig.businessInfo.logo == null
+                        ? ClipOval(
+                            child: Container(
+                              decoration: BoxDecoration(
+                                  color: pluginConfig.theme!.secondaryColor),
+                              child: Center(
+                                child: Text(
+                                  pluginConfig.businessInfo.businessName[0],
+                                  style: headling1.copyWith(
+                                      color: pluginConfig.theme!.onPrimary),
+                                ),
+                              ),
+                            ),
+                          )
+                        : pluginConfig.businessInfo.logo)),
             const Gap(16),
             Text(
                 "Accept payment much easier with ${pluginConfig.businessInfo.businessName}",
@@ -67,10 +93,10 @@ class _RavenPayAppState extends State<RavenPayApp> {
                           PurchaseAmount(
                               onProceed: (mContext, amount) => pushRoute(
                                   mContext, const BusinessPhoneNumber()),
-                              title: "Requested Amount"));
+                              title: "Enter Amount"));
                     },
                     asset: "generate_pay_code.png",
-                    title: "Generate Pay-code",
+                    title: "Generate Paycode",
                     subTitile: "Receive payment from a third-party terminal"),
                 HomeItem(
                     onTap: () {
@@ -78,15 +104,18 @@ class _RavenPayAppState extends State<RavenPayApp> {
                     },
                     asset: "secure_pin.png",
                     title: "Secure PIN Share",
-                    subTitile: "Accept payment from your customers"),
+                    subTitile: "Securely share card PIN for payment"),
                 const HomeItem(
+                    comingSoon: true,
                     asset: "reward.png",
                     title: "Rewards",
                     subTitile: "Accept payment from your customers"),
               ]),
             ),
-            const Gap(16),
-            const PoweredByRaven(),
+            const Gap(32),
+            const PoweredByRaven(
+              transparent: true,
+            ),
             const Gap(24),
           ],
         ),

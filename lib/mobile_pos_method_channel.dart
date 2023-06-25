@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:mobile_pos/mobile_pos_sdk.dart';
-import 'package:mobile_pos/src/helpers/enums.dart';
 import 'package:mobile_pos/src/views/home/raven_pay_app.dart';
-
 import 'mobile_pos_platform_interface.dart';
 
 /// An implementation of [MobilePosPlatform] that uses method channels.
@@ -38,6 +36,7 @@ class MethodChannelMobilePos extends MobilePosPlatform {
         },
       ),
     );
+
     return;
   }
 
@@ -47,20 +46,28 @@ class MethodChannelMobilePos extends MobilePosPlatform {
     var args = <String, dynamic>{
       "deviceType": _getConnectivityCode(connectivityType)
     };
-    final status =
-        await methodChannel.invokeMethod<bool>('getPosSdkStatus', args);
-    return status;
+    try {
+      final status =
+          await methodChannel.invokeMethod<bool>('getPosSdkStatus', args);
+      return status;
+    } catch (e) {}
+    return null;
   }
 
   @override
   Future<String?> chargeCard(
       {required double amount,
+      String? pin,
       required ConnectivityType connectivityType}) async {
     var args = <String, dynamic>{
       "amount": amount,
       'account_type': '10',
       'device_type': _getConnectivityCode(connectivityType),
     };
+
+    if (pin != null) {
+      args['pin'] = pin;
+    }
 
     final res =
         await methodChannel.invokeMethod<String>('startTransaction', args);

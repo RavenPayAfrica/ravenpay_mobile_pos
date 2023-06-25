@@ -16,7 +16,7 @@ class SeeHowToConnect extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
       decoration: BoxDecoration(
-          color: pluginTheme.secondaryColor!.withOpacity(0.1),
+          color: pluginTheme.secondaryColor.withOpacity(0.1),
           borderRadius: BorderRadius.circular(16)),
       child: Row(children: [
         if (showIcon) ...[

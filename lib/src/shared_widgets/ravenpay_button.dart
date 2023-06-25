@@ -14,7 +14,7 @@ class RavenPayButton extends StatelessWidget {
     this.busy = false,
     this.buttonColor,
     this.borderColor,
-    this.height = 58,
+    this.height = 52,
     this.enabled = true,
     this.fontSize,
     this.fontWeight,
@@ -44,7 +44,7 @@ class RavenPayButton extends StatelessWidget {
       borderRadius: BorderRadius.circular(borderRadius),
       color: enabled
           ? (buttonColor ?? pluginTheme.primaryColor)
-          : pluginTheme.primaryColor!.withOpacity(.4),
+          : pluginTheme.primaryColor.withOpacity(.4),
       child: InkWell(
         borderRadius: BorderRadius.circular(borderRadius),
         onTap: enabled ? onPressed : null,

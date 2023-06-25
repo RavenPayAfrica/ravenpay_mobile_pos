@@ -1,5 +1,6 @@
 const String kCardReadError = 'card-read-error';
 const String kNibbsError = 'n-error';
+const String kBluetoothPermissionError = 'bluetooth-permission-error';
 
 class RavenMobilePOSException implements Exception {
   String code;

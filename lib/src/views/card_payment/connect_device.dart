@@ -82,32 +82,41 @@ class _ConnectDeviceState extends State<ConnectDevice> {
                 buttonText: "Proceed",
                 onPressed: () async {
                   if (currentIndex == 1) {
-                    final cardData = await MobilePosPlatform.instance
-                        .chargeCard(
-                            amount: widget.amount,
-                            connectivityType: ConnectivityType.bluetooth);
-                    if (cardData != null) {
-                      if (pluginConfig.isStaging) {
-                        //Mock Successful
-                        pushRoute(
-                            context,
-                            CardSuccessPage(
-                              amount: widget.amount,
-                              response: RavenMPOSResponse(),
-                            ));
-                      } else {
-                        //charge card
-                        try {
-                          final res = await ApiRequest.processCard(
-                              context, widget.amount, cardData);
-                          pluginConfig.onSuccess.call(res);
-                        } on RavenMobilePOSException catch (e) {
-                          pluginConfig.onError.call(e);
-                        }
-                      }
-                    } else {
+                    final res = await MobilePosPlatform.instance
+                        .checkConnectivityStatus(ConnectivityType.bluetooth);
+                    if (res != true) {
                       pluginConfig.onError.call(RavenMobilePOSException(
                           code: kNibbsError, message: 'Payment failed'));
+                      return;
+                    } else {
+                      final cardData =
+                          await MobilePosPlatform.instance.chargeCard(
+                              // pin: '0133',
+                              amount: widget.amount,
+                              connectivityType: ConnectivityType.bluetooth);
+                      if (cardData != null) {
+                        if (pluginConfig.isStaging) {
+                          //Mock Successful
+                          pushRoute(
+                              context,
+                              CardSuccessPage(
+                                amount: widget.amount,
+                                response: RavenMPOSResponse(),
+                              ));
+                        } else {
+                          //charge card
+                          try {
+                            final res = await ApiRequest.processCard(
+                                context, widget.amount, cardData);
+                            pluginConfig.onSuccess.call(res);
+                          } on RavenMobilePOSException catch (e) {
+                            pluginConfig.onError.call(e);
+                          }
+                        }
+                      } else {
+                        pluginConfig.onError.call(RavenMobilePOSException(
+                            code: kNibbsError, message: 'Payment failed'));
+                      }
                     }
                   } else if (currentIndex == 2) {
                     await MobilePosPlatform.instance.chargeCard(
@@ -135,14 +144,14 @@ class Items extends StatelessWidget {
     required this.name,
   });
 
-  List<String> bluetoothItems = [
+  final List<String> bluetoothItems = [
     "Ensure your bluetooth is active ",
     "Ensure the Terminal is on",
     "Find the device and connect ",
     "Once connected proceed to add a PIN"
   ];
 
-  List<String> otgItems = [
+  final List<String> otgItems = [
     "Ensure you have your OTG Cable available",
     "Ensure the terminal is on",
     "Insert your OTG to your phone and the terminal",

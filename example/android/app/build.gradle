@@ -29,6 +29,12 @@ android {
     compileSdkVersion flutter.compileSdkVersion
     ndkVersion flutter.ndkVersion
 
+      configurations.all {
+        resolutionStrategy {
+            force 'com.google.code.gson:gson:2.8.9'
+        }
+    }
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8

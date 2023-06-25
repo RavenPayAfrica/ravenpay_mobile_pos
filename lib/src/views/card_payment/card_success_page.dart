@@ -3,7 +3,6 @@ import 'package:gap/gap.dart';
 import 'package:mobile_pos/src/helpers/global_variables.dart';
 import 'package:mobile_pos/src/helpers/helper_functions.dart';
 import 'package:mobile_pos/src/models/success_response.dart';
-import 'package:mobile_pos/src/styles/ravenpay_app_colors.dart';
 import 'package:mobile_pos/src/styles/ravenpay_textstyles.dart';
 import 'package:mobile_pos/src/views/card_payment/share_receipt.dart';
 import 'package:mobile_pos/src/shared_widgets/powerby_by_raven_widget.dart';
@@ -36,8 +35,8 @@ class _CardSuccessPageState extends State<CardSuccessPage> {
                   onPressed: () {
                     pushRoute(context, const ShareReceipt());
                   },
-                  height: 54,
-                  textColor: pluginTheme.primaryColor!,
+                  height: 48,
+                  textColor: pluginTheme.primaryColor,
                   buttonText: "Share Receipt",
                   buttonColor: pluginTheme.onPrimary,
                 )),
@@ -47,20 +46,20 @@ class _CardSuccessPageState extends State<CardSuccessPage> {
                     onPressed: () {
                       toRavenPayHome(context);
                     },
-                    height: 54,
-                    textColor: pluginTheme.primaryColor!,
+                    height: 48,
+                    textColor: pluginTheme.primaryColor,
                     buttonText: "Close Payment",
                     buttonColor: pluginTheme.onPrimary,
                   ),
                 ),
               ],
             ),
-            const Gap(24),
+            const Gap(32),
             const PoweredByRaven(
-              transpirent: true,
+              transparent: true,
               fontSize: 10,
             ),
-            const Gap(34),
+            const Gap(24),
           ]),
         ),
         backgroundColor: pluginTheme.primaryColor,
@@ -81,9 +80,20 @@ class _CardSuccessPageState extends State<CardSuccessPage> {
               Text("You have successfully received,",
                   style: subtitle2.copyWith(color: pluginTheme.onPrimary)),
               const Gap(4),
-              Text("NGN ${formatAmount(widget.amount)}",
-                  style: subtitle.copyWith(
-                      color: pluginTheme.onPrimary, fontSize: 18)),
+              RichText(
+                  text: TextSpan(
+                      text: '₦',
+                      style: headling1.copyWith(
+                          fontFamily: 'Roboto',
+                          fontSize: 22,
+                          color: pluginTheme.onPrimary,
+                          fontWeight: FontWeight.bold),
+                      children: [
+                    TextSpan(
+                        text: formatAmount(widget.amount),
+                        style: headling1.copyWith(
+                            color: pluginTheme.onPrimary, fontSize: 24))
+                  ])),
               const Gap(74),
             ],
           ),
