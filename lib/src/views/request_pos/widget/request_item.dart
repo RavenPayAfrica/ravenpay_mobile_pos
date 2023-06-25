@@ -6,7 +6,9 @@ import 'package:mobile_pos/src/styles/ravenpay_app_colors.dart';
 import 'package:mobile_pos/src/styles/ravenpay_textstyles.dart';
 
 class RequestItem extends StatelessWidget {
-  const RequestItem({super.key});
+  final String? seriaNo;
+
+  const RequestItem({super.key, required this.seriaNo});
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +17,19 @@ class RequestItem extends StatelessWidget {
         const Gap(8),
         Row(
           children: [
-            Image.asset(loadAsset("mpos_icon.png"), height: 34),
+            if (seriaNo != null) ...[
+              Image.asset(loadAsset("mpos_icon.png"), height: 40),
+            ] else ...[
+              Container(
+                height: 40,
+                width: 40,
+                decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: AppColors.ravenLightGrey.withOpacity(0.3)),
+                child: Icon(Icons.info_outline_rounded,
+                    color: AppColors.ravenLightGrey),
+              )
+            ],
             const Gap(16),
             Expanded(
               child: Column(
@@ -25,11 +39,19 @@ class RequestItem extends StatelessWidget {
                         style: headling2.copyWith(
                             color: pluginTheme.primaryColor, fontSize: 14)),
                     const Gap(4),
-                    Text(
-                      "Seria No: 123345543222",
-                      style: subtitle2.copyWith(
-                          fontSize: 14, color: AppColors.ravenGreyLight1),
-                    )
+                    if (seriaNo != null) ...[
+                      Text(
+                        seriaNo!,
+                        style: subtitle2.copyWith(
+                            fontSize: 14, color: AppColors.ravenGreyLight1),
+                      )
+                    ] else ...[
+                      Text(
+                        "Pending Delivery",
+                        style: subtitle2.copyWith(
+                            fontSize: 14, color: AppColors.ravenGreyLight1),
+                      )
+                    ]
                   ]),
             )
           ],
