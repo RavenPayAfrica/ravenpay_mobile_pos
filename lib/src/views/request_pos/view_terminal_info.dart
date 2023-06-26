@@ -6,6 +6,7 @@ import 'package:mobile_pos/src/shared_widgets/ravenpay_close_button.dart';
 import 'package:mobile_pos/src/shared_widgets/ravenpay_scaffold.dart';
 import 'package:mobile_pos/src/styles/ravenpay_app_colors.dart';
 import 'package:mobile_pos/src/styles/ravenpay_textstyles.dart';
+import 'package:mobile_pos/src/views/request_pos/edit_terminal_info.dart';
 
 class ViewTerminalInfo extends StatefulWidget {
   const ViewTerminalInfo({super.key});
@@ -62,9 +63,14 @@ class _ViewTerminalInfoState extends State<ViewTerminalInfo> {
                                       pluginTheme.onPrimary.withOpacity(0.7)))
                         ]),
                   ),
-                  Image.asset(
-                    loadAsset("edit_icon.png"),
-                    height: 34,
+                  GestureDetector(
+                    onTap: () {
+                      pushRoute(context, const EditTerminalInfo());
+                    },
+                    child: Image.asset(
+                      loadAsset("edit_icon.png"),
+                      height: 34,
+                    ),
                   )
                 ],
               ),
