@@ -33,8 +33,8 @@ class _RavenPayAppState extends State<RavenPayApp> {
   }
 
   void initialize() async {
-    await ApiRequest.fetchAppInfo();
-    await ApiRequest.registerUser();
+    await ApiRequests.fetchAppInfo();
+    await ApiRequests.registerUser();
   }
 
   setupPermissions() async {

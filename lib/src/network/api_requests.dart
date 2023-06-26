@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:mobile_pos/mobile_pos_sdk.dart';
 import 'package:mobile_pos/src/helpers/global_variables.dart';
@@ -14,7 +13,7 @@ import 'package:mobile_pos/src/views/card_payment/card_success_page.dart';
 
 import '../models/card_tx_response.dart';
 
-class ApiRequest {
+class ApiRequests {
   static Future<RavenMPOSResponse> processCard(
       BuildContext context, double amount, String cardData) async {
     final body = json.decode(cardData);

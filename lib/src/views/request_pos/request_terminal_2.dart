@@ -59,13 +59,13 @@ class _RequestTerminal2State extends State<RequestTerminal2> {
                           ));
                   switch (deliveryMethod) {
                     case DeliveryMethod.pickup:
-                      success = await ApiRequest.requestTerminal(
+                      success = await ApiRequests.requestTerminal(
                         qty: terminalCount,
                       );
                       break;
                     case DeliveryMethod.dispatch:
                       if (formKey.currentState!.validate()) {
-                        success = await ApiRequest.requestTerminal(
+                        success = await ApiRequests.requestTerminal(
                             qty: terminalCount,
                             address: addressController.text,
                             landmark: landmarkController.text,

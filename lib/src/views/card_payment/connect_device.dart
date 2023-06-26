@@ -130,7 +130,7 @@ class _ConnectDeviceState extends State<ConnectDevice> {
                         } else {
                           //charge card
                           try {
-                            final res = await ApiRequest.processCard(
+                            final res = await ApiRequests.processCard(
                                 context, widget.amount, cardData ?? '');
                             pluginConfig.onSuccess.call(res);
                           } on RavenMobilePOSException catch (e) {

@@ -104,7 +104,7 @@ class _UpdateUserInfoState extends State<UpdateUserInfo> {
           builder: (BuildContext context) => const ProgressDialog(
                 status: 'Updating info...',
               ));
-      final success = await ApiRequest.updateUserDetails(
+      final success = await ApiRequests.updateUserDetails(
           busnessName: name ?? '',
           businessAddress: address ?? '',
           businessDescription: desc ?? '',

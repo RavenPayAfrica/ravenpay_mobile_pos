@@ -27,8 +27,8 @@ class _RequestTerminalIndexState extends State<RequestTerminalIndex> {
   List<TerminalModel> allTerminals = [];
 
   void fetchTerminals() async {
-    await ApiRequest.fetchAppInfo();
-    final res = await ApiRequest.getUserTerminals();
+    await ApiRequests.fetchAppInfo();
+    final res = await ApiRequests.getUserTerminals();
     allTerminals = res;
     loading = false;
     setState(() {});
