@@ -31,9 +31,7 @@ class _RequestTerminal2State extends State<RequestTerminal2> {
   Widget build(BuildContext context) {
     return RavenPayScaffold(
         backgroundColor: Colors.white,
-        appBar: ravenPayAppBar(
-          howToText: "Track your Terminal",
-        ),
+        appBar: ravenPayAppBar(),
         bottomNavigationBar: Padding(
           padding: EdgeInsets.symmetric(horizontal: kHoriontalScreenPadding),
           child: Column(
@@ -169,61 +167,65 @@ class _RequestTerminal2State extends State<RequestTerminal2> {
             if (currentIndex == 1) ...[
               const Pickup(),
             ] else ...[
-              RavenPayTextField(
-                controller: stateController,
-                readOnly: true,
-                isDropdown: true,
-                labelText: "Select State",
-                hintText: "Choose a State",
-                onTap: () async {
-                  var choice = await showCupertinoModalBottomSheet(
-                      expand: false,
-                      duration: const Duration(milliseconds: 200),
-                      context: context,
-                      builder: (BuildContext context) =>
-                          const Material(child: StateOfOriginSheet()));
+              Column(
+                children: [
+                  RavenPayTextField(
+                    controller: stateController,
+                    readOnly: true,
+                    isDropdown: true,
+                    labelText: "Select State",
+                    hintText: "Choose a State",
+                    onTap: () async {
+                      var choice = await showCupertinoModalBottomSheet(
+                          expand: false,
+                          duration: const Duration(milliseconds: 200),
+                          context: context,
+                          builder: (BuildContext context) =>
+                              const Material(child: StateOfOriginSheet()));
 
-                  if (choice != null) {
-                    setState(() {
-                      stateController.text = choice;
-                    });
-                  }
-                },
-              ),
-              const Gap(16),
-              RavenPayTextField(
-                controller: lgaController,
-                readOnly: true,
-                isDropdown: true,
-                labelText: "Select City",
-                hintText: "Choose a City",
-                onTap: () async {
-                  if (stateController.text.length < 3) {
-                    showSnack(
-                        context, 'Please select state of residence first');
+                      if (choice != null) {
+                        setState(() {
+                          stateController.text = choice;
+                        });
+                      }
+                    },
+                  ),
+                  const Gap(16),
+                  RavenPayTextField(
+                    controller: lgaController,
+                    readOnly: true,
+                    isDropdown: true,
+                    labelText: "Select City",
+                    hintText: "Choose a City",
+                    onTap: () async {
+                      if (stateController.text.length < 3) {
+                        showSnack(
+                            context, 'Please select state of residence first');
 
-                    return;
-                  }
-                  var choice = await showCupertinoModalBottomSheet(
-                      expand: false,
-                      duration: const Duration(milliseconds: 200),
-                      context: context,
-                      builder: (BuildContext context) => Material(
-                              child: LGASheet(
-                            state: stateController.text,
-                          )));
+                        return;
+                      }
+                      var choice = await showCupertinoModalBottomSheet(
+                          expand: false,
+                          duration: const Duration(milliseconds: 200),
+                          context: context,
+                          builder: (BuildContext context) => Material(
+                                  child: LGASheet(
+                                state: stateController.text,
+                              )));
 
-                  if (choice != null) {
-                    lgaController.text = choice;
-                  }
-                },
+                      if (choice != null) {
+                        lgaController.text = choice;
+                      }
+                    },
+                  ),
+                  const Gap(16),
+                  const RavenPayTextField(
+                    labelText: "Your Address",
+                    hintText: "Your Address Location",
+                  ),
+                  const Gap(16),
+                ],
               ),
-              const Gap(16),
-              const RavenPayTextField(
-                labelText: "Your Address",
-                hintText: "Your Address Location",
-              ),
-              const Gap(16),
             ],
             const Gap(34),
           ]),
@@ -233,8 +235,8 @@ class _RequestTerminal2State extends State<RequestTerminal2> {
 
 class Item extends StatelessWidget {
   final String text;
-  final index;
-  final currentIndex;
+  final int index;
+  final int currentIndex;
   final Function(int) onTap;
   const Item(
       {super.key,

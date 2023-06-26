@@ -7,7 +7,7 @@ import 'package:mobile_pos/src/shared_widgets/ravenpay_close_button.dart';
 import 'package:mobile_pos/src/shared_widgets/ravenpay_scaffold.dart';
 import 'package:mobile_pos/src/styles/ravenpay_textstyles.dart';
 import 'package:mobile_pos/src/views/request_pos/request_terminal_1.dart';
-import 'package:mobile_pos/src/views/request_pos/widget/request_item.dart';
+import 'package:mobile_pos/src/views/request_pos/widget/terminal_item.dart';
 
 class RequestTerminalIndex extends StatefulWidget {
   const RequestTerminalIndex({super.key});
@@ -57,7 +57,7 @@ class _RequestTerminalIndexState extends State<RequestTerminalIndex> {
             const Gap(28),
             Expanded(
               child: ListView.builder(itemBuilder: (context, index) {
-                return RequestItem(
+                return TerminalItem(
                   seriaNo: index % 2 == 0 ? "1234565432222" : null,
                 );
               }),

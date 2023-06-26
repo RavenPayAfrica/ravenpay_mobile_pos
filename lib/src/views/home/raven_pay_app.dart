@@ -109,10 +109,10 @@ class _RavenPayAppState extends State<RavenPayApp> {
                     onTap: () {
                       pushRoute(context, const RequestTerminalIndex());
                     },
-                    comingSoon: true,
-                    asset: "reward.png",
-                    title: "Rewards",
-                    subTitile: "Accept payment from your customers"),
+                    comingSoon: false,
+                    asset: "terminal_icon.png",
+                    title: "Terminals",
+                    subTitile: "Manage your point of sales terminals"),
               ]),
             ),
             const Gap(32),

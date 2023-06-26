@@ -22,8 +22,7 @@ class _RequestTerminal1State extends State<RequestTerminal1> {
   Widget build(BuildContext context) {
     return RavenPayScaffold(
         backgroundColor: Colors.white,
-        appBar:
-            ravenPayAppBar(howToText: "Track your Terminal", howToTap: () {}),
+        appBar: ravenPayAppBar(),
         bottomNavigationBar: Padding(
           padding: EdgeInsets.symmetric(horizontal: kHoriontalScreenPadding),
           child: Column(
