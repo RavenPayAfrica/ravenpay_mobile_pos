@@ -6,6 +6,7 @@ import 'package:mobile_pos/src/helpers/global_variables.dart';
 import 'package:mobile_pos/src/helpers/helper_functions.dart';
 import 'package:mobile_pos/src/models/success_response.dart';
 import 'package:mobile_pos/src/network/api_requests.dart';
+import 'package:mobile_pos/src/shared_widgets/qr_code_scanner.dart';
 import 'package:mobile_pos/src/styles/ravenpay_app_colors.dart';
 import 'package:mobile_pos/src/styles/ravenpay_textstyles.dart';
 import 'package:mobile_pos/src/views/card_payment/card_success_page.dart';
@@ -16,9 +17,11 @@ import 'package:mobile_pos/src/shared_widgets/ravenpay_close_button.dart';
 import 'package:mobile_pos/src/shared_widgets/ravenpay_scaffold.dart';
 
 class ConnectDevice extends StatefulWidget {
-  const ConnectDevice({super.key, required this.amount});
+  const ConnectDevice(
+      {super.key, required this.amount, required this.cardAuthMethod});
 
   final double amount;
+  final CardAuthMethod cardAuthMethod;
 
   @override
   State<ConnectDevice> createState() => _ConnectDeviceState();
@@ -30,7 +33,7 @@ class _ConnectDeviceState extends State<ConnectDevice> {
   @override
   Widget build(BuildContext context) {
     return RavenPayScaffold(
-        showLogo: true,
+        showLogo: pluginConfig.showLabel,
         body: Padding(
           padding: EdgeInsets.symmetric(horizontal: kHoriontalScreenPadding),
           child: Column(
@@ -89,11 +92,32 @@ class _ConnectDeviceState extends State<ConnectDevice> {
                           code: kNibbsError, message: 'Payment failed'));
                       return;
                     } else {
-                      final cardData =
-                          await MobilePosPlatform.instance.chargeCard(
-                              // pin: '0133',
-                              amount: widget.amount,
-                              connectivityType: ConnectivityType.bluetooth);
+                      String? cardData;
+
+                      switch (widget.cardAuthMethod) {
+                        case CardAuthMethod.pin:
+                          cardData = await MobilePosPlatform.instance
+                              .chargeCard(
+                                  amount: widget.amount,
+                                  connectivityType: ConnectivityType.bluetooth);
+                          break;
+                        case CardAuthMethod.qrCode:
+                          await pushRoute(context, RavenPayQRCodeSCanner(
+                              onDataCapture: (data) async {
+                            Navigator.pop(context);
+                            final pin = await decryptString(data);
+
+                            if (pin != null && pin.length == 4) {
+                              cardData = await MobilePosPlatform.instance
+                                  .chargeCard(
+                                      pin: pin,
+                                      amount: widget.amount,
+                                      connectivityType:
+                                          ConnectivityType.bluetooth);
+                            }
+                          }));
+                          break;
+                      }
                       if (cardData != null) {
                         if (pluginConfig.isStaging) {
                           //Mock Successful
@@ -107,7 +131,7 @@ class _ConnectDeviceState extends State<ConnectDevice> {
                           //charge card
                           try {
                             final res = await ApiRequest.processCard(
-                                context, widget.amount, cardData);
+                                context, widget.amount, cardData ?? '');
                             pluginConfig.onSuccess.call(res);
                           } on RavenMobilePOSException catch (e) {
                             pluginConfig.onError.call(e);

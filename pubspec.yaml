@@ -1,6 +1,7 @@
 name: mobile_pos
-description: A new Flutter plugin for Raven Bank mPOS device that allows users connect the terminal to their mobile app.
-version: 0.0.12
+description: A new Flutter plugin for Raven Bank mPOS device that allows users
+  connect the terminal to their mobile app.
+version: 0.1.0
 homepage: null
 
 environment:
@@ -14,15 +15,11 @@ dependencies:
   gap: ^3.0.0
   http: ^0.13.6
   intl: ^0.18.1
+  mobile_scanner: 3.1.1 #2.0
+  # qr_code_dart_scan: ^0.7.1
   pinput: ^2.2.31
   plugin_platform_interface: ^2.0.2
   pretty_qr_code: ^2.0.3
-  modal_bottom_sheet:
-    git:
-      url: https://github.com/followthemoney1/modal_bottom_sheet.git
-      ref: main
-      path: modal_bottom_sheet
-
 
 dev_dependencies:
   flutter_lints: ^2.0.0

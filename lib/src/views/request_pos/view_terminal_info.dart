@@ -30,7 +30,7 @@ class _ViewTerminalInfoState extends State<ViewTerminalInfo> {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return RavenPayScaffold(
-        showLogo: true,
+        showLogo: pluginConfig.showLabel,
         appBar: AppBar(
           leadingWidth: double.infinity,
           leading: Padding(

@@ -1,4 +1,4 @@
-export 'package:mobile_pos/src/models/app_info.dart';
+export 'package:mobile_pos/src/models/affliate_info_model.dart';
 
 export 'package:mobile_pos/src/models/theme.dart';
 

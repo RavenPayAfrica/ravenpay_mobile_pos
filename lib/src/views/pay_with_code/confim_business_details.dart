@@ -49,7 +49,6 @@ class _ConfirmBusinessDetailsState extends State<ConfirmBusinessDetails> {
               ],
             ),
           ),
-          showLogo: false,
           body: Padding(
             padding: EdgeInsets.symmetric(horizontal: kHoriontalScreenPadding),
             child: Column(

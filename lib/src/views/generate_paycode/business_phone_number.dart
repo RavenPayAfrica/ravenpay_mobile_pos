@@ -41,7 +41,6 @@ class _BusinessPhoneNumberState extends State<BusinessPhoneNumber> {
           ],
         ),
       ),
-      showLogo: false,
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: kHoriontalScreenPadding),
         child: Column(

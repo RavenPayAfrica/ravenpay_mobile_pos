@@ -19,7 +19,7 @@ class _TerminalStatusState extends State<TerminalStatus> {
   @override
   Widget build(BuildContext context) {
     return RavenPayScaffold(
-        showLogo: true,
+        showLogo: pluginConfig.showLabel,
         backgroundColor: Colors.white,
         body: Stack(
           children: [

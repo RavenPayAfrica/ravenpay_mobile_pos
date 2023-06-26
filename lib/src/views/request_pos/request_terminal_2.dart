@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:intl/intl.dart';
+import 'package:mobile_pos/mobile_pos_sdk.dart';
 import 'package:mobile_pos/src/helpers/global_variables.dart';
 import 'package:mobile_pos/src/helpers/helper_functions.dart';
+import 'package:mobile_pos/src/network/api_requests.dart';
 import 'package:mobile_pos/src/shared_widgets/lga_bottom_sheet.dart';
 import 'package:mobile_pos/src/shared_widgets/powerby_by_raven_widget.dart';
+import 'package:mobile_pos/src/shared_widgets/progress_dialog.dart';
 import 'package:mobile_pos/src/shared_widgets/raven_pay_appbar.dart';
+import 'package:mobile_pos/src/shared_widgets/ravenpay_bottomsheet.dart';
 import 'package:mobile_pos/src/shared_widgets/ravenpay_button.dart';
 import 'package:mobile_pos/src/shared_widgets/ravenpay_custom_success_page.dart';
 import 'package:mobile_pos/src/shared_widgets/ravenpay_scaffold.dart';
@@ -13,7 +18,7 @@ import 'package:mobile_pos/src/shared_widgets/state_of_origin_sheet.dart';
 import 'package:mobile_pos/src/styles/ravenpay_app_colors.dart';
 import 'package:mobile_pos/src/styles/ravenpay_textstyles.dart';
 import 'package:mobile_pos/src/views/card_payment/widget/see_how_to_connect.dart';
-import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
+// import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
 class RequestTerminal2 extends StatefulWidget {
   const RequestTerminal2({super.key});
@@ -25,8 +30,13 @@ class RequestTerminal2 extends StatefulWidget {
 class _RequestTerminal2State extends State<RequestTerminal2> {
   final stateController = TextEditingController();
   final lgaController = TextEditingController();
-  int currentIndex = 1;
-  int purchaseNo = 1;
+  final addressController = TextEditingController();
+  final landmarkController = TextEditingController();
+  DeliveryMethod deliveryMethod = DeliveryMethod.pickup;
+  int terminalCount = 1;
+
+  final GlobalKey<FormState> formKey = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
     return RavenPayScaffold(
@@ -39,23 +49,51 @@ class _RequestTerminal2State extends State<RequestTerminal2> {
             children: [
               RavenPayButton(
                 buttonText: "Proceed",
-                onPressed: () {
-                  pushRoute(
-                      context,
-                      const RavenPayCustomSuccessPage(
-                        header: "Terminal Requested",
-                        subText:
-                            "Your terminal request has been approved for delivery check your terminal tab to see your terminals.",
-                      ));
+                onPressed: () async {
+                  bool success = false;
+                  showDialog(
+                      barrierDismissible: true,
+                      context: context,
+                      builder: (BuildContext context) => const ProgressDialog(
+                            status: 'Processing...',
+                          ));
+                  switch (deliveryMethod) {
+                    case DeliveryMethod.pickup:
+                      success = await ApiRequest.requestTerminal(
+                        qty: terminalCount,
+                      );
+                      break;
+                    case DeliveryMethod.dispatch:
+                      if (formKey.currentState!.validate()) {
+                        success = await ApiRequest.requestTerminal(
+                            qty: terminalCount,
+                            address: addressController.text,
+                            landmark: landmarkController.text,
+                            lga: lgaController.text,
+                            state: stateController.text);
+                      }
+                      break;
+                    default:
+                  }
+                  Navigator.pop(context);
+
+                  if (success) {
+                    pushRoute(
+                        context,
+                        RavenPayCustomSuccessPage(
+                          header: "Terminal Requested",
+                          subText:
+                              "Your terminal request has been approved for ${deliveryMethod.name} check your terminal tab to see your terminals.",
+                        ));
+                  }
                 },
               ),
               const Gap(24),
               const PoweredByRaven(fontSize: 9),
-              const Gap(24),
+              const Gap(32),
             ],
           ),
         ),
-        showLogo: false,
         body: SingleChildScrollView(
           padding: EdgeInsets.symmetric(horizontal: kHoriontalScreenPadding),
           child: Column(children: [
@@ -87,10 +125,10 @@ class _RequestTerminal2State extends State<RequestTerminal2> {
               child: Row(children: [
                 GestureDetector(
                   onTap: () {
-                    if (purchaseNo == 1) {
+                    if (terminalCount == 1) {
                       return;
                     }
-                    purchaseNo--;
+                    terminalCount--;
                     setState(() {});
                   },
                   child: Container(
@@ -102,14 +140,14 @@ class _RequestTerminal2State extends State<RequestTerminal2> {
                 ),
                 Expanded(
                   child: Text(
-                    purchaseNo.toString(),
+                    terminalCount.toString(),
                     style: subtitle,
                     textAlign: TextAlign.center,
                   ),
                 ),
                 GestureDetector(
                   onTap: () {
-                    purchaseNo++;
+                    terminalCount++;
                     setState(() {});
                   },
                   child: Container(
@@ -123,10 +161,11 @@ class _RequestTerminal2State extends State<RequestTerminal2> {
             ),
             const Gap(16),
             Row(
-              children: const [
+              children: [
                 SeeHowToConnect(
                   fontSize: 12,
-                  text: "Terminal Price: N20,000.00",
+                  text:
+                      "Amount: NGN${formatAmount((aflliateInfo?.devicePrice ?? 0) * terminalCount)}",
                   showIcon: false,
                   fontWeight: FontWeight.w500,
                 ),
@@ -142,21 +181,21 @@ class _RequestTerminal2State extends State<RequestTerminal2> {
             ),
             Row(
               children: [
-                Item(
-                  index: 1,
-                  currentIndex: currentIndex,
+                DeliveryItem(
+                  value: DeliveryMethod.pickup,
+                  currentValue: deliveryMethod,
                   onTap: (index) {
-                    currentIndex = index;
+                    deliveryMethod = index;
                     setState(() {});
                   },
                   text: "Pick Up",
                 ),
                 const Gap(12),
-                Item(
-                  index: 2,
-                  currentIndex: currentIndex,
+                DeliveryItem(
+                  value: DeliveryMethod.dispatch,
+                  currentValue: deliveryMethod,
                   onTap: (index) {
-                    currentIndex = index;
+                    deliveryMethod = index;
                     setState(() {});
                   },
                   text: "Deliver to me",
@@ -164,67 +203,86 @@ class _RequestTerminal2State extends State<RequestTerminal2> {
               ],
             ),
             const Gap(12),
-            if (currentIndex == 1) ...[
+            if (deliveryMethod == DeliveryMethod.pickup) ...[
               const Pickup(),
             ] else ...[
-              Column(
-                children: [
-                  RavenPayTextField(
-                    controller: stateController,
-                    readOnly: true,
-                    isDropdown: true,
-                    labelText: "Select State",
-                    hintText: "Choose a State",
-                    onTap: () async {
-                      var choice = await showCupertinoModalBottomSheet(
-                          expand: false,
-                          duration: const Duration(milliseconds: 200),
-                          context: context,
-                          builder: (BuildContext context) =>
-                              const Material(child: StateOfOriginSheet()));
+              Form(
+                key: formKey,
+                child: Column(
+                  children: [
+                    RavenPayTextField(
+                      controller: stateController,
+                      readOnly: true,
+                      isDropdown: true,
+                      labelText: "Select State",
+                      hintText: "Choose a state",
+                      validator: (data) => validateInput(data,
+                          errorMessage: 'State can not be empty'),
+                      onTap: () async {
+                        var choice = await showRavenPayBottomSheet(context,
+                            child: StateOfOriginSheet());
 
-                      if (choice != null) {
-                        setState(() {
-                          stateController.text = choice;
-                        });
-                      }
-                    },
-                  ),
-                  const Gap(16),
-                  RavenPayTextField(
-                    controller: lgaController,
-                    readOnly: true,
-                    isDropdown: true,
-                    labelText: "Select City",
-                    hintText: "Choose a City",
-                    onTap: () async {
-                      if (stateController.text.length < 3) {
-                        showSnack(
-                            context, 'Please select state of residence first');
+                        if (choice != null) {
+                          setState(() {
+                            stateController.text = choice;
+                          });
+                        }
+                      },
+                    ),
+                    const Gap(16),
+                    RavenPayTextField(
+                      controller: lgaController,
+                      readOnly: true,
+                      isDropdown: true,
+                      labelText: "Select City",
+                      hintText: "Choose a city",
+                      validator: (data) => validateInput(data,
+                          errorMessage: 'City can not be empty'),
+                      onTap: () async {
+                        if (stateController.text.length < 3) {
+                          showSnack(context,
+                              'Please select state of residence first');
 
-                        return;
-                      }
-                      var choice = await showCupertinoModalBottomSheet(
-                          expand: false,
-                          duration: const Duration(milliseconds: 200),
-                          context: context,
-                          builder: (BuildContext context) => Material(
-                                  child: LGASheet(
-                                state: stateController.text,
-                              )));
+                          return;
+                        }
+                        var choice = await showRavenPayBottomSheet(context,
+                            child: LGASheet(
+                              state: stateController.text,
+                            ));
 
-                      if (choice != null) {
-                        lgaController.text = choice;
-                      }
-                    },
-                  ),
-                  const Gap(16),
-                  const RavenPayTextField(
-                    labelText: "Your Address",
-                    hintText: "Your Address Location",
-                  ),
-                  const Gap(16),
-                ],
+                        // await showCupertinoModalBottomSheet(
+                        //     expand: false,
+                        //     duration: const Duration(milliseconds: 200),
+                        //     context: context,
+                        //     builder: (BuildContext context) => Material(
+                        //             child: LGASheet(
+                        //           state: stateController.text,
+                        //         )));
+
+                        if (choice != null) {
+                          lgaController.text = choice;
+                        }
+                      },
+                    ),
+                    const Gap(16),
+                    RavenPayTextField(
+                      controller: addressController,
+                      labelText: "Your Address",
+                      hintText: "Enter your full address",
+                      validator: (data) => validateInput(data,
+                          errorMessage: 'City can not be empty'),
+                    ),
+                    const Gap(16),
+                    RavenPayTextField(
+                      controller: landmarkController,
+                      labelText: "Landmark",
+                      hintText: "Enter closest landmark",
+                      validator: (data) => validateInput(data,
+                          errorMessage: 'landmark can not be empty'),
+                    ),
+                    const Gap(16),
+                  ],
+                ),
               ),
             ],
             const Gap(34),
@@ -233,17 +291,17 @@ class _RequestTerminal2State extends State<RequestTerminal2> {
   }
 }
 
-class Item extends StatelessWidget {
+class DeliveryItem extends StatelessWidget {
   final String text;
-  final int index;
-  final int currentIndex;
-  final Function(int) onTap;
-  const Item(
+  final DeliveryMethod value;
+  final DeliveryMethod currentValue;
+  final Function(DeliveryMethod) onTap;
+  const DeliveryItem(
       {super.key,
       required this.text,
-      required this.index,
+      required this.value,
       required this.onTap,
-      required this.currentIndex});
+      required this.currentValue});
 
   @override
   Widget build(BuildContext context) {
@@ -252,9 +310,9 @@ class Item extends StatelessWidget {
         SizedBox(
           width: 34,
           child: Radio(
-            value: index,
-            groupValue: currentIndex,
-            onChanged: (val) => onTap(index),
+            value: value,
+            groupValue: currentValue,
+            onChanged: (val) => onTap(value),
             activeColor: pluginTheme.primaryColor,
           ),
         ),
@@ -296,7 +354,7 @@ class Pickup extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          "Pick up address: 20 The Quad Layi Yusuf off Admiralty way. Lekki  Lagos Nigeria.",
+                          "Pick up address: ${toBeginningOfSentenceCase(aflliateInfo?.address ?? '')}.",
                           style: subtitle2.copyWith(
                               color: AppColors.ravenPayGrey3,
                               wordSpacing: 1,

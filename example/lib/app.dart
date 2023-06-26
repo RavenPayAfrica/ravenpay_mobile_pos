@@ -25,7 +25,7 @@ class _RavenPayExampleAppState extends State<RavenPayExampleApp> {
                           enviroment: RavenMobilePOSEnviroment.staging,
                           appInfo: AppInfo(
                             appName: 'Raven Bank',
-                            appId: '344ac4a97a8ec9e58b041099e5386851',
+                            appId: '89dca95cee33f4d965172740a323243e',
                           ),
                           customerInfo: CustomerInfo(
                             lastName: 'Jay',

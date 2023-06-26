@@ -1,10 +1,13 @@
 import 'dart:convert';
+import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:mobile_pos/mobile_pos_sdk.dart';
 import 'package:mobile_pos/src/helpers/global_variables.dart';
 import 'package:mobile_pos/src/helpers/helper_functions.dart';
 import 'package:mobile_pos/src/helpers/logger.dart';
+import 'package:mobile_pos/src/models/app_info_model.dart';
 import 'package:mobile_pos/src/models/success_response.dart';
+import 'package:mobile_pos/src/models/terminal_model.dart';
 import 'package:mobile_pos/src/network/http_base.dart';
 import 'package:mobile_pos/src/shared_widgets/progress_dialog.dart';
 import 'package:mobile_pos/src/views/card_payment/card_success_page.dart';
@@ -65,6 +68,19 @@ class ApiRequest {
     }
   }
 
+  static Future<void> fetchAppInfo() async {
+    if (aflliateInfo != null) return;
+    final payload = {"affiliate_app_id": pluginConfig.appInfo.appId};
+    var response =
+        await HttpBase.postRequest(payload, 'pdon/affiliate_app_setting');
+    if (response != null && response != 'failed') {
+      if (response['data'] != null) {
+        aflliateInfo = AflliateInfoModel.fromJson(response['data']);
+      }
+    }
+    logData(response);
+  }
+
   static Future<void> registerUser() async {
     final payload = pluginConfig.customerInfo.toJson();
     payload["affiliate_app_id"] = pluginConfig.appInfo.appId;
@@ -93,9 +109,11 @@ class ApiRequest {
 
     //failed
     if (response == 'failed' || response == null) {
-      throw RavenMobilePOSException(
+      final error = RavenMobilePOSException(
           code: kUpdateUserError,
           message: 'User account update failed: ${response['message']}');
+      pluginConfig.onError(error);
+      return false;
     } else {
       return response['status'] == 'success';
     }
@@ -103,17 +121,17 @@ class ApiRequest {
 
   static Future<bool> requestTerminal({
     required int qty,
-    required String state,
-    required String lga,
-    required String address,
-    required String landmark,
+    String? state,
+    String? lga,
+    String? address,
+    String? landmark,
   }) async {
     final payload = {
-      "quantity": qty,
-      "delivery_state": state,
-      "delivery_address": address,
-      "delivery_lga": lga,
-      "landmark": landmark,
+      "quantity": qty.toString(),
+      "delivery_state": state ?? 'pickup',
+      "delivery_address": address ?? 'pickup',
+      "delivery_lga": lga ?? 'pickup',
+      "landmark": landmark ?? 'pickup',
     };
     payload["poseidon_email"] = pluginConfig.customerInfo.email;
     payload["affiliate_app_id"] = pluginConfig.appInfo.appId;
@@ -122,40 +140,36 @@ class ApiRequest {
 
     //failed
     if (response == 'failed' || response == null) {
-      throw RavenMobilePOSException(
-          code: kRequestTerminalError,
-          message: 'Terminal request failed: ${response['message']}');
+      final error = RavenMobilePOSException(
+          code: kRequestTerminalError, message: 'Terminal request failed');
+
+      pluginConfig.onError(error);
+      return false;
     } else {
       return response['status'] == 'success';
     }
   }
 
-  static Future<List> getUserTerminals({
-    required int qty,
-    required String state,
-    required String lga,
-    required String address,
-    required String landmark,
-  }) async {
+  static Future<List<TerminalModel>> getUserTerminals() async {
     final payload = {
-      "quantity": qty,
-      "delivery_state": state,
-      "delivery_address": address,
-      "delivery_lga": lga,
-      "landmark": landmark,
+      "poseidon_email": pluginConfig.customerInfo.email,
+      "affiliate_app_id": pluginConfig.appInfo.appId,
     };
-    payload["poseidon_email"] = pluginConfig.customerInfo.email;
-    payload["affiliate_app_id"] = pluginConfig.appInfo.appId;
-    var response = await HttpBase.postRequest(payload, 'pdon/request_bankbox');
+
+    var response = await HttpBase.postRequest(payload, 'pdon/user_bankbox');
     logData(response);
 
     //failed
     if (response == 'failed' || response == null) {
-      throw RavenMobilePOSException(
-          code: kRequestTerminalError,
-          message: 'Terminal request failed: ${response['message']}');
-    } else {
+      final error = RavenMobilePOSException(
+          code: kRequestTerminalError, message: 'Get user terminals failed');
+      pluginConfig.onError(error);
       return [];
+    } else {
+      final list = (response['data'] as List)
+          .map((e) => TerminalModel.fromJson(e))
+          .toList();
+      return list;
     }
   }
 }

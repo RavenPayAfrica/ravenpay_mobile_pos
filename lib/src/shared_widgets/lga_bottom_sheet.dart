@@ -44,6 +44,7 @@ class LGASheetState extends State<LGASheet> {
   @override
   Widget build(BuildContext context) {
     return Container(
+      height: MediaQuery.of(context).size.height * .92,
       color: Colors.white,
       child: Stack(
         children: [
@@ -58,6 +59,7 @@ class LGASheetState extends State<LGASheet> {
               child: Padding(
                 padding: const EdgeInsets.all(16.0),
                 child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
                       'Select LGA',
@@ -66,14 +68,12 @@ class LGASheetState extends State<LGASheet> {
                           color: pluginTheme.primaryColor,
                           fontWeight: FontWeight.w700),
                     ),
-                    Expanded(child: Container()),
-                    IconButton(
-                        padding: const EdgeInsets.only(bottom: 6),
-                        onPressed: () {
+                    InkWell(
+                        onTap: () {
                           Navigator.pop(context);
                         },
-                        icon:
-                            Icon(Icons.close, color: pluginTheme.primaryColor)),
+                        child:
+                            Icon(Icons.close, color: pluginTheme.primaryColor))
                   ],
                 ),
               )),

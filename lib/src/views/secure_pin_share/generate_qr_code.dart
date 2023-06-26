@@ -38,7 +38,6 @@ class _GenerateQrCodeState extends State<GenerateQrCode> {
           ],
         ),
       ),
-      showLogo: false,
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: kHoriontalScreenPadding),
         child: Column(

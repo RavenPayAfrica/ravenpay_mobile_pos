@@ -40,7 +40,6 @@ class _ShareReceiptState extends State<ShareReceipt> {
           ],
         ),
       ),
-      showLogo: false,
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: kHoriontalScreenPadding),
         child: Column(

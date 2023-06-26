@@ -50,12 +50,12 @@ TextStyle headling1 = TextStyle(
 TextStyle headling2 = TextStyle(
     fontSize: 16,
     fontFamily: "br_bold",
-    color: AppColors.ravenPayGreen,
+    color: pluginTheme.primaryColor,
     package: "mobile_pos");
 TextStyle bodyText = TextStyle(
   fontSize: 16,
   fontWeight: FontWeight.w900,
-  color: AppColors.ravenPayGreen,
+  color: pluginTheme.primaryColor,
   package: "mobile_pos",
   fontFamily: "br_regular",
 );

@@ -45,7 +45,6 @@ class _RavenPayCustomSuccessPageState extends State<RavenPayCustomSuccessPage> {
           ]),
         ),
         backgroundColor: pluginTheme.primaryColor,
-        showLogo: false,
         body: Padding(
           padding: EdgeInsets.symmetric(horizontal: kHoriontalScreenPadding),
           child: Column(
@@ -64,17 +63,14 @@ class _RavenPayCustomSuccessPageState extends State<RavenPayCustomSuccessPage> {
                   )),
               const Gap(12),
               Text(widget.header,
-                  style: subtitle.copyWith(
-                      fontWeight: FontWeight.w900,
-                      color: pluginTheme.onPrimary,
-                      fontSize: 18)),
+                  style: headling1.copyWith(
+                      color: pluginTheme.onPrimary, fontSize: 18)),
               const Gap(12),
               Text(
                 widget.subText,
                 textAlign: TextAlign.center,
                 style: subtitle2.copyWith(
-                    color: pluginTheme.onPrimary.withOpacity(0.8),
-                    fontSize: 12),
+                    color: pluginTheme.onPrimary, fontSize: 16),
               ),
               const Gap(24),
             ],

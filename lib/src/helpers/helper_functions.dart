@@ -8,7 +8,7 @@ String loadAsset(String asset) {
   return "packages/mobile_pos/assets/images/$asset";
 }
 
-Future<void> pushRoute(BuildContext context, Widget page) async {
+Future<dynamic> pushRoute(BuildContext context, Widget page) async {
   Navigator.push(
     context,
     MaterialPageRoute(
@@ -41,12 +41,21 @@ Future<String?> decryptString(String data) async {
 
 void showSnack(BuildContext context, String msg, {SnackBarBehavior? floating}) {
   ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-    backgroundColor: Colors.black54,
-    behavior: floating,
+    margin: EdgeInsets.symmetric(horizontal: 16, vertical: 4),
+    backgroundColor: Colors.black,
+    behavior: SnackBarBehavior.floating,
     content: Text(
       msg,
       textAlign: TextAlign.start,
       style: bodyText.copyWith(fontSize: 14.0, color: Colors.white),
     ),
   ));
+}
+
+String? validateInput(String? data, {String? errorMessage, int minCount = 4}) {
+  if (data!.trim().length < minCount) {
+    return errorMessage ?? 'Invalid input';
+  } else {
+    return null;
+  }
 }

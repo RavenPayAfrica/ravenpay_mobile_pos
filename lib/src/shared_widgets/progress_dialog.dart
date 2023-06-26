@@ -24,7 +24,7 @@ class ProgressDialog extends StatelessWidget {
           borderRadius: BorderRadius.circular(4),
         ),
         child: Padding(
-          padding: const EdgeInsets.all(16.0),
+          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 24),
           child: Row(
             children: <Widget>[
               const SizedBox(

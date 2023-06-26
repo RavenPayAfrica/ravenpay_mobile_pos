@@ -1,11 +1,15 @@
 import 'package:mobile_pos/mobile_pos_platform_interface.dart';
 import 'package:mobile_pos/mobile_pos_sdk.dart';
+import 'package:mobile_pos/src/models/app_info_model.dart';
 
 double kHoriontalScreenPadding = 24;
 MobilePOSTheme get pluginTheme =>
     MobilePosPlatform.instance.config?.theme ?? MobilePOSTheme.defaults();
 
 RavenMobilePOSConfig get pluginConfig => MobilePosPlatform.instance.config!;
+
+bool? profileUpdate;
+AflliateInfoModel? aflliateInfo;
 
 final String eKey = "1704C7E7C2AE708BA7DBFA51B062CEA9";
 

@@ -1,7 +1,8 @@
 const String kCardReadError = 'card-read-error';
-const String kNibbsError = 'n-error';
+const String kNibbsError = 'nibbs-error';
 const String kUpdateUserError = 'update-user-error';
 const String kRequestTerminalError = 'terminal-request-error';
+const String kAffliateNotUpdated = 'missing-biz-info-error';
 
 const String kBluetoothPermissionError = 'bluetooth-permission-error';
 

@@ -43,6 +43,7 @@ class StateOfOriginSheetState extends State<StateOfOriginSheet> {
   @override
   Widget build(BuildContext context) {
     return Container(
+      height: MediaQuery.of(context).size.height * .92,
       color: Colors.white,
       child: Stack(
         children: [
@@ -57,6 +58,7 @@ class StateOfOriginSheetState extends State<StateOfOriginSheet> {
               child: Padding(
                 padding: const EdgeInsets.all(16.0),
                 child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
                       'Select State',
@@ -65,16 +67,21 @@ class StateOfOriginSheetState extends State<StateOfOriginSheet> {
                           color: pluginTheme.primaryColor,
                           fontWeight: FontWeight.w700),
                     ),
-                    Expanded(child: Container()),
-                    IconButton(
-                        padding: const EdgeInsets.only(bottom: 6),
-                        onPressed: () {
-                          Navigator.pop(context);
-                        },
-                        icon: Icon(
-                          Icons.close,
-                          color: pluginTheme.primaryColor,
-                        )),
+                    // IconButton(
+                    //     padding: const EdgeInsets.only(bottom: 6),
+                    //     onPressed: () {
+                    //       Navigator.pop(context);
+                    //     },
+                    //     icon: ),
+                    InkWell(
+                      onTap: () {
+                        Navigator.pop(context);
+                      },
+                      child: Icon(
+                        Icons.close,
+                        color: pluginTheme.primaryColor,
+                      ),
+                    )
                   ],
                 ),
               )),

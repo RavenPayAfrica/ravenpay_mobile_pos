@@ -6,3 +6,4 @@
 .pub/
 build/
 /build/
+.dart_tool/

@@ -28,11 +28,12 @@ class _RavenPayAppState extends State<RavenPayApp> {
   @override
   void initState() {
     super.initState();
-    registerUser();
+    initialize();
     setupPermissions();
   }
 
-  void registerUser() async {
+  void initialize() async {
+    await ApiRequest.fetchAppInfo();
     await ApiRequest.registerUser();
   }
 
@@ -94,18 +95,6 @@ class _RavenPayAppState extends State<RavenPayApp> {
                     subTitile: "Accept payment from your customers"),
                 HomeItem(
                     onTap: () {
-                      pushRoute(
-                          context,
-                          PurchaseAmount(
-                              onProceed: (mContext, amount) => pushRoute(
-                                  mContext, const BusinessPhoneNumber()),
-                              title: "Enter Amount"));
-                    },
-                    asset: "generate_pay_code.png",
-                    title: "Generate Paycode",
-                    subTitile: "Receive payment from a third-party terminal"),
-                HomeItem(
-                    onTap: () {
                       pushRoute(context, const AddCardPin());
                     },
                     asset: "secure_pin.png",
@@ -119,6 +108,19 @@ class _RavenPayAppState extends State<RavenPayApp> {
                     asset: "terminal_icon.png",
                     title: "Terminals",
                     subTitile: "Manage your point of sales terminals"),
+                HomeItem(
+                    comingSoon: true,
+                    onTap: () {
+                      pushRoute(
+                          context,
+                          PurchaseAmount(
+                              onProceed: (mContext, amount) => pushRoute(
+                                  mContext, const BusinessPhoneNumber()),
+                              title: "Enter Amount"));
+                    },
+                    asset: "generate_pay_code.png",
+                    title: "Generate Paycode",
+                    subTitile: "Receive payment from a third-party terminal"),
               ]),
             ),
             const Gap(32),

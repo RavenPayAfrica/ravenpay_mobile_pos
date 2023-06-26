@@ -36,11 +36,10 @@ class _RequestTerminal1State extends State<RequestTerminal1> {
               ),
               const Gap(24),
               const PoweredByRaven(fontSize: 9),
-              const Gap(24),
+              const Gap(32),
             ],
           ),
         ),
-        showLogo: false,
         body: SingleChildScrollView(
           padding: EdgeInsets.symmetric(horizontal: kHoriontalScreenPadding),
           child: Column(children: [
@@ -85,7 +84,7 @@ class _RequestTerminal1State extends State<RequestTerminal1> {
                         const Gap(8),
                         Expanded(
                           child: Text(
-                            "all you need to know about Poseidon "
+                            "all you need to know about the device "
                                 .toUpperCase(),
                             style: subtitle.copyWith(
                                 fontSize: 12, fontFamily: "br_light"),
@@ -99,17 +98,19 @@ class _RequestTerminal1State extends State<RequestTerminal1> {
                     ),
                     const Gap(4),
                     const Item(
-                      text: "Operated with a OTG cord or bluetooth.",
+                      text:
+                          "Seamlessly connect to your smartphone devices via an OTG cable or bluetooth.",
                     ),
-                    const Item(
-                      text: "Caution fee of N5,000.00.",
+                    Item(
+                      text:
+                          "One time fee of NGN${formatAmount(aflliateInfo?.devicePrice ?? 00)}",
                     ),
-                    const Item(
-                      text: "Easy connection with smartphone device",
-                    ),
-                    const Item(
-                      text: "Compatible with all android and ios device",
-                    ),
+                    // const Item(
+                    //   text: "Seamless connection with smartphones",
+                    // ),
+                    // const Item(
+                    //   text: "Compatible with all android and ios device",
+                    // ),
                     const Item(
                       text: "Easy to carry around",
                     ),
@@ -130,8 +131,10 @@ class Item extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 8),
       child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Container(
+            margin: EdgeInsets.only(top: 4),
             height: 4,
             width: 4,
             decoration: BoxDecoration(

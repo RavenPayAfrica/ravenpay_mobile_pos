@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:mobile_pos/src/helpers/global_variables.dart';
 import 'package:mobile_pos/src/helpers/helper_functions.dart';
+import 'package:mobile_pos/src/shared_widgets/coming_soon_badge.dart';
 import 'package:mobile_pos/src/styles/ravenpay_app_colors.dart';
 import 'package:mobile_pos/src/styles/ravenpay_textstyles.dart';
 
@@ -23,7 +24,7 @@ class HomeItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () => onTap!(),
+      onTap: comingSoon ? null : () => onTap!(),
       child: Container(
           margin: const EdgeInsets.symmetric(vertical: 4),
           padding: const EdgeInsets.symmetric(horizontal: 12),
@@ -48,24 +49,7 @@ class HomeItem extends StatelessWidget {
                       Text(title,
                           style: headling2.copyWith(
                               color: AppColors.ravenPayDark)),
-                      if (comingSoon) ...[
-                        const Gap(8),
-                        Container(
-                          margin: const EdgeInsets.only(bottom: 4),
-                          padding: const EdgeInsets.symmetric(
-                              vertical: 2, horizontal: 6),
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(16),
-                              color: pluginConfig.theme!.secondaryColor
-                                  .withOpacity(.8)),
-                          child: Text(
-                            'Coming soon',
-                            style: headling2.copyWith(
-                                color: pluginConfig.theme!.onPrimary,
-                                fontSize: 12),
-                          ),
-                        )
-                      ]
+                      if (comingSoon) ...[const Gap(8), ComingSoonBadge()]
                     ],
                   ),
                   Text(subTitile,

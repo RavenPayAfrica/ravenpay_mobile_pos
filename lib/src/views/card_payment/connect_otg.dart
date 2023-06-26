@@ -20,7 +20,7 @@ class _ConnectOtgState extends State<ConnectOtg> {
   @override
   Widget build(BuildContext context) {
     return RavenPayScaffold(
-        showLogo: true,
+        showLogo: pluginConfig.showLabel,
         body: Padding(
           padding: EdgeInsets.symmetric(horizontal: kHoriontalScreenPadding),
           child: Column(

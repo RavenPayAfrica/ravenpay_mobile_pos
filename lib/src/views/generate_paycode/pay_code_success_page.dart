@@ -42,7 +42,6 @@ class _PayCodeSuccessPageState extends State<PayCodeSuccessPage> {
           ]),
         ),
         backgroundColor: pluginTheme.primaryColor,
-        showLogo: false,
         body: Padding(
           padding: EdgeInsets.symmetric(horizontal: kHoriontalScreenPadding),
           child: Column(
