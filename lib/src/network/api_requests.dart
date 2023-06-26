@@ -79,9 +79,9 @@ class ApiRequest {
     String? nin,
   }) async {
     final payload = {
-      "busines_name": "cp5 ltd",
-      "business_address": "10, Layi Yusuf street",
-      "business_description": "all greek product",
+      "busines_name": busnessName,
+      "business_address": businessAddress,
+      "business_description": businessDescription,
       "nin": nin ?? ''
     };
     payload["email"] = pluginConfig.customerInfo.email;
@@ -94,9 +94,68 @@ class ApiRequest {
     //failed
     if (response == 'failed' || response == null) {
       throw RavenMobilePOSException(
-          code: kUpdateUserError, message: 'User account update failed');
+          code: kUpdateUserError,
+          message: 'User account update failed: ${response['message']}');
     } else {
       return response['status'] == 'success';
+    }
+  }
+
+  static Future<bool> requestTerminal({
+    required int qty,
+    required String state,
+    required String lga,
+    required String address,
+    required String landmark,
+  }) async {
+    final payload = {
+      "quantity": qty,
+      "delivery_state": state,
+      "delivery_address": address,
+      "delivery_lga": lga,
+      "landmark": landmark,
+    };
+    payload["poseidon_email"] = pluginConfig.customerInfo.email;
+    payload["affiliate_app_id"] = pluginConfig.appInfo.appId;
+    var response = await HttpBase.postRequest(payload, 'pdon/request_bankbox');
+    logData(response);
+
+    //failed
+    if (response == 'failed' || response == null) {
+      throw RavenMobilePOSException(
+          code: kRequestTerminalError,
+          message: 'Terminal request failed: ${response['message']}');
+    } else {
+      return response['status'] == 'success';
+    }
+  }
+
+  static Future<List> getUserTerminals({
+    required int qty,
+    required String state,
+    required String lga,
+    required String address,
+    required String landmark,
+  }) async {
+    final payload = {
+      "quantity": qty,
+      "delivery_state": state,
+      "delivery_address": address,
+      "delivery_lga": lga,
+      "landmark": landmark,
+    };
+    payload["poseidon_email"] = pluginConfig.customerInfo.email;
+    payload["affiliate_app_id"] = pluginConfig.appInfo.appId;
+    var response = await HttpBase.postRequest(payload, 'pdon/request_bankbox');
+    logData(response);
+
+    //failed
+    if (response == 'failed' || response == null) {
+      throw RavenMobilePOSException(
+          code: kRequestTerminalError,
+          message: 'Terminal request failed: ${response['message']}');
+    } else {
+      return [];
     }
   }
 }
