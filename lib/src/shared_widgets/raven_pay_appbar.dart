@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:mobile_pos/src/shared_widgets/ravenpay_close_button.dart';
 import 'package:mobile_pos/src/views/card_payment/widget/see_how_to_connect.dart';
 
-AppBar ravenPayAppBar({String? howToText, Function()? howToTap}) {
+AppBar ravenPayAppBar(
+    {String? howToText, Function()? howToTap, Color? backgroundColor}) {
   return AppBar(
     leadingWidth: double.infinity,
     leading: Padding(
@@ -28,7 +29,7 @@ AppBar ravenPayAppBar({String? howToText, Function()? howToTap}) {
         ],
       ),
     ),
-    backgroundColor: Colors.white,
+    backgroundColor: backgroundColor ?? Colors.white,
     elevation: 0,
   );
 }

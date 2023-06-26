@@ -8,9 +8,11 @@ import 'package:mobile_pos/src/styles/ravenpay_textstyles.dart';
 class RavenPayCloseButton extends StatelessWidget {
   final bool isArrow;
   final String text;
+  final Color? color;
   const RavenPayCloseButton({
     super.key,
     this.text = "Close",
+    this.color,
     this.isArrow = false,
   });
 
@@ -31,15 +33,17 @@ class RavenPayCloseButton extends StatelessWidget {
               height: 32,
               width: 32,
               decoration: BoxDecoration(
-                  boxShadow: [
-                    BoxShadow(
-                        color: const Color(0xff333333).withOpacity(0.06),
-                        spreadRadius: 2,
-                        offset: const Offset(2, 2),
-                        blurRadius: 2)
-                  ],
+                  boxShadow: color == null
+                      ? [
+                          BoxShadow(
+                              color: const Color(0xff333333).withOpacity(0.06),
+                              spreadRadius: 2,
+                              offset: const Offset(2, 2),
+                              blurRadius: 2)
+                        ]
+                      : null,
                   shape: BoxShape.circle,
-                  color: pluginTheme.onPrimary.withOpacity(0.2)),
+                  color: color ?? pluginTheme.onPrimary.withOpacity(0.2)),
               child: Image.asset(
                   loadAsset(isArrow ? "arrow_back.png" : "close_icon.png"),
                   color: isArrow ? null : pluginTheme.onPrimary)),
@@ -47,7 +51,7 @@ class RavenPayCloseButton extends StatelessWidget {
           Text(
             text,
             style: subtitle.copyWith(
-                color: isArrow ? null : pluginTheme.onPrimary),
+                color: isArrow ? (color) : (pluginTheme.onPrimary)),
           )
         ],
       ),
