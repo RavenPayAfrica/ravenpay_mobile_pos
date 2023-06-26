@@ -6,16 +6,26 @@ import 'package:mobile_pos/src/shared_widgets/ravenpay_close_button.dart';
 import 'package:mobile_pos/src/shared_widgets/ravenpay_scaffold.dart';
 import 'package:mobile_pos/src/styles/ravenpay_app_colors.dart';
 import 'package:mobile_pos/src/styles/ravenpay_textstyles.dart';
-import 'package:mobile_pos/src/views/request_pos/edit_terminal_info.dart';
 
 class ViewTerminalInfo extends StatefulWidget {
-  const ViewTerminalInfo({super.key});
+  final String terminalName;
+  const ViewTerminalInfo({super.key, required this.terminalName});
 
   @override
   State<ViewTerminalInfo> createState() => _ViewTerminalInfoState();
 }
 
 class _ViewTerminalInfoState extends State<ViewTerminalInfo> {
+  bool isEditing = false;
+  final FocusNode _focusNode = FocusNode();
+  @override
+  void initState() {
+    nameController.text = widget.terminalName;
+
+    super.initState();
+  }
+
+  final nameController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -53,9 +63,23 @@ class _ViewTerminalInfoState extends State<ViewTerminalInfo> {
                     child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text("Elatech Solution 1",
+                          if (isEditing) ...[
+                            TextField(
+                              autofocus: true,
+                              focusNode: _focusNode,
+                              textAlign: TextAlign.start,
                               style: headling1.copyWith(
-                                  color: pluginTheme.onPrimary)),
+                                  color: pluginTheme.onPrimary),
+                              controller: nameController,
+                              cursorColor: pluginTheme.onPrimary,
+                              decoration: const InputDecoration(
+                                  border: InputBorder.none),
+                            )
+                          ] else ...[
+                            Text(nameController.text,
+                                style: headling1.copyWith(
+                                    color: pluginTheme.onPrimary)),
+                          ],
                           Text("View terminal information",
                               style: subtitle2.copyWith(
                                   fontSize: 13,
@@ -65,10 +89,19 @@ class _ViewTerminalInfoState extends State<ViewTerminalInfo> {
                   ),
                   GestureDetector(
                     onTap: () {
-                      pushRoute(context, const EditTerminalInfo());
+                      if (isEditing) {
+                        isEditing = false;
+                        setState(() {});
+                        return;
+                      }
+
+                      isEditing = true;
+                      setState(() {});
+                      FocusScope.of(context).requestFocus(_focusNode);
                     },
                     child: Image.asset(
-                      loadAsset("edit_icon.png"),
+                      loadAsset(
+                          isEditing ? "check_icon_3.png" : "edit_icon.png"),
                       height: 34,
                     ),
                   )

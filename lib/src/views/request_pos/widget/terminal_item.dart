@@ -22,7 +22,11 @@ class TerminalItem extends StatelessWidget {
           pushRoute(context, const TerminalStatus());
           return;
         }
-        pushRoute(context, const ViewTerminalInfo());
+        pushRoute(
+            context,
+            const ViewTerminalInfo(
+              terminalName: "Elatech Solution 1",
+            ));
       },
       child: Column(
         children: [
