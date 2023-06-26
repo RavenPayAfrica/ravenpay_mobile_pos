@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:mobile_pos/mobile_pos_sdk.dart';
+import 'package:mobile_pos/src/helpers/global_variables.dart';
 import 'package:mobile_pos/src/helpers/helper_functions.dart';
 import 'package:mobile_pos/src/helpers/logger.dart';
 import 'package:mobile_pos/src/models/success_response.dart';
@@ -61,6 +62,41 @@ class ApiRequest {
         throw RavenMobilePOSException(
             code: kNibbsError, message: 'Transaction failed to complete');
       }
+    }
+  }
+
+  static Future<void> registerUser() async {
+    final payload = pluginConfig.customerInfo.toJson();
+    payload["affiliate_app_id"] = pluginConfig.appInfo.appId;
+    var response = await HttpBase.postRequest(payload, 'pdon/register');
+    logData(response);
+  }
+
+  static Future<bool> updateUserDetails({
+    required String busnessName,
+    required String businessAddress,
+    required String businessDescription,
+    String? nin,
+  }) async {
+    final payload = {
+      "busines_name": "cp5 ltd",
+      "business_address": "10, Layi Yusuf street",
+      "business_description": "all greek product",
+      "nin": nin ?? ''
+    };
+    payload["email"] = pluginConfig.customerInfo.email;
+    payload["business_type"] = "poseidon";
+
+    payload["affiliate_app_id"] = pluginConfig.appInfo.appId;
+    var response = await HttpBase.postRequest(payload, 'pdon/update');
+    logData(response);
+
+    //failed
+    if (response == 'failed' || response == null) {
+      throw RavenMobilePOSException(
+          code: kUpdateUserError, message: 'User account update failed');
+    } else {
+      return response['status'] == 'success';
     }
   }
 }

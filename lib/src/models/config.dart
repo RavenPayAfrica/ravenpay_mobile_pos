@@ -13,13 +13,22 @@ class RavenMobilePOSConfig {
   ///Customise the look and feel of the plugin
   MobilePOSTheme? theme;
 
-  BusinessInfo businessInfo;
+  ///Contains details about this app instance
+  AppInfo appInfo;
+
+  ///Set to true if you wish to show the label at the bottom
+  bool showLabel;
+
+  ///Infomation about current user
+  CustomerInfo customerInfo;
 
   RavenMobilePOSConfig(
       {required this.onSuccess,
       required this.onError,
-      required this.businessInfo,
+      required this.appInfo,
+      this.showLabel = true,
       this.theme,
+      required this.customerInfo,
       this.enviroment = RavenMobilePOSEnviroment.staging})
       : super() {
     theme = theme ?? MobilePOSTheme.defaults();

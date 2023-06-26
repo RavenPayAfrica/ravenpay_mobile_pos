@@ -1,13 +1,12 @@
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
-
-const String kBseURL = 'http://postest.getravenpos.com';
+import 'package:mobile_pos/src/helpers/global_variables.dart';
 
 class HttpBase {
   static Future<dynamic> postRequest(
       Map<String, dynamic> map, String route) async {
-    var url = Uri.parse('$kBseURL/$route');
+    var url = Uri.parse('$hostUrl/$route');
     try {
       http.Response response = await http.post(url, body: map);
 
@@ -22,4 +21,7 @@ class HttpBase {
       return null;
     }
   }
+
+  static String get hostUrl =>
+      pluginConfig.isStaging ? baseURLDev : baseURLProd;
 }
