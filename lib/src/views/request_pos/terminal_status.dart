@@ -20,78 +20,95 @@ class _TerminalStatusState extends State<TerminalStatus> {
     return RavenPayScaffold(
         showLogo: true,
         backgroundColor: Colors.white,
-        appBar: ravenPayAppBar(),
-        body: SingleChildScrollView(
-          padding: EdgeInsets.symmetric(horizontal: kHoriontalScreenPadding),
-          child:
-              Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-            const Gap(24),
-            Text("Terminal Status",
-                style: headling1.copyWith(color: AppColors.ravenDark)),
-            const Gap(12),
-            Text("Elatech Solution",
-                style: headling2.copyWith(color: AppColors.ravenPayGrey3)),
-            const Gap(8),
-            Row(
+        body: Stack(
+          children: [
+            Image.asset(
+              loadAsset("pending_bg.png"),
+              width: double.infinity,
+            ),
+            Column(
               children: [
-                Text(
-                  "Order #123456",
-                  style: subtitle2.copyWith(fontSize: 14),
-                ),
-                Container(
-                  margin: const EdgeInsets.symmetric(horizontal: 8),
-                  height: 4,
-                  width: 4,
-                  decoration: BoxDecoration(
-                      shape: BoxShape.circle, color: AppColors.ravenPayGrey3),
-                ),
-                Text(
-                  "June 16th 2023",
-                  style: subtitle2.copyWith(fontSize: 14),
+                ravenPayAppBar(backgroundColor: Colors.transparent),
+                SingleChildScrollView(
+                  padding:
+                      EdgeInsets.symmetric(horizontal: kHoriontalScreenPadding),
+                  child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const Gap(24),
+                        Text("Terminal Status",
+                            style:
+                                headling1.copyWith(color: AppColors.ravenDark)),
+                        const Gap(12),
+                        Text("Elatech Solution",
+                            style: headling2.copyWith(
+                                color: AppColors.ravenPayGrey3)),
+                        const Gap(8),
+                        Row(
+                          children: [
+                            Text(
+                              "Order #123456",
+                              style: subtitle2.copyWith(fontSize: 14),
+                            ),
+                            Container(
+                              margin: const EdgeInsets.symmetric(horizontal: 8),
+                              height: 4,
+                              width: 4,
+                              decoration: BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  color: AppColors.ravenPayGrey3),
+                            ),
+                            Text(
+                              "June 16th 2023",
+                              style: subtitle2.copyWith(fontSize: 14),
+                            ),
+                          ],
+                        ),
+                        const Gap(24),
+                        Container(
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 14, vertical: 24),
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(8),
+                                color: Colors.white,
+                                boxShadow: [
+                                  BoxShadow(
+                                      color: Colors.grey.withOpacity(0.2),
+                                      spreadRadius: 1,
+                                      blurRadius: 34)
+                                ]),
+                            child: Column(
+                              children: const [
+                                Item(
+                                  title: "Order Received",
+                                  completed: true,
+                                ),
+                                Item(
+                                  title: "Terminal Ready for delivery",
+                                  asset: "package.png",
+                                ),
+                                Item(
+                                  title: "Terminal Shipped",
+                                  asset: "bus.png",
+                                ),
+                                Item(
+                                  title: "Arriving Today",
+                                  asset: "bus.png",
+                                ),
+                                Item(
+                                  title: "Package delivered",
+                                  isLastItem: true,
+                                  icon: Icons.check_circle_outline,
+                                )
+                              ],
+                            )),
+                        const Gap(24),
+                        const HelpExplainer()
+                      ]),
                 ),
               ],
             ),
-            const Gap(24),
-            Container(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 14, vertical: 24),
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(8),
-                    color: Colors.white,
-                    boxShadow: [
-                      BoxShadow(
-                          color: Colors.grey.withOpacity(0.2),
-                          spreadRadius: 1,
-                          blurRadius: 34)
-                    ]),
-                child: Column(
-                  children: const [
-                    Item(
-                      title: "Order Received",
-                      completed: true,
-                    ),
-                    Item(
-                      title: "Terminal Ready for delivery",
-                      asset: "package.png",
-                    ),
-                    Item(
-                      title: "Terminal Shipped",
-                      asset: "bus.png",
-                    ),
-                    Item(
-                      title: "Arriving Today",
-                      asset: "bus.png",
-                    ),
-                    Item(
-                      title: "Package delivered",
-                      isLastItem: true,
-                      icon: Icons.check_circle_outline,
-                    )
-                  ],
-                )),
-            const Gap(24),
-            const HelpExplainer()
-          ]),
+          ],
         ));
   }
 }
