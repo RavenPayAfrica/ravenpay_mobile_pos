@@ -24,12 +24,15 @@ class RequestTerminalIndex extends StatefulWidget {
 
 class _RequestTerminalIndexState extends State<RequestTerminalIndex> {
   bool loading = true;
-  List<TerminalModel> allTerminals = [];
+  List<Terminal> allTerminals = [];
 
   void fetchTerminals() async {
     await ApiRequests.fetchAppInfo();
     final res = await ApiRequests.getUserTerminals();
-    allTerminals = res;
+    allTerminals.addAll(res);
+
+    final res2 = await ApiRequests.getUserTerminalRequests();
+    allTerminals.addAll(res2);
     loading = false;
     setState(() {});
   }
@@ -123,11 +126,18 @@ class _RequestTerminalIndexState extends State<RequestTerminalIndex> {
                             ],
                           ),
                         )
-                      : ListView.builder(itemBuilder: (context, index) {
-                          return TerminalItem(
-                            seriaNo: index % 2 == 0 ? "1234565432222" : null,
-                          );
-                        }),
+                      : ListView.builder(
+                          itemCount: allTerminals.length,
+                          itemBuilder: (context, index) {
+                            final terminal = allTerminals[index];
+                            return terminal is TerminalModel
+                                ? TerminalItem(
+                                    model: terminal,
+                                  )
+                                : terminal is TerminalRequestModel
+                                    ? TerminalRequestItem(model: terminal)
+                                    : SizedBox();
+                          }),
             )
           ]),
         ));

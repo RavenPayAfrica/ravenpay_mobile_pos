@@ -149,6 +149,30 @@ class ApiRequests {
     }
   }
 
+  static Future<List<TerminalRequestModel>> getUserTerminalRequests() async {
+    final payload = {
+      "poseidon_email": pluginConfig.customerInfo.email,
+      "affiliate_app_id": pluginConfig.appInfo.appId,
+    };
+
+    var response = await HttpBase.postRequest(payload, 'pdon/bankbox_request');
+    logData(response);
+
+    //failed
+    if (response == 'failed' || response == null) {
+      final error = RavenMobilePOSException(
+          code: kRequestTerminalError,
+          message: 'Get user terminals request failed');
+      pluginConfig.onError(error);
+      return [];
+    } else {
+      final list = (response['data'] as List)
+          .map((e) => TerminalRequestModel.fromJson(e))
+          .toList();
+      return list;
+    }
+  }
+
   static Future<List<TerminalModel>> getUserTerminals() async {
     final payload = {
       "poseidon_email": pluginConfig.customerInfo.email,
