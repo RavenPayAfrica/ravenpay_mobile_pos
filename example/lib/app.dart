@@ -26,6 +26,7 @@ class _RavenPayExampleAppState extends State<RavenPayExampleApp> {
                           appInfo: AppInfo(
                             appName: 'Raven Bank',
                             appId: '89dca95cee33f4d965172740a323243e',
+                            appEmail: 'raven@gmail.com'
                           ),
                           customerInfo: CustomerInfo(
                             lastName: 'Jay',
