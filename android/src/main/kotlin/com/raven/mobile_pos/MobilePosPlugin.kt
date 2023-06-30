@@ -94,33 +94,46 @@ class MobilePosPlugin : FlutterPlugin, MethodCallHandler, ActivityAware, PluginR
                 try {
                     val amount: Double = arguments.getValue("amount") as Double
                     val deviceType: Int = arguments.getValue("device_type") as Int
+                    val tID: String =  arguments.getValue("terminal_id") as String
+                    val port: String =  arguments.getValue("port") as String
+                    val pinKey: String =  arguments.getValue("pin_key") as String
+                    val masterKey: String =  arguments.getValue("master_key") as String
+                    val ip: String =  arguments.getValue("ip") as String
+                    val sessionKey: String =  arguments.getValue("session_key") as String
+                    val serialNumber: String =  arguments.getValue("serial_number") as String
+                    val mid: String =  arguments.getValue("mid") as String
+                    val businessName: String =  arguments.getValue("business_name") as String
+
+
+
+
                     this.result = result
                     val intent = Intent(getContext(), RavenActivity::class.java)
                     intent.putExtra(Constants.INTENT_EXTRA_ACCOUNT_TYPE, "10")
                     intent.putExtra(Constants.INTENT_EXTRA_AMOUNT_KEY, amount)
-                    intent.putExtra(Constants.TERMINAL_ID, "2030LQ01")
+                    intent.putExtra(Constants.TERMINAL_ID, tID)
                     intent.putExtra(Constants.INTENT_BLUETOOTH_DEVICE_TYPE, deviceType == 0)
 
                     intent.putExtra(
                             Constants.INTENT_CLEAR_MASTER_KEY,
-                            "549DEC3898977CC243A415DCC1BF6457"
+                            masterKey
                     )
                     intent.putExtra(
                             Constants.INTENT_CLEAR_PIN_KEY,
-                            "9DFB23DC0EE3899B26DFBA372570A151"
+                            pinKey
                     )
 
-                    intent.putExtra(Constants.INTENT_Port, "5013")
-                    intent.putExtra(Constants.INTENT_IP, "196.6.103.18")
-                    intent.putExtra(Constants.INTENT_MID, "2030LA0C0199436")
-                    intent.putExtra(Constants.INTENT_SN, "98211206905806")
+                    intent.putExtra(Constants.INTENT_Port, port)
+                    intent.putExtra(Constants.INTENT_IP, ip)
+                    intent.putExtra(Constants.INTENT_MID, mid)
+                    intent.putExtra(Constants.INTENT_SN, serialNumber)
                     intent.putExtra(
                             Constants.INTENT_BUSINESS_NAME_KEY,
-                            "RAVENPAY LIMITED       LA           LANG"
+                            businessName
                     )
                     intent.putExtra(
                             Constants.INTENT_CLEAR_SESSION_KEY,
-                            "97BCC4618F323BF119103E9E161C589E"
+                            sessionKey
                     )
 
                     if (arguments.containsKey("pin")) {

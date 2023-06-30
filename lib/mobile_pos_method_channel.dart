@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:mobile_pos/mobile_pos_sdk.dart';
+import 'package:mobile_pos/src/helpers/global_variables.dart';
 import 'package:mobile_pos/src/views/home/raven_pay_app.dart';
 import 'mobile_pos_platform_interface.dart';
 
@@ -63,6 +64,19 @@ class MethodChannelMobilePos extends MobilePosPlatform {
       "amount": amount,
       'account_type': '10',
       'device_type': _getConnectivityCode(connectivityType),
+
+      ///TODO: fix properly, do not hard code, these files are pushed to github and is open source.
+      ///fetch values from server and pass in at run time
+      'terminal_id': "",
+      'port': "",
+      'master_key': "",
+      'pin_key': "",
+      'ip': "",
+      'session_key': "",
+      'serial_number': "",
+      'mid': "",
+      'business_name':
+          "${pluginConfig.appInfo.appName}       LA           LANG",
     };
 
     if (pin != null) {
