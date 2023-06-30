@@ -60,12 +60,12 @@ class _RequestTerminal2State extends State<RequestTerminal2> {
                   switch (deliveryMethod) {
                     case DeliveryMethod.pickup:
                       success = await ApiRequests.requestTerminal(
-                        qty: terminalCount,
-                      );
+                          qty: terminalCount, deliveryMethod: deliveryMethod);
                       break;
-                    case DeliveryMethod.dispatch:
+                    case DeliveryMethod.home_delivery:
                       if (formKey.currentState!.validate()) {
                         success = await ApiRequests.requestTerminal(
+                            deliveryMethod: deliveryMethod,
                             qty: terminalCount,
                             address: addressController.text,
                             landmark: landmarkController.text,
@@ -83,7 +83,7 @@ class _RequestTerminal2State extends State<RequestTerminal2> {
                         RavenPayCustomSuccessPage(
                           header: "Terminal Requested",
                           subText:
-                              "Your terminal request has been approved for ${deliveryMethod.name} check your terminal tab to see your terminals.",
+                              "Your terminal request has been approved for ${deliveryMethod.name.replaceAll('_', ' ')} check your terminal tab to see your terminals.",
                         ));
                   }
                 },
@@ -192,7 +192,7 @@ class _RequestTerminal2State extends State<RequestTerminal2> {
                 ),
                 const Gap(12),
                 DeliveryItem(
-                  value: DeliveryMethod.dispatch,
+                  value: DeliveryMethod.home_delivery,
                   currentValue: deliveryMethod,
                   onTap: (index) {
                     deliveryMethod = index;

@@ -6,7 +6,6 @@ import 'package:mobile_pos/src/shared_widgets/coming_soon_badge.dart';
 import 'package:mobile_pos/src/shared_widgets/ravenpay_bottomsheet.dart';
 import 'package:mobile_pos/src/styles/ravenpay_app_colors.dart';
 import 'package:mobile_pos/src/styles/ravenpay_textstyles.dart';
-import 'package:mobile_pos/src/views/card_payment/connect_device.dart';
 import 'package:mobile_pos/src/views/card_payment/widget/auth_method_sheet.dart';
 import 'package:mobile_pos/src/views/pay_with_code/pay_with_code.dart';
 import 'package:mobile_pos/src/shared_widgets/powerby_by_raven_widget.dart';

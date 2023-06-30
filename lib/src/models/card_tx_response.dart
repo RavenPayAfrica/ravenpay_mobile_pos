@@ -43,6 +43,7 @@ class RavenEMV {
   String? totalAmoount;
   String? cardOrg;
   String? cardType;
+  String? pSerialNo;
 
   RavenEMV(
       {this.accountType,
@@ -59,6 +60,7 @@ class RavenEMV {
       this.responseCode,
       this.totalAmoount,
       this.cardOrg,
+      this.pSerialNo = '',
       this.cardType});
   RavenEMV.fromJson(Map<String, dynamic> json) {
     cardOrg = json['cardOrg']?.toString();
@@ -76,6 +78,7 @@ class RavenEMV {
     amount = json['amount']?.toString();
     responseCode = json['responseCode']?.toString();
     totalAmoount = json['totalAmoount']?.toString();
+    pSerialNo = json['poseidonSerialNumber']?.toString();
   }
   Map<String, dynamic> toJson() {
     final data = <String, dynamic>{};
@@ -94,6 +97,7 @@ class RavenEMV {
     data['amount'] = amount;
     data['responseCode'] = responseCode;
     data['totalAmoount'] = totalAmoount;
+    data['poseidonSerialNumber'] = pSerialNo;
     return data;
   }
 

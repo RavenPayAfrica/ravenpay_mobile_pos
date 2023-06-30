@@ -29,6 +29,8 @@ class ApiRequests {
     Map<String, dynamic> nibssMap = cardModel.nibbsEMV!.toJson();
     nibssMap.update('ssl', (value) => 'true');
 
+    final payload = <String, dynamic>{};
+
     final serializedMap = nibssMap.map((key, value) {
       if (nibssMap[key] == null) {
         return MapEntry(key, '');
@@ -37,9 +39,19 @@ class ApiRequests {
       }
     });
 
-    logData(jsonEncode(nibssMap));
+    payload['card_data'] = serializedMap;
+    payload['poseidon_serial_number'] = cardModel.ravenEMV?.pSerialNo ?? '';
+    payload['app_profile'] = {
+      "affiliate_app_name": pluginConfig.appInfo.appName,
+      "affiliate_app_id": pluginConfig.appInfo.appId,
+      "poseidon_business_email": pluginConfig.customerInfo.email,
+      "bvn": pluginConfig.customerInfo.bvn
+    };
 
-    var response = await HttpBase.postRequest(serializedMap, 'card/processing');
+    logData(jsonEncode(payload));
+
+    var response =
+        await HttpBase.postRequest(serializedMap, 'pdon/card/processing');
     Navigator.pop(context);
 
     //failed
@@ -124,6 +136,7 @@ class ApiRequests {
     String? lga,
     String? address,
     String? landmark,
+    required DeliveryMethod deliveryMethod,
   }) async {
     final payload = {
       "quantity": qty.toString(),
@@ -131,6 +144,7 @@ class ApiRequests {
       "delivery_address": address ?? 'pickup',
       "delivery_lga": lga ?? 'pickup',
       "landmark": landmark ?? 'pickup',
+      "delivery_option": deliveryMethod.name
     };
     payload["poseidon_email"] = pluginConfig.customerInfo.email;
     payload["affiliate_app_id"] = pluginConfig.appInfo.appId;

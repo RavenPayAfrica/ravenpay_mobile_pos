@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
-import 'package:mobile_pos/src/helpers/global_variables.dart';
 import 'package:mobile_pos/src/helpers/helper_functions.dart';
 import 'package:mobile_pos/src/shared_widgets/coming_soon_badge.dart';
 import 'package:mobile_pos/src/styles/ravenpay_app_colors.dart';

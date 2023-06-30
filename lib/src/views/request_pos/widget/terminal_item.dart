@@ -105,7 +105,7 @@ class TerminalRequestItem extends StatelessWidget {
                 child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text('Terminal Request (${model.quantity})',
+                      Text('Terminal Request (x${model.quantity})',
                           style: headling2.copyWith(
                               color: pluginTheme.primaryColor, fontSize: 14)),
                       const Gap(4),

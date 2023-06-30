@@ -25,6 +25,7 @@ class RequestTerminalIndex extends StatefulWidget {
 class _RequestTerminalIndexState extends State<RequestTerminalIndex> {
   bool loading = true;
   List<Terminal> allTerminals = [];
+  bool canRequestTerminal = true;
 
   void fetchTerminals() async {
     await ApiRequests.fetchAppInfo();
@@ -32,6 +33,7 @@ class _RequestTerminalIndexState extends State<RequestTerminalIndex> {
     allTerminals.addAll(res);
 
     final res2 = await ApiRequests.getUserTerminalRequests();
+    canRequestTerminal = res2.isEmpty;
     allTerminals.addAll(res2);
     loading = false;
     setState(() {});
@@ -56,6 +58,11 @@ class _RequestTerminalIndexState extends State<RequestTerminalIndex> {
                         code: kAffliateNotUpdated,
                         message: 'App settings missing');
                     pluginConfig.onError(error);
+                    return;
+                  }
+                  if (!canRequestTerminal) {
+                    showSnack(context,
+                        'You already have a pending terminal request. You can request again, when your current request has been handled.');
                     return;
                   }
 

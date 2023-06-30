@@ -33,7 +33,6 @@ class StateOfOriginSheetState extends State<StateOfOriginSheet> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     setState(() {
       stateListFromStore = stateInNigeria.toList();

@@ -34,7 +34,6 @@ class LGASheetState extends State<LGASheet> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     setState(() {
       lgaFromStore = lgaList[widget.state]!.toList();
