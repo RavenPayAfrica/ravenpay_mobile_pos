@@ -57,35 +57,45 @@ class MethodChannelMobilePos extends MobilePosPlatform {
 
   @override
   Future<String?> chargeCard(
-      {required double amount,
+      {
+        required double amount,
+        required String tid,
+        required String port,
+        required String mskey,
+        required String ip,
+        required String sesskey,
+        required String sn,
+        required String mid,
+        required String clrpinkey,
+        required String accountType,
+        required String businessName,
       String? pin,
       required ConnectivityType connectivityType}) async {
     var args = <String, dynamic>{
       "amount": amount,
-      'account_type': '10',
+      'account_type': '00',
       'device_type': _getConnectivityCode(connectivityType),
 
       ///TODO: fix properly, do not hard code, these files are pushed to github and is open source.
       ///fetch values from server and pass in at run time
-      'terminal_id': "",
-      'port': "",
-      'master_key': "",
-      'pin_key': "",
-      'ip': "",
-      'session_key': "",
-      'serial_number': "",
-      'mid': "",
-      'business_name':
-          "${pluginConfig.appInfo.appName}       LA           LANG",
+      'terminal_id': tid,
+      'port': port,
+      'master_key': mskey,
+      'pin_key': clrpinkey,
+      'ip': ip,
+      'session_key': sesskey,
+      'serial_number': sn,
+      'mid': mid,
+      'business_name': businessName,
     };
 
     if (pin != null) {
       args['pin'] = pin;
     }
 
-    final res =
-        await methodChannel.invokeMethod<String>('startTransaction', args);
+    final res = await methodChannel.invokeMethod<String>('startTransaction', args);
     return res;
+
   }
 
   @override

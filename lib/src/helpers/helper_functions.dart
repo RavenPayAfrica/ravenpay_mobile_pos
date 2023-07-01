@@ -59,3 +59,16 @@ String? validateInput(String? data, {String? errorMessage, int minCount = 4}) {
     return null;
   }
 }
+
+
+ String getMid(context) {
+   var param = keyDetails!.paramdownload!;
+   param = param.substring(24, 39);
+   return param;
+}
+
+ String getBusinessName(context) {
+  var param = keyDetails!.paramdownload!;
+  param = param.substring(param.length - 40, param.length);
+  return param;
+}

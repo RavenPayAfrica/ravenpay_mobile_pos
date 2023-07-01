@@ -5,6 +5,7 @@ import 'package:mobile_pos/src/helpers/global_variables.dart';
 import 'package:mobile_pos/src/helpers/helper_functions.dart';
 import 'package:mobile_pos/src/helpers/logger.dart';
 import 'package:mobile_pos/src/models/app_info_model.dart';
+import 'package:mobile_pos/src/models/keydetails.dart';
 import 'package:mobile_pos/src/models/success_response.dart';
 import 'package:mobile_pos/src/models/terminal_model.dart';
 import 'package:mobile_pos/src/network/http_base.dart';
@@ -14,8 +15,7 @@ import 'package:mobile_pos/src/views/card_payment/card_success_page.dart';
 import '../models/card_tx_response.dart';
 
 class ApiRequests {
-  static Future<RavenMPOSResponse> processCard(
-      BuildContext context, double amount, String cardData) async {
+  static Future<RavenMPOSResponse> processCard(BuildContext context, double amount, String cardData) async {
     final body = json.decode(cardData);
     final cardModel = CardTransactionResponseModel.fromJson(body);
 
@@ -50,8 +50,11 @@ class ApiRequests {
 
     logData(jsonEncode(payload));
 
-    var response =
-        await HttpBase.postRequest(serializedMap, 'pdon/card/processing');
+    var response = await HttpBase.postRequest(serializedMap, 'pdon/card_processing');
+    logData(response);
+
+    logData("Card processed");
+
     Navigator.pop(context);
 
     //failed
@@ -82,8 +85,8 @@ class ApiRequests {
   static Future<void> fetchAppInfo() async {
     if (aflliateInfo != null) return;
     final payload = {"affiliate_app_id": pluginConfig.appInfo.appId};
-    var response =
-        await HttpBase.postRequest(payload, 'pdon/affiliate_app_setting');
+
+    var response = await HttpBase.postRequest(payload, 'pdon/affiliate_app_setting');
     if (response != null && response != 'failed') {
       if (response['data'] != null) {
         aflliateInfo = AflliateInfoModel.fromJson(response['data']);
@@ -209,4 +212,31 @@ class ApiRequests {
       return list;
     }
   }
+
+  static Future<void> getKeyDetails() async {
+
+    final headerMap = {
+      'x-device-model': 'K11',
+      'x-brand': 'Horizonpay',
+      'x-app-version': '1.0.0',
+      'x-serial-no': '98211206905806',
+    };
+
+
+    var response = await HttpBase.getRequestWithHeader(headerMap, 'http://46.101.123.218:5010/api/v1/card/perform-key-exchange', );
+    logData(response);
+
+    if(response == null || response == 'failed'){
+      return;
+    }
+
+    keyDetails = KeyDetails.fromJson(response);
+    if(keyDetails != null){
+      logData('Keys Acquired');
+    }
+
+  }
+
+
+
 }
