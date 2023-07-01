@@ -16,4 +16,4 @@ KeyDetails? keyDetails;
 final String eKey = "1704C7E7C2AE708BA7DBFA51B062CEA9";
 
 const String baseURLDev = 'https://postest.getravenpos.com';
-const String baseURLProd = 'https://pos.getravenpos.com';
+const String baseURLProd = 'https://posapi.getravenbank.com/v1';

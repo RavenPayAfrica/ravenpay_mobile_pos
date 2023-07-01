@@ -60,7 +60,7 @@ class RavenEMV {
       this.responseCode,
       this.totalAmoount,
       this.cardOrg,
-      this.pSerialNo = '',
+      this.pSerialNo = '2303280101',
       this.cardType});
   RavenEMV.fromJson(Map<String, dynamic> json) {
     cardOrg = json['cardOrg']?.toString();

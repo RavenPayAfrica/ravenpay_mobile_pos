@@ -40,7 +40,7 @@ class ApiRequests {
     });
 
     payload['card_data'] = serializedMap;
-    payload['poseidon_serial_number'] = cardModel.ravenEMV?.pSerialNo ?? '';
+    payload['poseidon_serial_number'] = '2303280101';
     payload['app_profile'] = {
       "affiliate_app_name": pluginConfig.appInfo.appName,
       "affiliate_app_id": pluginConfig.appInfo.appId,
@@ -48,12 +48,14 @@ class ApiRequests {
       "bvn": pluginConfig.customerInfo.bvn
     };
 
+
     logData(jsonEncode(payload));
 
-    var response = await HttpBase.postRequest(serializedMap, 'pdon/card_processing');
-    logData(response);
+    var response = await HttpBase.postRequestJson(payload, 'pdon/card_processing');
 
     logData("Card processed");
+
+    logData(response.toString());
 
     Navigator.pop(context);
 

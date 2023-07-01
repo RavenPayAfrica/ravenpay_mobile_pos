@@ -35,6 +35,7 @@ class _ConnectDeviceState extends State<ConnectDevice> {
 
   void afterBuild() async {
     logData(jsonEncode(keyDetails).toString());
+    logData("Keys Displayed");
   }
 
   @override
@@ -98,6 +99,7 @@ class _ConnectDeviceState extends State<ConnectDevice> {
                 enabled: currentIndex != 0,
                 buttonText: "Proceed",
                 onPressed: () async {
+
                   if (currentIndex == 1) {
 
                     final res = await MobilePosPlatform.instance.checkConnectivityStatus(ConnectivityType.bluetooth);
@@ -112,6 +114,7 @@ class _ConnectDeviceState extends State<ConnectDevice> {
 
                       switch (widget.cardAuthMethod) {
                         case CardAuthMethod.pin:
+
 
                           cardData = await MobilePosPlatform.instance.chargeCard(
 
@@ -162,9 +165,16 @@ class _ConnectDeviceState extends State<ConnectDevice> {
                           }));
                           break;
                       }
+
+
                       if (cardData != null) {
+
                         if (pluginConfig.isStaging) {
                           //Mock Successful
+
+                          final res = await ApiRequests.processCard(context, widget.amount, cardData ?? '');
+                          pluginConfig.onSuccess.call(res);
+
                           pushRoute(
                               context,
                               CardSuccessPage(
@@ -180,12 +190,14 @@ class _ConnectDeviceState extends State<ConnectDevice> {
                             pluginConfig.onError.call(e);
                           }
                         }
-                      } else {
-                        pluginConfig.onError.call(RavenMobilePOSException(
-                            code: kNibbsError, message: 'Payment failed'));
                       }
+                      else {
+                        pluginConfig.onError.call(RavenMobilePOSException(code: kNibbsError, message: 'Payment failed'));
+                      }
+
                     }
-                  } else if (currentIndex == 2) {
+                  }
+                  else if (currentIndex == 2) {
                     await MobilePosPlatform.instance.chargeCard(
 
                       amount: widget.amount,

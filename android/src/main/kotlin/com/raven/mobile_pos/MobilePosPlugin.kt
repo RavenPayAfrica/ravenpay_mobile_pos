@@ -109,7 +109,7 @@ class MobilePosPlugin : FlutterPlugin, MethodCallHandler, ActivityAware, PluginR
 
                     this.result = result
                     val intent = Intent(getContext(), RavenActivity::class.java)
-                    intent.putExtra(Constants.INTENT_EXTRA_ACCOUNT_TYPE, "10")
+                    intent.putExtra(Constants.INTENT_EXTRA_ACCOUNT_TYPE, "00")
                     intent.putExtra(Constants.INTENT_EXTRA_AMOUNT_KEY, amount)
                     intent.putExtra(Constants.TERMINAL_ID, tID)
                     intent.putExtra(Constants.INTENT_BLUETOOTH_DEVICE_TYPE, deviceType == 0)
