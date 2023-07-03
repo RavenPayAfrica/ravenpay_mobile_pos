@@ -32,14 +32,14 @@ class _PurchaseAmountState extends State<PurchaseAmount> {
               children: [
                 const RavenPayCloseButton(
                   isArrow: true,
-                  text: "Back",
+                  text: "",
                 ),
                 const Gap(24),
                 Align(
                     alignment: Alignment.centerLeft,
                     child:
                         Text(widget.title ?? "Enter Amount", style: headling1)),
-                Gap(32),
+                Gap(70),
                 Align(
                     alignment: Alignment.center,
                     child: RichText(
@@ -60,6 +60,7 @@ class _PurchaseAmountState extends State<PurchaseAmount> {
               ],
             ),
           ),
+          const Gap(24),
           RavenPayAmountPad(
               onChange: (val) {
                 amount = val;

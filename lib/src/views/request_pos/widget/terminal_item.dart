@@ -32,41 +32,48 @@ class TerminalItem extends StatelessWidget {
               terminalName: "Elatech Solution 1",
             ));
       },
-      child: Column(
-        children: [
-          const Gap(8),
-          Row(
-            children: [
-              Image.asset(loadAsset("mpos_icon.png"), height: 40),
-              const Gap(16),
-              Expanded(
-                child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(model.tidLabel ?? '',
-                          style: headling2.copyWith(
-                              color: pluginTheme.primaryColor, fontSize: 14)),
-                      const Gap(4),
-                      if (model.serial != null) ...[
-                        Text(
-                          model.serial ?? '',
-                          style: subtitle2.copyWith(
-                              fontSize: 14, color: AppColors.ravenGreyLight1),
-                        )
-                      ] else ...[
-                        Text(
-                          "Pending Delivery",
-                          style: subtitle2.copyWith(
-                              fontSize: 14, color: AppColors.ravenGreyLight1),
-                        )
-                      ]
-                    ]),
-              )
-            ],
-          ),
-          const Gap(8),
-          const Divider()
-        ],
+      child: CardShadowViewLight(
+        child: Column(
+          children: [
+            const Gap(12),
+            Row(
+              children: [
+
+                const Gap(6),
+
+                Image.asset(loadAsset("mpos_image.png"), height: 40),
+
+                const Gap(16),
+                Expanded(
+                  child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(model.tidLabel ?? '',
+                            style: headling2.copyWith(
+                                color: pluginTheme.primaryColor, fontSize: 16)),
+                        const Gap(4),
+                        if (model.serial != null) ...[
+                          Text(
+                            model.serial ?? '',
+                            style: subtitle2.copyWith(
+                                fontSize: 14, color: AppColors.darkGrey),
+                          )
+                        ] else ...[
+                          Text(
+                            "Pending Delivery",
+                            style: subtitle2.copyWith(
+                                fontSize: 14, color: AppColors.ravenGreyLight1),
+                          )
+                        ]
+                      ]),
+                ),
+
+
+              ],
+            ),
+            const Gap(12),
+          ],
+        ),
       ),
     );
   }
@@ -125,3 +132,29 @@ class TerminalRequestItem extends StatelessWidget {
     );
   }
 }
+
+class CardShadowViewLight extends StatelessWidget {
+  final Widget child;
+  final double? vertical;
+  const CardShadowViewLight({Key? key, required this.child, this.vertical}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+        margin: const EdgeInsets.symmetric(vertical: 10),
+        padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 4),
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(12),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.grey.withOpacity(.07),
+              blurRadius: 18,
+              spreadRadius: 7,
+            ),
+          ],
+        ),
+        child: child);
+  }
+}
+

@@ -35,7 +35,6 @@ class _RavenPayAppState extends State<RavenPayApp> {
   void initialize() async {
     await ApiRequests.fetchAppInfo();
     await ApiRequests.registerUser();
-    await ApiRequests.getKeyDetails();
   }
 
   setupPermissions() async {
@@ -76,15 +75,15 @@ class _RavenPayAppState extends State<RavenPayApp> {
                             ),
                           ),
                         ))),
-            const Gap(16),
-            Text(
-                "Accept payment much easier with ${pluginConfig.appInfo.appName}",
-                style: headling1.copyWith(color: pluginTheme.onPrimary)),
             const Gap(24),
+            Text(
+                "Hi ${pluginConfig.customerInfo.firstName}, Accept payment much easier with ${pluginConfig.appInfo.appName}",
+                style: headling1.copyWith(color: pluginTheme.onPrimary)),
+            const Gap(32),
             Container(
               padding: const EdgeInsets.symmetric(vertical: 12),
               decoration: BoxDecoration(
-                  color: Colors.white, borderRadius: BorderRadius.circular(14)),
+                  color: Colors.white, borderRadius: BorderRadius.circular(18)),
               child: Column(children: [
                 HomeItem(
                     onTap: () {

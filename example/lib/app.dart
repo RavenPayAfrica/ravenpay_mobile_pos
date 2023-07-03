@@ -24,7 +24,7 @@ class _RavenPayExampleAppState extends State<RavenPayExampleApp> {
                               secondaryColor: Color(0xFFEA872D)),
                           enviroment: RavenMobilePOSEnviroment.staging,
                           appInfo: AppInfo(
-                            appName: 'Raven Bank',
+                            appName: 'Raven',
                             appId: '89dca95cee33f4d965172740a323112',
                             appEmail: 'ravenofficial@gmail.com'
                           ),

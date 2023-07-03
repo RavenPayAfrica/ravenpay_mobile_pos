@@ -14,6 +14,7 @@ import 'package:mobile_pos/src/views/request_pos/update_user_info.dart';
 import 'package:mobile_pos/src/views/request_pos/widget/terminal_item.dart';
 
 import '../../models/failure.dart';
+import '../../styles/ravenpay_app_colors.dart';
 
 class RequestTerminalIndex extends StatefulWidget {
   const RequestTerminalIndex({super.key});
@@ -85,9 +86,11 @@ class _RequestTerminalIndexState extends State<RequestTerminalIndex> {
           child: Column(children: [
             const Gap(24),
             const RavenPayCloseButton(
-              text: "Back",
+              text: "",
               isArrow: true,
             ),
+
+
             const Gap(24),
             Align(
               alignment: Alignment.centerLeft,
@@ -96,11 +99,18 @@ class _RequestTerminalIndexState extends State<RequestTerminalIndex> {
                 style: headling1,
               ),
             ),
-            const Gap(16),
-            Text(
-                "Manage all your terminals here, request, edit and track all at the same time.",
-                style: subtitle2.copyWith(fontSize: 14)),
-            const Gap(28),
+
+            if(allTerminals.isNotEmpty) ... [
+
+
+              const Gap(16),
+              Text(
+                  "Manage all your terminals here, request, edit and track all at the same time.",
+                  style: subtitle2.copyWith(fontSize: 14)),
+              const Gap(28),
+
+            ],
+
             Expanded(
               child: loading == true
                   ? Center(
@@ -115,12 +125,28 @@ class _RequestTerminalIndexState extends State<RequestTerminalIndex> {
                             crossAxisAlignment: CrossAxisAlignment.center,
                             mainAxisSize: MainAxisSize.min,
                             children: [
+
+
+                              Container(
+                                  margin: const EdgeInsets.symmetric(vertical: 10),
+                                  padding: const EdgeInsets.all(20),
+                                  decoration: BoxDecoration(
+                                    color: AppColors.ravenGrey4,
+                                    borderRadius: BorderRadius.circular(60),
+                                  ),
+                                  child:Image.asset(loadAsset("mpos_image.png"), height: 70)
+                              ),
+
+                              Gap(20),
+
                               Text(
                                 "No terminals found",
                                 style: headling1.copyWith(fontSize: 18),
                                 textAlign: TextAlign.center,
                               ),
-                              Gap(4),
+
+                              Gap(8),
+
                               Padding(
                                 padding:
                                     const EdgeInsets.symmetric(horizontal: 32),
@@ -129,7 +155,10 @@ class _RequestTerminalIndexState extends State<RequestTerminalIndex> {
                                   style: subtitle2.copyWith(fontSize: 14),
                                   textAlign: TextAlign.center,
                                 ),
-                              )
+                              ),
+
+                              Gap(MediaQuery.of(context).size.height/8),
+
                             ],
                           ),
                         )

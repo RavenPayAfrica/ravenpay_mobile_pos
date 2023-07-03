@@ -85,16 +85,31 @@ class ApiRequests {
   }
 
   static Future<void> fetchAppInfo() async {
+
     if (aflliateInfo != null) return;
+
     final payload = {"affiliate_app_id": pluginConfig.appInfo.appId};
 
     var response = await HttpBase.postRequest(payload, 'pdon/affiliate_app_setting');
+
     if (response != null && response != 'failed') {
+
       if (response['data'] != null) {
-        aflliateInfo = AflliateInfoModel.fromJson(response['data']);
+
+        aflliateInfo = AflliateInfoModel.fromJson(response['data']['appsetting']);
+
+        keyDetails = KeyDetails.fromJson(response['data']['keydetails']);
+
+        if(keyDetails != null){
+          logData('Keys Acquired');
+        }
+
       }
+
     }
+
     logData(response);
+
   }
 
   static Future<void> registerUser() async {
@@ -215,30 +230,25 @@ class ApiRequests {
     }
   }
 
-  static Future<void> getKeyDetails() async {
+  static Future<void> getPdonKeyDetails() async {
 
-    final headerMap = {
-      'x-device-model': 'K11',
-      'x-brand': 'Horizonpay',
-      'x-app-version': '1.0.0',
-      'x-serial-no': '98211206905806',
+    final map = {
+      'serial': '98211206905806',
     };
 
-
-    var response = await HttpBase.getRequestWithHeader(headerMap, 'http://46.101.123.218:5010/api/v1/card/perform-key-exchange', );
+    var response = await HttpBase.postRequest(map, 'pdon/get_keys');
     logData(response);
 
     if(response == null || response == 'failed'){
       return;
     }
 
-    keyDetails = KeyDetails.fromJson(response);
+    keyDetails = KeyDetails.fromJson(response['data']);
     if(keyDetails != null){
       logData('Keys Acquired');
     }
 
   }
-
 
 
 }

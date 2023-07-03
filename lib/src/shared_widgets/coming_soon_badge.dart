@@ -3,8 +3,10 @@ import 'package:mobile_pos/src/helpers/global_variables.dart';
 import 'package:mobile_pos/src/styles/ravenpay_textstyles.dart';
 
 class ComingSoonBadge extends StatelessWidget {
+
+  final String? customText;
   const ComingSoonBadge({
-    super.key,
+    super.key, this.customText
   });
 
   @override
@@ -16,7 +18,7 @@ class ComingSoonBadge extends StatelessWidget {
           borderRadius: BorderRadius.circular(16),
           color: pluginConfig.theme!.secondaryColor.withOpacity(.8)),
       child: Text(
-        'Coming soon',
+       customText ?? 'Coming soon',
         style: headling2.copyWith(
             color: pluginConfig.theme!.onPrimary, fontSize: 12),
       ),
