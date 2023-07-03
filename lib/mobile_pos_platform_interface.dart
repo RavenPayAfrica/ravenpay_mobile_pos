@@ -36,21 +36,12 @@ abstract class MobilePosPlatform extends PlatformInterface {
   }
 
   Future<String?> chargeCard(
-      {
-        required double amount,
-        required String tid,
-        required String port,
-        required String mskey,
-        required String ip,
-        required String sesskey,
-        required String sn,
-        required String mid,
-        required String clrpinkey,
-        required String accountType,
-        required String businessName,
-        required ConnectivityType connectivityType,
-        String? pin,
-      }) {
+    BuildContext context, {
+    required double amount,
+    required String accountType,
+    required ConnectivityType connectivityType,
+    String? pin,
+  }) {
     throw UnimplementedError('Not implemented.');
   }
 

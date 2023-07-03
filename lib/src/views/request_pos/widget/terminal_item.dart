@@ -10,10 +10,12 @@ import 'package:mobile_pos/src/views/request_pos/view_terminal_info.dart';
 
 class TerminalItem extends StatelessWidget {
   final TerminalModel model;
+  final void Function()? onlabelUpdated;
 
   const TerminalItem({
     super.key,
     required this.model,
+    this.onlabelUpdated,
   });
 
   @override
@@ -28,8 +30,9 @@ class TerminalItem extends StatelessWidget {
         }
         pushRoute(
             context,
-            const ViewTerminalInfo(
-              terminalName: "Elatech Solution 1",
+            ViewTerminalInfo(
+              model: model,
+              onlabelUpdated: onlabelUpdated ?? () {},
             ));
       },
       child: CardShadowViewLight(
@@ -38,11 +41,8 @@ class TerminalItem extends StatelessWidget {
             const Gap(12),
             Row(
               children: [
-
                 const Gap(6),
-
                 Image.asset(loadAsset("mpos_image.png"), height: 40),
-
                 const Gap(16),
                 Expanded(
                   child: Column(
@@ -67,8 +67,6 @@ class TerminalItem extends StatelessWidget {
                         ]
                       ]),
                 ),
-
-
               ],
             ),
             const Gap(12),
@@ -136,7 +134,8 @@ class TerminalRequestItem extends StatelessWidget {
 class CardShadowViewLight extends StatelessWidget {
   final Widget child;
   final double? vertical;
-  const CardShadowViewLight({Key? key, required this.child, this.vertical}) : super(key: key);
+  const CardShadowViewLight({Key? key, required this.child, this.vertical})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -157,4 +156,3 @@ class CardShadowViewLight extends StatelessWidget {
         child: child);
   }
 }
-
