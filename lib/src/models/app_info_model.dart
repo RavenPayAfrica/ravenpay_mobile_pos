@@ -7,17 +7,18 @@ class AflliateInfoModel {
   String? appId;
   String? createdAt;
   String? updatedAt;
+  String? serialNumber;
 
-  AflliateInfoModel({
-    this.id,
-    this.email,
-    this.address,
-    this.devicePrice,
-    this.appName,
-    this.appId,
-    this.createdAt,
-    this.updatedAt,
-  });
+  AflliateInfoModel(
+      {this.id,
+      this.email,
+      this.address,
+      this.devicePrice,
+      this.appName,
+      this.appId,
+      this.createdAt,
+      this.updatedAt,
+      this.serialNumber});
   AflliateInfoModel.fromJson(Map<String, dynamic> json) {
     id = json['id']?.toInt();
     email = json['email']?.toString();
@@ -27,6 +28,7 @@ class AflliateInfoModel {
     appId = json['app_id']?.toString();
     createdAt = json['created_at']?.toString();
     updatedAt = json['updated_at']?.toString();
+    serialNumber = json['key_serial']?.toString();
   }
   Map<String, dynamic> toJson() {
     final data = <String, dynamic>{};
@@ -38,6 +40,7 @@ class AflliateInfoModel {
     data['app_id'] = appId;
     data['created_at'] = createdAt;
     data['updated_at'] = updatedAt;
+    data['key_serial'] = serialNumber;
     return data;
   }
 }
