@@ -56,7 +56,7 @@ class _ConnectDeviceState extends State<ConnectDevice> {
               const Gap(24),
               Row(
                 children: const [
-                  RavenPayCloseButton(isArrow: true, text: "Back"),
+                  RavenPayCloseButton(isArrow: true, text: ""),
                   Spacer(),
                   SeeHowToConnect()
                 ],
