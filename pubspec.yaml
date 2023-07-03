@@ -15,8 +15,7 @@ dependencies:
   gap: ^3.0.0
   http: ^0.13.6
   intl: ^0.18.1
-  mobile_scanner: 3.1.1 #2.0
-  # qr_code_dart_scan: ^0.7.1
+  mobile_scanner: 3.1.1 
   pinput: ^2.2.31
   plugin_platform_interface: ^2.0.2
   pretty_qr_code: ^2.0.3

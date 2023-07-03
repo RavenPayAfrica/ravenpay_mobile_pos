@@ -15,7 +15,8 @@ import 'package:mobile_pos/src/views/card_payment/card_success_page.dart';
 import '../models/card_tx_response.dart';
 
 class ApiRequests {
-  static Future<RavenMPOSResponse> processCard(BuildContext context, double amount, String cardData) async {
+  static Future<RavenMPOSResponse> processCard(
+      BuildContext context, double amount, String cardData) async {
     final body = json.decode(cardData);
     final cardModel = CardTransactionResponseModel.fromJson(body);
 
@@ -48,10 +49,10 @@ class ApiRequests {
       "bvn": pluginConfig.customerInfo.bvn
     };
 
-
     logData(jsonEncode(payload));
 
-    var response = await HttpBase.postRequestJson(payload, 'pdon/card_processing');
+    var response =
+        await HttpBase.postRequestJson(payload, 'pdon/card_processing');
 
     logData("Card processed");
 
@@ -85,31 +86,27 @@ class ApiRequests {
   }
 
   static Future<void> fetchAppInfo() async {
-
     if (aflliateInfo != null) return;
 
     final payload = {"affiliate_app_id": pluginConfig.appInfo.appId};
 
-    var response = await HttpBase.postRequest(payload, 'pdon/affiliate_app_setting');
+    var response =
+        await HttpBase.postRequest(payload, 'pdon/affiliate_app_setting');
 
     if (response != null && response != 'failed') {
-
       if (response['data'] != null) {
-
-        aflliateInfo = AflliateInfoModel.fromJson(response['data']['appsetting']);
+        aflliateInfo =
+            AflliateInfoModel.fromJson(response['data']['appsetting']);
 
         keyDetails = KeyDetails.fromJson(response['data']['keydetails']);
 
-        if(keyDetails != null){
+        if (keyDetails != null) {
           logData('Keys Acquired');
         }
-
       }
-
     }
 
     logData(response);
-
   }
 
   static Future<void> registerUser() async {
@@ -141,8 +138,7 @@ class ApiRequests {
     //failed
     if (response == 'failed' || response == null) {
       final error = RavenMobilePOSException(
-          code: kUpdateUserError,
-          message: 'User account update failed: ${response['message']}');
+          code: kUpdateUserError, message: 'User account update failed');
       pluginConfig.onError(error);
       return false;
     } else {
@@ -196,7 +192,7 @@ class ApiRequests {
     if (response == 'failed' || response == null) {
       final error = RavenMobilePOSException(
           code: kRequestTerminalError,
-          message: 'Get user terminals request failed');
+          message: 'Get user terminal requests failed');
       pluginConfig.onError(error);
       return [];
     } else {
@@ -230,25 +226,25 @@ class ApiRequests {
     }
   }
 
-  static Future<void> getPdonKeyDetails() async {
-
-    final map = {
-      'serial': '98211206905806',
-    };
-
-    var response = await HttpBase.postRequest(map, 'pdon/get_keys');
+  static Future<bool> updateDeviceLabel({
+    required String label,
+    required String serialNumber,
+    String? nin,
+  }) async {
+    final payload = {"label": label, "serial_number": serialNumber};
+    payload["affiliate_app_id"] = pluginConfig.appInfo.appId;
+    var response = await HttpBase.postRequest(payload, 'pdon/update_bankbox');
     logData(response);
 
-    if(response == null || response == 'failed'){
-      return;
+    //failed
+    if (response == 'failed' || response == null) {
+      final error = RavenMobilePOSException(
+          code: kDeviceLabelUpdateError,
+          message: 'Could not update device label');
+      pluginConfig.onError(error);
+      return false;
+    } else {
+      return response['status'] == 'success';
     }
-
-    keyDetails = KeyDetails.fromJson(response['data']);
-    if(keyDetails != null){
-      logData('Keys Acquired');
-    }
-
   }
-
-
 }

@@ -12,6 +12,7 @@ import 'package:mobile_pos/src/network/api_requests.dart';
 import 'package:mobile_pos/src/shared_widgets/qr_code_scanner.dart';
 import 'package:mobile_pos/src/styles/ravenpay_app_colors.dart';
 import 'package:mobile_pos/src/styles/ravenpay_textstyles.dart';
+import 'package:mobile_pos/src/views/card_payment/card_failure_page.dart';
 import 'package:mobile_pos/src/views/card_payment/card_success_page.dart';
 import 'package:mobile_pos/src/views/card_payment/widget/see_how_to_connect.dart';
 import 'package:mobile_pos/src/shared_widgets/ravenpay_button.dart';
@@ -30,9 +31,7 @@ class ConnectDevice extends StatefulWidget {
   State<ConnectDevice> createState() => _ConnectDeviceState();
 }
 
-
 class _ConnectDeviceState extends State<ConnectDevice> {
-
   void afterBuild() async {
     logData(jsonEncode(keyDetails).toString());
     logData("Keys Displayed");
@@ -99,80 +98,52 @@ class _ConnectDeviceState extends State<ConnectDevice> {
                 enabled: currentIndex != 0,
                 buttonText: "Proceed",
                 onPressed: () async {
-
                   if (currentIndex == 1) {
-
-                    final res = await MobilePosPlatform.instance.checkConnectivityStatus(ConnectivityType.bluetooth);
+                    final res = await MobilePosPlatform.instance
+                        .checkConnectivityStatus(ConnectivityType.bluetooth);
 
                     if (res != true) {
-
-                      pluginConfig.onError.call(RavenMobilePOSException(code: kNibbsError, message: 'Payment failed'));
+                      pluginConfig.onError.call(RavenMobilePOSException(
+                          code: kNibbsError, message: 'Payment failed'));
                       return;
-
                     } else {
                       String? cardData;
 
                       switch (widget.cardAuthMethod) {
                         case CardAuthMethod.pin:
-
-
-                          cardData = await MobilePosPlatform.instance.chargeCard(
-
-                              amount: widget.amount,
-                              tid: keyDetails!.tid!,
-                              port: keyDetails!.port!,
-                              mskey: keyDetails!.clrmasterkey!,
-                              ip: keyDetails!.ip!,
-                              sesskey: keyDetails!.clrsesskey!,
-                              sn: '98211206905806',
-                              mid: getMid(context).toString(),
-                              clrpinkey: keyDetails!.clrpinkey!,
-                              accountType: '00',
-                              businessName: getBusinessName(context).toString(),
-
-                              connectivityType: ConnectivityType.bluetooth
-
-                          );
+                          cardData = await MobilePosPlatform.instance
+                              .chargeCard(context,
+                                  amount: widget.amount,
+                                  accountType: '00',
+                                  connectivityType: ConnectivityType.bluetooth);
                           break;
 
                         case CardAuthMethod.qrCode:
-                          await pushRoute(context, RavenPayQRCodeSCanner(onDataCapture: (data) async {
-
+                          await pushRoute(context, RavenPayQRCodeSCanner(
+                              onDataCapture: (data) async {
                             Navigator.pop(context);
 
                             final pin = await decryptString(data);
                             if (pin != null && pin.length == 4) {
-                              cardData = await MobilePosPlatform.instance.chargeCard(
+                              cardData =
+                                  await MobilePosPlatform.instance.chargeCard(
+                                context,
                                 pin: pin,
                                 connectivityType: ConnectivityType.bluetooth,
-
                                 amount: widget.amount,
-                                tid: keyDetails!.tid!,
-                                port: keyDetails!.port!,
-                                mskey: keyDetails!.clrmasterkey!,
-                                ip: keyDetails!.ip!,
-                                sesskey: keyDetails!.clrsesskey!,
-                                sn: '98211206905806',
-                                mid: getMid(context).toString(),
-                                clrpinkey: keyDetails!.clrpinkey!,
                                 accountType: '00',
-                                businessName: getBusinessName(context).toString(),
-
-
                               );
                             }
-
                           }));
                           break;
                       }
 
-
                       if (cardData != null) {
-
                         if (pluginConfig.isStaging) {
                           //Mock Successful
 
-                          final res = await ApiRequests.processCard(context, widget.amount, cardData ?? '');
+                          final res = await ApiRequests.processCard(
+                              context, widget.amount, cardData ?? '');
                           pluginConfig.onSuccess.call(res);
 
                           pushRoute(
@@ -184,36 +155,29 @@ class _ConnectDeviceState extends State<ConnectDevice> {
                         } else {
                           //charge card
                           try {
-                            final res = await ApiRequests.processCard(context, widget.amount, cardData ?? '');
+                            final res = await ApiRequests.processCard(
+                                context, widget.amount, cardData ?? '');
                             pluginConfig.onSuccess.call(res);
                           } on RavenMobilePOSException catch (e) {
+                            pushRoute(
+                                context,
+                                CardFailurePage(
+                                  reason: e.message,
+                                ));
                             pluginConfig.onError.call(e);
                           }
                         }
+                      } else {
+                        pluginConfig.onError.call(RavenMobilePOSException(
+                            code: kNibbsError, message: 'Payment failed'));
                       }
-                      else {
-                        pluginConfig.onError.call(RavenMobilePOSException(code: kNibbsError, message: 'Payment failed'));
-                      }
-
                     }
-                  }
-                  else if (currentIndex == 2) {
+                  } else if (currentIndex == 2) {
                     await MobilePosPlatform.instance.chargeCard(
-
+                      context,
                       amount: widget.amount,
-                      tid: keyDetails!.tid!,
-                      port: keyDetails!.port!,
-                      mskey: keyDetails!.clrmasterkey!,
-                      ip: keyDetails!.ip!,
-                      sesskey: keyDetails!.clrsesskey!,
-                      sn: '98211206905806',
-                      mid: getMid(context).toString(),
-                      clrpinkey: keyDetails!.clrpinkey!,
                       accountType: '00',
-                      businessName: getBusinessName(context).toString(),
-
                       connectivityType: ConnectivityType.otg,
-
                     );
                   }
                 },

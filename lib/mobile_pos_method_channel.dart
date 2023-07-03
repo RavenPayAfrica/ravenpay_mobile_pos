@@ -4,6 +4,7 @@ import 'package:mobile_pos/mobile_pos_sdk.dart';
 import 'package:mobile_pos/src/helpers/global_variables.dart';
 import 'package:mobile_pos/src/views/home/raven_pay_app.dart';
 import 'mobile_pos_platform_interface.dart';
+import 'src/helpers/helper_functions.dart';
 
 /// An implementation of [MobilePosPlatform] that uses method channels.
 class MethodChannelMobilePos extends MobilePosPlatform {
@@ -56,46 +57,34 @@ class MethodChannelMobilePos extends MobilePosPlatform {
   }
 
   @override
-  Future<String?> chargeCard(
-      {
-        required double amount,
-        required String tid,
-        required String port,
-        required String mskey,
-        required String ip,
-        required String sesskey,
-        required String sn,
-        required String mid,
-        required String clrpinkey,
-        required String accountType,
-        required String businessName,
+  Future<String?> chargeCard(BuildContext context,
+      {required double amount,
+      required String accountType,
       String? pin,
       required ConnectivityType connectivityType}) async {
     var args = <String, dynamic>{
       "amount": amount,
       'account_type': '00',
       'device_type': _getConnectivityCode(connectivityType),
-
-      ///TODO: fix properly, do not hard code, these files are pushed to github and is open source.
-      ///fetch values from server and pass in at run time
-      'terminal_id': tid,
-      'port': port,
-      'master_key': mskey,
-      'pin_key': clrpinkey,
-      'ip': ip,
-      'session_key': sesskey,
-      'serial_number': sn,
-      'mid': mid,
-      'business_name': businessName,
+      //
+      'terminal_id': keyDetails!.tid!,
+      'port': keyDetails!.port!,
+      'master_key': keyDetails!.clrmasterkey!,
+      'pin_key': keyDetails!.clrpinkey!,
+      'ip': keyDetails!.ip!,
+      'session_key': keyDetails!.clrsesskey!,
+      'serial_number': '98211206905806',
+      'mid': getMid(context).toString(),
+      'business_name': getBusinessName(context),
     };
 
     if (pin != null) {
       args['pin'] = pin;
     }
 
-    final res = await methodChannel.invokeMethod<String>('startTransaction', args);
+    final res =
+        await methodChannel.invokeMethod<String>('startTransaction', args);
     return res;
-
   }
 
   @override
