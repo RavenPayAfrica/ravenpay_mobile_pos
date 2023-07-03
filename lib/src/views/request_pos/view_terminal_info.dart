@@ -4,6 +4,7 @@ import 'package:mobile_pos/src/helpers/global_variables.dart';
 import 'package:mobile_pos/src/helpers/helper_functions.dart';
 import 'package:mobile_pos/src/models/terminal_model.dart';
 import 'package:mobile_pos/src/network/api_requests.dart';
+import 'package:mobile_pos/src/shared_widgets/coming_soon_badge.dart';
 import 'package:mobile_pos/src/shared_widgets/progress_dialog.dart';
 import 'package:mobile_pos/src/shared_widgets/ravenpay_close_button.dart';
 import 'package:mobile_pos/src/shared_widgets/ravenpay_scaffold.dart';
@@ -47,8 +48,8 @@ class _ViewTerminalInfoState extends State<ViewTerminalInfo> {
                   text: "Back",
                   isArrow: true,
                 ),
-                const Spacer(),
-                Icon(Icons.more_vert, color: pluginTheme.onPrimary)
+                // const Spacer(),
+                // Icon(Icons.more_vert, color: pluginTheme.onPrimary)
               ],
             ),
           ),
@@ -59,7 +60,7 @@ class _ViewTerminalInfoState extends State<ViewTerminalInfo> {
           Container(
             padding: EdgeInsets.symmetric(horizontal: kHoriontalScreenPadding),
             color: pluginTheme.primaryColor,
-            height: size.height * 0.25,
+            height: 95,
             width: double.infinity,
             child: Column(mainAxisAlignment: MainAxisAlignment.end, children: [
               Row(
@@ -151,7 +152,7 @@ class _ViewTerminalInfoState extends State<ViewTerminalInfo> {
                       //         fontSize: 20, color: AppColors.ravenDark)),
                       // const Gap(8),
                       // const Divider(),
-                      const Gap(12),
+                      // const Gap(12),
                       TerminalRowItem(
                           title: "Serial Number",
                           detail: widget.model.serial ?? ''),
@@ -160,7 +161,44 @@ class _ViewTerminalInfoState extends State<ViewTerminalInfo> {
                         detail: widget.model.tid ?? '',
                       ),
 
-                      const Divider()
+                      const Divider(),
+
+                      Gap(32),
+
+                      Container(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 16, vertical: 16),
+                        decoration: ShapeDecoration(
+                          color: Color(0xFFF7F8F7),
+                          shape: RoundedRectangleBorder(
+                            side: BorderSide(
+                                width: 0.50,
+                                color: AppColors.ravenPayGrey.withOpacity(.3)),
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                        ),
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Expanded(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    'View Terminal Transactions',
+                                    style: subtitle,
+                                  ),
+                                  Gap(2)
+                                ],
+                              ),
+                            ),
+                            Gap(16),
+                            ComingSoonBadge(),
+                          ],
+                        ),
+                      )
                     ]),
               ),
             ),
@@ -196,13 +234,21 @@ class TerminalRowItem extends StatelessWidget {
           ),
         ),
         GestureDetector(
-          onTap: () {},
-          child: SizedBox(
-              height: 22,
-              width: 22,
-              child: Image.asset(
-                loadAsset('copy_icon.png'),
-                color: Colors.black45,
+          onTap: () {
+            copyToClipBoard(context, data: detail);
+          },
+          child: Container(
+              decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  color: pluginTheme.primaryColor.withOpacity(.5)),
+              height: 28,
+              width: 28,
+              child: Padding(
+                padding: const EdgeInsets.all(7),
+                child: Image.asset(
+                  loadAsset('copy_icon.png'),
+                  color: pluginTheme.onPrimary,
+                ),
               )),
         )
       ],

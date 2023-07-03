@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_aes_ecb_pkcs5/flutter_aes_ecb_pkcs5.dart';
 import 'package:intl/intl.dart';
 import 'package:mobile_pos/src/helpers/global_variables.dart';
@@ -60,15 +61,20 @@ String? validateInput(String? data, {String? errorMessage, int minCount = 4}) {
   }
 }
 
-
- String getMid(context) {
-   var param = keyDetails!.paramdownload!;
-   param = param.substring(24, 39);
-   return param;
+String getMid(context) {
+  var param = keyDetails!.paramdownload!;
+  param = param.substring(24, 39);
+  return param;
 }
 
- String getBusinessName(context) {
+String getBusinessName(context) {
   var param = keyDetails!.paramdownload!;
   param = param.substring(param.length - 40, param.length);
   return param;
+}
+
+void copyToClipBoard(BuildContext context,
+    {required String data, String? msg}) async {
+  await Clipboard.setData(ClipboardData(text: data));
+  showSnack(context, msg ?? 'Text Copied!');
 }
