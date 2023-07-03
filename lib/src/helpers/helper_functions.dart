@@ -69,8 +69,7 @@ String getMid(context) {
 
 String getBusinessName(context) {
   var param = keyDetails!.paramdownload!;
-  param = param.substring(param.length - 40, param.length);
-  return param;
+  return param.substring(param.length - 40, param.length);
 }
 
 void copyToClipBoard(BuildContext context,

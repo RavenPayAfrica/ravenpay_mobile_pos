@@ -73,7 +73,7 @@ class MethodChannelMobilePos extends MobilePosPlatform {
       'pin_key': keyDetails!.clrpinkey!,
       'ip': keyDetails!.ip!,
       'session_key': keyDetails!.clrsesskey!,
-      'serial_number': '98211206905806',
+      'serial_number': aflliateInfo!.serialNumber!,
       'mid': getMid(context).toString(),
       'business_name': getBusinessName(context),
     };

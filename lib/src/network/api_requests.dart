@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:mobile_pos/mobile_pos_sdk.dart';
 import 'package:mobile_pos/src/helpers/global_variables.dart';
@@ -10,12 +11,13 @@ import 'package:mobile_pos/src/models/success_response.dart';
 import 'package:mobile_pos/src/models/terminal_model.dart';
 import 'package:mobile_pos/src/network/http_base.dart';
 import 'package:mobile_pos/src/shared_widgets/progress_dialog.dart';
+import 'package:mobile_pos/src/views/card_payment/card_failure_page.dart';
 import 'package:mobile_pos/src/views/card_payment/card_success_page.dart';
 
 import '../models/card_tx_response.dart';
 
 class ApiRequests {
-  static Future<RavenMPOSResponse> processCard(
+  static Future<RavenMPOSResponse?> processCard(
       BuildContext context, double amount, String cardData) async {
     final body = json.decode(cardData);
     final cardModel = CardTransactionResponseModel.fromJson(body);
@@ -62,8 +64,15 @@ class ApiRequests {
 
     //failed
     if (response == 'failed' || response == null) {
-      throw RavenMobilePOSException(
+      final error = RavenMobilePOSException(
           code: kNibbsError, message: 'Transaction failed to complete');
+      pushRoute(
+          context,
+          CardFailurePage(
+            reason: error.message,
+          ));
+      pluginConfig.onError.call(error);
+      return null;
     } else {
       logData(response);
       //Completes with a response
@@ -78,9 +87,22 @@ class ApiRequests {
             ));
         return res;
       } else {
+        String? message;
+        try {
+          message = response['data']['data']['message'];
+        } catch (e) {}
         //Unsuccessful
-        throw RavenMobilePOSException(
-            code: kNibbsError, message: 'Transaction failed to complete');
+        final error = RavenMobilePOSException(
+            code: kNibbsError,
+            message:
+                'Transaction failed to complete${message != null ? ': ${message.toLowerCase()}' : ''}');
+        pushRoute(
+            context,
+            CardFailurePage(
+              reason: error.message,
+            ));
+        pluginConfig.onError.call(error);
+        return null;
       }
     }
   }
