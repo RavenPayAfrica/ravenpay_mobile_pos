@@ -48,7 +48,7 @@ class _ShareReceiptState extends State<ShareReceipt> {
             Row(
               children: const [
                 RavenPayCloseButton(
-                  text: "Back",
+                  text: "",
                   isArrow: true,
                 ),
                 Spacer(),
@@ -62,7 +62,7 @@ class _ShareReceiptState extends State<ShareReceipt> {
             const Gap(24),
             Align(
                 alignment: Alignment.centerLeft,
-                child: Text("Share to Whatsapp", style: headling1)),
+                child: Text("Share to WhatsApp", style: headling1)),
             const Gap(12),
             RichText(
                 text: TextSpan(
@@ -71,14 +71,14 @@ class _ShareReceiptState extends State<ShareReceipt> {
                     style: subtitle2.copyWith(fontSize: 14),
                     children: [
                   TextSpan(
-                    text: "see Instruction above",
+                    text: " see Instruction above",
                     style: subtitle2.copyWith(
                         fontWeight: FontWeight.bold,
                         fontSize: 14,
                         color: pluginTheme.secondaryColor),
                   )
                 ])),
-            const Gap(24),
+            const Gap(40),
             RavenPayTextField(
               controller: _phoneController,
               isPhone: true,
