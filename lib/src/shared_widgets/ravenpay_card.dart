@@ -16,7 +16,7 @@ class RavenPayCard extends StatelessWidget {
         height: height,
         width: double.infinity,
         decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(8),
+            borderRadius: BorderRadius.circular(18),
             border: Border.all(color: AppColors.ravenPayGrey2, width: 0.5)),
         child: child);
   }
