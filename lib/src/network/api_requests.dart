@@ -17,8 +17,21 @@ import 'package:mobile_pos/src/views/card_payment/card_success_page.dart';
 import '../models/card_tx_response.dart';
 
 class ApiRequests {
-  static Future<RavenMPOSResponse?> processCard(
+  static Future<void> processCard(
       BuildContext context, double amount, String cardData) async {
+    // Mock success for staging
+    if (pluginConfig.isStaging) {
+      final res = RavenMPOSResponse();
+      pushRoute(
+          context,
+          CardSuccessPage(
+            amount: amount,
+            response: res,
+          ));
+      pluginConfig.onSuccess.call(res);
+      return;
+    }
+
     final body = json.decode(cardData);
     final cardModel = CardTransactionResponseModel.fromJson(body);
 
@@ -43,7 +56,7 @@ class ApiRequests {
     });
 
     payload['card_data'] = serializedMap;
-    payload['poseidon_serial_number'] = '2303280101';
+    payload['poseidon_serial_number'] = aflliateInfo!.serialNumber ?? '';
     payload['app_profile'] = {
       "affiliate_app_name": pluginConfig.appInfo.appName,
       "affiliate_app_id": pluginConfig.appInfo.appId,
@@ -72,7 +85,6 @@ class ApiRequests {
             reason: error.message,
           ));
       pluginConfig.onError.call(error);
-      return null;
     } else {
       logData(response);
       //Completes with a response
@@ -85,7 +97,7 @@ class ApiRequests {
               amount: amount,
               response: res,
             ));
-        return res;
+        pluginConfig.onSuccess.call(res);
       } else {
         String? message;
         try {
@@ -102,7 +114,6 @@ class ApiRequests {
               reason: error.message,
             ));
         pluginConfig.onError.call(error);
-        return null;
       }
     }
   }

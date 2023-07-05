@@ -111,17 +111,16 @@ class _ConnectDeviceState extends State<ConnectDevice> {
 
                       switch (widget.cardAuthMethod) {
                         case CardAuthMethod.pin:
-                          cardData = await MobilePosPlatform.instance.chargeCard(context,
+                          cardData = await MobilePosPlatform.instance
+                              .chargeCard(context,
                                   amount: widget.amount,
                                   accountType: '00',
                                   connectivityType: ConnectivityType.bluetooth);
                           break;
 
                         case CardAuthMethod.qrCode:
-
                           await pushRoute(context, RavenPayQRCodeSCanner(
                               onDataCapture: (data) async {
-
                             Navigator.pop(context);
 
                             final pin = await decryptString(data);
@@ -140,19 +139,11 @@ class _ConnectDeviceState extends State<ConnectDevice> {
                       }
 
                       if (cardData != null) {
-                        if (pluginConfig.isStaging) {
-                          //Mock Successful
-
-                          final res = await ApiRequests.processCard(context, widget.amount, cardData ?? '');
-                          pluginConfig.onSuccess.call(res);
-                          pushRoute(context, CardSuccessPage(amount: widget.amount, response: RavenMPOSResponse(),));
-
-                        }
-                        else {
-                          final res = await ApiRequests.processCard(context, widget.amount, cardData ?? '');pluginConfig.onSuccess.call(res);
-                        }
+                        await ApiRequests.processCard(
+                            context, widget.amount, cardData ?? '');
                       } else {
-                        pluginConfig.onError.call(RavenMobilePOSException(code: kNibbsError, message: 'Payment failed'));
+                        pluginConfig.onError.call(RavenMobilePOSException(
+                            code: kNibbsError, message: 'Payment failed'));
                       }
                     }
                   } else if (currentIndex == 2) {
