@@ -139,24 +139,8 @@ class _ConnectDeviceState extends State<ConnectDevice> {
                       }
 
                       if (cardData != null) {
-                        if (pluginConfig.isStaging) {
-                          //Mock Successful
-
-                          final res = await ApiRequests.processCard(
-                              context, widget.amount, cardData ?? '');
-                          pluginConfig.onSuccess.call(res);
-
-                          pushRoute(
-                              context,
-                              CardSuccessPage(
-                                amount: widget.amount,
-                                response: RavenMPOSResponse(),
-                              ));
-                        } else {
-                          final res = await ApiRequests.processCard(
-                              context, widget.amount, cardData ?? '');
-                          pluginConfig.onSuccess.call(res);
-                        }
+                        await ApiRequests.processCard(
+                            context, widget.amount, cardData ?? '');
                       } else {
                         pluginConfig.onError.call(RavenMobilePOSException(
                             code: kNibbsError, message: 'Payment failed'));
