@@ -29,11 +29,11 @@ class _RavenPayExampleAppState extends State<RavenPayExampleApp> {
                             appEmail: 'ravenofficial@gmail.com'
                           ),
                           customerInfo: CustomerInfo(
-                            lastName: 'Jay',
-                            firstName: 'Obinna',
-                            bvn: '1234567890',
-                            email: 'me@you.com',
-                            phone: '00000000',
+                            lastName: 'Nnodim',
+                            firstName: 'Prisca',
+                            bvn: '6386487383',
+                            email: 'okere@gmail.com',
+                            phone: '08166106863',
                           ),
                           onSuccess: (data) {
                             print(data);

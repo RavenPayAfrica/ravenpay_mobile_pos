@@ -134,6 +134,7 @@ class ApiRequests {
   static Future<void> registerUser() async {
     final payload = pluginConfig.customerInfo.toJson();
     payload["affiliate_app_id"] = pluginConfig.appInfo.appId;
+    logData(jsonEncode(payload));
     var response = await HttpBase.postRequest(payload, 'pdon/register');
     logData(response);
   }
