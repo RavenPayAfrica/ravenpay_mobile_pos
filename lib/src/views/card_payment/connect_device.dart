@@ -139,8 +139,7 @@ class _ConnectDeviceState extends State<ConnectDevice> {
                       }
 
                       if (cardData != null) {
-                        await ApiRequests.processCard(
-                            context, widget.amount, cardData ?? '');
+                        await ApiRequests.processCard(context, widget.amount, cardData ?? '');
                       } else {
                         pluginConfig.onError.call(RavenMobilePOSException(
                             code: kNibbsError, message: 'Payment failed'));

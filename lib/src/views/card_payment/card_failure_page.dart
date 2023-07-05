@@ -6,14 +6,19 @@ import 'package:mobile_pos/src/styles/ravenpay_textstyles.dart';
 import 'package:mobile_pos/src/views/card_payment/share_receipt.dart';
 
 class CardFailurePage extends StatelessWidget {
-  const CardFailurePage({super.key, this.reason});
+  const CardFailurePage({super.key, this.reason, this.RRN});
   final String? reason;
+  final String? RRN;
 
   @override
   Widget build(BuildContext context) {
+
+    print(RRN ?? 'no RRN');
+
     return RavenPayScaffold(
         bottomNavigationBar: Container(
-          height: 94,
+          width: double.infinity,
+          height: 80,
           decoration: BoxDecoration(
               color: Color(0xFFF7F8F7),
               border: Border(top: BorderSide(color: Color(0xFFCCCCCC)))),
@@ -24,13 +29,12 @@ class CardFailurePage extends StatelessWidget {
                 splashColor: Colors.transparent,
                 highlightColor: Colors.transparent,
                 onTap: () {
-                  pushRoute(context, ShareReceipt());
+                  pushRoute(context, ShareReceipt(RRN: RRN,));
                 },
                 child: Container(
                   height: 100,
                   decoration: BoxDecoration(
-                      border:
-                          Border(right: BorderSide(color: Color(0xFFCCCCCC)))),
+                      border: Border(right: BorderSide(color: Color(0xFFCCCCCC)))),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -75,28 +79,36 @@ class CardFailurePage extends StatelessWidget {
             ],
           ),
         ),
-        body: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            SizedBox(
-                width: 124,
-                height: 124,
-                child: Image.asset(loadAsset('warning_red.png'))),
-            // Gap(8),
-            Text(
-              'Payment Failed',
-              textAlign: TextAlign.center,
-              style: headling1.copyWith(fontSize: 22),
-            ),
-            Gap(4),
-            Text(
-              reason ??
-                  'There was an issue charging your card for this transaction.',
-              style: subtitle.copyWith(fontWeight: FontWeight.w500),
-              textAlign: TextAlign.center,
-            )
-          ],
+        body: Padding(
+          padding: const EdgeInsets.all(20.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              SizedBox(
+                  width: 100,
+                  height: 100,
+                  child: Image.asset(loadAsset('warning_red.png'))),
+              // Gap(8),
+              Text(
+                'Payment Failed',
+                textAlign: TextAlign.center,
+                style: headling1.copyWith(fontSize: 22),
+              ),
+              Gap(4),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    reason ??
+                        'There was an issue charging your card for this transaction.',
+                    style: subtitle.copyWith(fontWeight: FontWeight.w500),
+                    textAlign: TextAlign.center,
+                  ),
+                ],
+              )
+            ],
+          ),
         ));
   }
 }
