@@ -22,7 +22,7 @@ class _RavenPayExampleAppState extends State<RavenPayExampleApp> {
                               primaryColor: Color(0xFF755AE2),
                               onPrimary: Colors.white,
                               secondaryColor: Color(0xFFEA872D)),
-                          enviroment: RavenMobilePOSEnviroment.production,
+                          enviroment: RavenMobilePOSEnviroment.staging,
                           appInfo: AppInfo(
                               appName: 'Raven',
                               appId: '89dca95cee33f4d965172740a323112',

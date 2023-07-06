@@ -56,7 +56,7 @@ class ApiRequests {
     });
 
     payload['card_data'] = serializedMap;
-    payload['poseidon_serial_number'] = aflliateInfo!.serialNumber ?? '';
+    payload['poseidon_serial_number'] = cardModel.ravenEMV!.pSerialNo ?? "";
     payload['app_profile'] = {
       "affiliate_app_name": pluginConfig.appInfo.appName,
       "affiliate_app_id": pluginConfig.appInfo.appId,
