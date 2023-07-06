@@ -137,7 +137,7 @@ class ApiRequests {
         String? message;
         String? responseCode;
         try {
-          message = response['data']['data']['message'];
+          message = refineMeaning(response);
           responseCode = response['data']['data']['resp'];
         } catch (e) {}
         //Unsuccessful

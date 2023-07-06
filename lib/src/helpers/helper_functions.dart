@@ -77,3 +77,33 @@ void copyToClipBoard(BuildContext context,
   await Clipboard.setData(ClipboardData(text: data));
   showSnack(context, msg ?? 'Text Copied!');
 }
+
+
+ String refineMeaning(response) {
+  String message = '';
+
+  if (response == 'failed') {
+    message = 'Failed - TimeOut';
+    return message;
+  }
+
+  if (response['data']['data'] != null) {
+    message = response['data']['data']['meaning'].toString();
+  }
+
+  if (message.isEmpty) {
+    if (response['data']['meaning'] != null) {
+      message = response['data']['meaning'].toString();
+    }
+  }
+
+  if (message.isEmpty) {
+    if (response['data']['message'] != null) {
+      message = response['data']['message'].toString();
+    } else {
+      message = 'Reason unknown';
+    }
+  }
+
+  return message;
+}
