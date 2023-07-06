@@ -10,6 +10,8 @@ import 'package:mobile_pos/src/shared_widgets/ravenpay_close_button.dart';
 import 'package:mobile_pos/src/shared_widgets/ravenpay_scaffold.dart';
 import 'package:mobile_pos/src/shared_widgets/ravenpay_textfeild.dart';
 
+import '../../network/api_requests.dart';
+
 class ShareReceipt extends StatefulWidget {
   final String? RRN;
   const ShareReceipt({super.key, this.RRN});
@@ -31,8 +33,27 @@ class _ShareReceiptState extends State<ShareReceipt> {
             RavenPayButton(
               enabled: _phoneController.text.length > 9,
               buttonText: "Proceed",
-              onPressed: () {
-                toRavenPayHome(context);
+              onPressed: () async {
+
+                String refinedPhone = '';
+
+                if (_phoneController.text.length == 10) {
+                  refinedPhone = '0' + _phoneController.text;
+                }
+                else{
+                  refinedPhone = _phoneController.text;
+                }
+
+                var result = await  ApiRequests.sendReceipts(context, refinedPhone, widget.RRN);
+
+                if(result){
+                  showSnack(context, 'Receipt was sent successfully');
+                   toRavenPayHome(context);
+                }
+                else{
+                  showSnack(context, 'Unable to sent receipt at the moment');
+                }
+
               },
             ),
             const Gap(24),
@@ -81,6 +102,8 @@ class _ShareReceiptState extends State<ShareReceipt> {
                 ])),
             const Gap(40),
             RavenPayTextField(
+              counterText: '',
+              maxLength: 11,
               inputType: TextInputType.phone,
               controller: _phoneController,
               isPhone: true,

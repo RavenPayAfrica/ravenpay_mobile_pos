@@ -5,6 +5,7 @@ version: 0.1.7
 homepage: null
 
 environment:
+
   sdk: '>=2.19.6 <3.0.0'
   flutter: ">=2.5.0"
 
