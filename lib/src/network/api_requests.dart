@@ -18,32 +18,6 @@ import '../models/card_tx_response.dart';
 
 class ApiRequests {
 
-  static Future<bool> sendReceipts(context, String phone, String? rrn) async {
-    final payload = {"phone_number": phone, "rrn": rrn};
-
-    showDialog(
-        barrierDismissible: false,
-        context: context,
-        builder: (BuildContext context) => const ProgressDialog(
-          status: 'Processing...',
-        ));
-
-    var response = await HttpBase.postRequest(payload, 'pdon/whatsapp_receipt');
-    print(response.toString());
-    Navigator.pop(context);
-
-    if (response == null && response == 'failed') {
-      logData(response);
-      return false;
-    }
-
-    if(response['status'] == 'success'){
-      return true;
-    }
-
-    return false;
-  }
-
   static Future<void> processCard(BuildContext context, double amount, String cardData) async {
     // Mock success for staging
     if (pluginConfig.isStaging) {
@@ -84,7 +58,7 @@ class ApiRequests {
     });
 
     payload['card_data'] = serializedMap;
-    payload['poseidon_serial_number'] = '2303280101';
+    payload['poseidon_serial_number'] = cardModel.ravenEMV!.pSerialNo ?? "";
     payload['app_profile'] = {
       "affiliate_app_name": pluginConfig.appInfo.appName,
       "affiliate_app_id": pluginConfig.appInfo.appId,
@@ -94,7 +68,8 @@ class ApiRequests {
 
     logData(jsonEncode(payload));
 
-    var response = await HttpBase.postRequestJson(payload, 'pdon/card_processing');
+    var response =
+        await HttpBase.postRequestJson(payload, 'pdon/card_processing');
 
     logData("Card processed");
 
