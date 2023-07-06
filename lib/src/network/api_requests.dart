@@ -18,23 +18,55 @@ import '../models/card_tx_response.dart';
 
 class ApiRequests {
 
-  static Future<void> processCard(BuildContext context, double amount, String cardData) async {
-    // Mock success for staging
-    if (pluginConfig.isStaging) {
+  static Future<bool> sendReceipts(context, phone, rrn) async {
 
-      final res = RavenMPOSResponse();
+    final payload = {
+      "phone_number": phone.toString(),
+      "rrn": rrn.toString(),
+    };
 
-      pushRoute(
-          context,
-          CardSuccessPage(
-            amount: amount,
-            response: res,
-          ));
-      pluginConfig.onSuccess.call(res);
-      return;
+    showDialog(
+        barrierDismissible: false,
+        context: context,
+        builder: (BuildContext context) => const ProgressDialog(
+          status: 'Processing...',
+        ));
+
+    var response = await HttpBase.postRequest(payload, 'pdon/whatsapp_receipt');
+    Navigator.pop(context);
+
+    if (response == null && response == 'failed') {
+      showSnack(context, 'Unable to sent receipt at the moment');
+      return false;
     }
 
+    if(response['status'] == 'success'){
+      showSnack(context, 'Receipt was sent successfully');
+      return true;
+    }
+
+    return false;
+
+  }
+
+  static Future<void> processCard(BuildContext context, double amount, String cardData) async {
+    // Mock success for staging
+    // if (pluginConfig.isStaging) {
+    //
+    //   final res = RavenMPOSResponse();
+    //
+    //   pushRoute(
+    //       context,
+    //       CardSuccessPage(
+    //         amount: amount,
+    //         response: res,
+    //       ));
+    //   pluginConfig.onSuccess.call(res);
+    //   return;
+    // }
+
     final body = json.decode(cardData);
+
     final cardModel = CardTransactionResponseModel.fromJson(body);
 
     showDialog(
@@ -45,6 +77,7 @@ class ApiRequests {
             ));
 
     Map<String, dynamic> nibssMap = cardModel.nibbsEMV!.toJson();
+
     nibssMap.update('ssl', (value) => 'true');
 
     final payload = <String, dynamic>{};
@@ -68,8 +101,7 @@ class ApiRequests {
 
     logData(jsonEncode(payload));
 
-    var response =
-        await HttpBase.postRequestJson(payload, 'pdon/card_processing');
+    var response = await HttpBase.postRequestJson(payload, 'pdon/card_processing');
 
     logData("Card processed");
 

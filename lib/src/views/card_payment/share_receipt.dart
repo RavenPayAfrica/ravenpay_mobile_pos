@@ -47,11 +47,7 @@ class _ShareReceiptState extends State<ShareReceipt> {
                 var result = await  ApiRequests.sendReceipts(context, refinedPhone, widget.RRN);
 
                 if(result){
-                  showSnack(context, 'Receipt was sent successfully');
                    toRavenPayHome(context);
-                }
-                else{
-                  showSnack(context, 'Unable to sent receipt at the moment');
                 }
 
               },
