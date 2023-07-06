@@ -17,6 +17,7 @@ class _RavenPayExampleAppState extends State<RavenPayExampleApp> {
                 onPressed: () async {
                   await RavenMobilePOS.launch(context,
                       config: RavenMobilePOSConfig(
+                        showLabel: false,
                           theme: const MobilePOSTheme(
                               headerTextColor: Color(0xFF755AE2),
                               primaryColor: Color(0xFF755AE2),
@@ -28,11 +29,11 @@ class _RavenPayExampleAppState extends State<RavenPayExampleApp> {
                               appId: '89dca95cee33f4d965172740a323112',
                               appEmail: 'ravenofficial@gmail.com'),
                           customerInfo: CustomerInfo(
-                            lastName: 'Jay',
-                            firstName: 'Obinna',
-                            bvn: '1234567890',
-                            email: 'me@you.com',
-                            phone: '00000000',
+                            lastName: 'Nnodim',
+                            firstName: 'Prisca',
+                            bvn: '6386487383',
+                            email: 'okere@gmail.com',
+                            phone: '08166106863',
                           ),
                           onSuccess: (data) {
                             print(data);

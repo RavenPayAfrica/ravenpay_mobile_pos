@@ -17,11 +17,13 @@ import 'package:mobile_pos/src/views/card_payment/card_success_page.dart';
 import '../models/card_tx_response.dart';
 
 class ApiRequests {
-  static Future<void> processCard(
-      BuildContext context, double amount, String cardData) async {
+
+  static Future<void> processCard(BuildContext context, double amount, String cardData) async {
     // Mock success for staging
     if (pluginConfig.isStaging) {
+
       final res = RavenMPOSResponse();
+
       pushRoute(
           context,
           CardSuccessPage(
@@ -96,22 +98,26 @@ class ApiRequests {
             CardSuccessPage(
               amount: amount,
               response: res,
+              RRN: cardModel.nibbsEMV!.rrn,
             ));
         pluginConfig.onSuccess.call(res);
       } else {
         String? message;
+        String? responseCode;
         try {
           message = response['data']['data']['message'];
+          responseCode = response['data']['data']['resp'];
         } catch (e) {}
         //Unsuccessful
         final error = RavenMobilePOSException(
             code: kNibbsError,
             message:
-                'Transaction failed to complete${message != null ? ': ${message.toLowerCase()}' : ''}');
+                'Reason${message != null ? ': $responseCode / ${message.toLowerCase()}' : ''}');
         pushRoute(
             context,
             CardFailurePage(
               reason: error.message,
+              RRN: cardModel.nibbsEMV!.rrn,
             ));
         pluginConfig.onError.call(error);
       }
@@ -145,6 +151,7 @@ class ApiRequests {
   static Future<void> registerUser() async {
     final payload = pluginConfig.customerInfo.toJson();
     payload["affiliate_app_id"] = pluginConfig.appInfo.appId;
+    logData(jsonEncode(payload));
     var response = await HttpBase.postRequest(payload, 'pdon/register');
     logData(response);
   }

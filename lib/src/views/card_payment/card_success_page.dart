@@ -11,9 +11,10 @@ import 'package:mobile_pos/src/shared_widgets/ravenpay_scaffold.dart';
 
 class CardSuccessPage extends StatefulWidget {
   const CardSuccessPage(
-      {super.key, required this.response, required this.amount});
+      {super.key, required this.response, required this.amount, this.RRN});
   final RavenMPOSResponse response;
   final double amount;
+  final String? RRN;
 
   @override
   State<CardSuccessPage> createState() => _CardSuccessPageState();
@@ -23,7 +24,11 @@ class _CardSuccessPageState extends State<CardSuccessPage> {
   int currentIndex = 0;
   @override
   Widget build(BuildContext context) {
+
     Size size = MediaQuery.of(context).size;
+
+    print(widget.RRN ?? 'no RRN');
+
     return RavenPayScaffold(
         bottomNavigationBar: Padding(
           padding: EdgeInsets.symmetric(horizontal: kHoriontalScreenPadding),
@@ -33,7 +38,7 @@ class _CardSuccessPageState extends State<CardSuccessPage> {
                 Expanded(
                     child: RavenPayButton(
                   onPressed: () {
-                    pushRoute(context, const ShareReceipt());
+                    pushRoute(context,  ShareReceipt(RRN: widget.RRN,));
                   },
                   height: 48,
                   textColor: pluginTheme.primaryColor,

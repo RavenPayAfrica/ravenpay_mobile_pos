@@ -11,7 +11,8 @@ import 'package:mobile_pos/src/shared_widgets/ravenpay_scaffold.dart';
 import 'package:mobile_pos/src/shared_widgets/ravenpay_textfeild.dart';
 
 class ShareReceipt extends StatefulWidget {
-  const ShareReceipt({super.key});
+  final String? RRN;
+  const ShareReceipt({super.key, this.RRN});
 
   @override
   State<ShareReceipt> createState() => _ShareReceiptState();
@@ -70,16 +71,17 @@ class _ShareReceiptState extends State<ShareReceipt> {
                         "Add your customer WhatsApp number to share this receipt to them directly.",
                     style: subtitle2.copyWith(fontSize: 14),
                     children: [
-                  TextSpan(
-                    text: " see Instruction above",
-                    style: subtitle2.copyWith(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 14,
-                        color: pluginTheme.secondaryColor),
-                  )
+                  // TextSpan(
+                  //   text: " see Instruction above",
+                  //   style: subtitle2.copyWith(
+                  //       fontWeight: FontWeight.bold,
+                  //       fontSize: 14,
+                  //       color: pluginTheme.secondaryColor),
+                  // )
                 ])),
             const Gap(40),
             RavenPayTextField(
+              inputType: TextInputType.phone,
               controller: _phoneController,
               isPhone: true,
               onChanged: (val) {
