@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:math';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:mobile_pos/mobile_pos_sdk.dart';
 import 'package:mobile_pos/src/helpers/global_variables.dart';
 import 'package:mobile_pos/src/helpers/helper_functions.dart';
@@ -225,6 +226,7 @@ class ApiRequests {
     String? address,
     String? landmark,
     required DeliveryMethod deliveryMethod,
+    required BuildContext context,
   }) async {
     final payload = {
       "quantity": qty.toString(),
@@ -243,11 +245,17 @@ class ApiRequests {
     if (response == 'failed' || response == null) {
       final error = RavenMobilePOSException(
           code: kRequestTerminalError, message: 'Terminal request failed');
-
       pluginConfig.onError(error);
       return false;
     } else {
-      return response['status'] == 'success';
+
+      if(response['status'] =='success'){
+        return true;
+      }
+      else{
+        showSnack(context, toBeginningOfSentenceCase(response['message'].toString()) ?? '');
+        return false;
+      }
     }
   }
 
